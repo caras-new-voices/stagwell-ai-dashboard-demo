@@ -1,15 +1,25 @@
 # CLAUDE CODE HANDOFF — Nike CMO Intelligence Dashboard
 
 **You are building:** a single-file, self-contained HTML dashboard (`nike-cmo-dashboard.html`) that gives Nike's CMO everything they need to understand the brand and its competition at a glance.
-**Data source:** `NIKE-CMO-MASTER-REPORT.md` (ships alongside this file). It is the single source of truth — every number on the dashboard must come from it, verbatim. Do not invent, extrapolate, or "refresh" any figure. Snapshot date: 21 July 2026.
+
+**This handoff ships as a 4-file package — read all of them before writing code:**
+
+| File | Role |
+|---|---|
+| `NIKE-DASHBOARD-HANDOFF.md` | This file — goal, IA, constraints, definition of done |
+| `nike-dashboard-data.json` | **The machine-readable dataset.** Load/embed this verbatim as `const DATA`. Do NOT transcribe numbers from prose — every value, schema, caveat, and locked-item is already structured here (`_meta._schemas` documents the array layouts). |
+| `NIKE-CHART-SPECS.md` | **Per-chart build spec.** Every chart: form, JSON data path, encoding, axes, validated colors, mark specs, annotations, tooltips, layout grid positions, and guardrails. If a visual isn't specified there, don't invent it. |
+| `NIKE-CMO-MASTER-REPORT.md` | Human-readable narrative + provenance. Use for context, the red-flag rationale, and Data Notes content; the JSON supersedes it for numbers. |
+
+Do not invent, extrapolate, or "refresh" any figure. Snapshot date: 21 July 2026.
 
 ---
 
 ## 1. Tech constraints
 
 - **One HTML file.** Inline all CSS and JS. No build step, no localStorage/sessionStorage (not supported in the render environment — use in-memory JS objects only).
-- Charts: use a CDN library (Chart.js from cdnjs is fine) or hand-rolled SVG. Either is acceptable; pick one and be consistent.
-- Embed the data as a single `const DATA = {...}` JS object near the top of the script, transcribed from the master report. Keep the report's exact formatted strings for display (`"291.7M"`, `"-5.6%"`) alongside numeric values for plotting.
+- Charts: hand-rolled SVG preferred (full control over the mark specs in `NIKE-CHART-SPECS.md`); Chart.js from cdnjs acceptable if you enforce those specs (thin bars, rounded data-ends, 2px gaps, direct labels, single axis).
+- Embed `nike-dashboard-data.json` verbatim as `const DATA = {...}` at the top of the script. It already carries numeric values for plotting plus display strings (`d` fields) for rendering — use `d` when present, otherwise format with a shared `fmt()` helper (K/M abbreviations matching source style).
 - Must render fully offline after first load; degrade gracefully if the CDN fails (numbers/tables still visible without charts).
 - Responsive: usable at 1440px (primary, boardroom screen) and 390px (phone). Print-friendly is a plus.
 
@@ -73,13 +83,9 @@ Render master report Part 6 verbatim-ish: sources, snapshot date, locked dataset
 
 ## 3. Design system
 
-- **Aesthetic:** Nike-adjacent, boardroom-grade. Near-black `#111` base, white surface cards, Nike volt `#CFF000`/`#D4FF00` as the single accent, red `#E4402F` reserved exclusively for negative deltas & risk, green `#1E9E5A` for positive deltas. Neutral grays for competitor series.
-- Competitor series colors (keep consistent across every chart): Adidas `#2A6FB0`, Puma `#C6373C` (muted), Under Armour `#6B7280`, New Balance `#B45309`, Lululemon `#9D5B8B`. Nike is always volt-on-black or black-on-volt.
-- Typography: system stack with strong condensed headline feel (`ui-sans-serif`/Helvetica Neue, uppercase section headers, tight tracking). Big stat numbers ≥40px.
-- Cards: white, 12–16px radius, subtle border, generous padding. Dark header band.
-- Every chart: title, axis labels, and a one-line "So what" annotation underneath (the insight, not a description).
-- Every section: tiny source tag (e.g., "Source: SEMrush Domain Overview, 21 Jul 2026" or "Source: IMAI, 21 Jul 2026").
-- Deltas: always signed, colored, with ▲/▼ glyphs. Unknown/locked values: render `—` with a lock icon and tooltip/title text naming the required upsell — never fake them.
+**Superseded by `NIKE-CHART-SPECS.md` §1–2**, which carries the full token set: surfaces/ink for light + dark, the **machine-validated 6-brand categorical palette** (Nike `#2a78d6`, Adidas `#eb6834`, Puma `#1baf7a`, UA `#eda100`, NB `#e87ba4`, Lulu `#008300` — colorblind-safe, validated both modes, with the mandatory direct-label relief rule for the three sub-3:1 light slots), the reserved status scale, the volt-as-UI-accent-only rule, mark specs, and component anatomies (stat tile, alert tile, meter, table, brand chip, locked cell, source tag, so-what annotation).
+
+The earlier hand-picked brand colors in previous drafts (`#2A6FB0`, `#C6373C`, `#6B7280`…) are **retired** — `#6B7280` fails the chroma floor (reads as gray) and the set was never CVD-validated. Use only the palette in the chart specs; if you change any hex, re-validate before shipping.
 
 ## 4. Data integrity rules (hard requirements)
 
@@ -99,9 +105,9 @@ Render master report Part 6 verbatim-ish: sources, snapshot date, locked dataset
 
 ## 6. Suggested build order
 
-1. Skeleton + tab shell + design tokens.
-2. `const DATA` object transcribed from the master report (do this carefully; it's the longest step).
-3. Executive Overview tab.
-4. Social scoreboard + charts.
-5. Search, AI, Backlinks tabs.
-6. Data Notes, responsive pass, CDN-failure fallback, final QA against the master report numbers.
+1. Skeleton + tab shell + design tokens from `NIKE-CHART-SPECS.md` §1.
+2. Paste `nike-dashboard-data.json` as `const DATA` (no transcription — it's ready).
+3. Build the shared components (§2 of chart specs): stat tile, alert tile, meter, table, brand chip, tooltip layer.
+4. Executive Overview (E1–E6), then Social (S0–S7), Search (K0–K8), AI (A0–A4), Backlinks (B1–B8), Notes — each chart exactly per its spec ID.
+5. Dark mode pass (stepped dark palette, not an invert).
+6. Run the chart-spec §5 guardrail checklist, responsive pass (1440/390), CDN-failure fallback, final QA of ~20 spot-checked values against `DATA`.

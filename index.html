@@ -5,97 +5,107 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stagwell AI — Nike Brand &amp; Competitive Intelligence (Demo)</title>
 <style>
-/* ============ DESIGN TOKENS ============ */
+/* ============ DESIGN TOKENS (NIKE-CHART-SPECS §1) ============ */
 :root{
-  --ink:#111111; --ink2:#3b3b3b; --muted:#6b6f76; --faint:#9aa0a8;
-  --bg:#f4f4f2; --card:#ffffff; --line:#e6e6e2; --line2:#d8d8d2;
-  --volt:#D4FF00; --volt2:#CFF000;
-  --neg:#E4402F; --pos:#1E9E5A; --amber:#D98E04;
-  --adidas:#2A6FB0; --puma:#C6373C; --ua:#6B7280; --nb:#B45309; --lulu:#9D5B8B;
+  --surface-1:#fcfcfb; --page:#f9f9f7;
+  --ink-1:#0b0b0b; --ink-2:#52514e; --ink-muted:#898781;
+  --grid:#e1e0d9; --baseline:#c3c2b7; --border:rgba(11,11,11,.10);
+  --delta-up:#006300; --delta-down:#d03b3b;
+  --header-band:#111111; --volt:#CFF000; /* UI accent ONLY — never a data series */
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --c-nike:#2a78d6; --c-adidas:#eb6834; --c-puma:#1baf7a;
+  --c-underarmour:#eda100; --c-newbalance:#e87ba4; --c-lululemon:#008300;
+  --blue-300:#6da7ec; --deemph:#c3c2b7;
   --indigo:#4F46E5; --indigo-soft:#eef0fe;
-  --radius:14px;
+  --tint-good:rgba(12,163,12,.10); --tint-crit:rgba(208,59,59,.08); --tint-warn:rgba(250,178,25,.14);
+  --radius:12px;
+}
+html[data-theme="dark"]{
+  --surface-1:#1a1a19; --page:#0d0d0d;
+  --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-muted:#898781;
+  --grid:#2c2c2a; --baseline:#383835; --border:rgba(255,255,255,.10);
+  --delta-up:#0ca30c; --delta-down:#d03b3b;
+  --c-nike:#3987e5; --c-adidas:#d95926; --c-puma:#199e70;
+  --c-underarmour:#c98500; --c-newbalance:#d55181; --c-lululemon:#008300;
+  --deemph:#52514e;
+  --indigo-soft:#26244a;
+  --tint-good:rgba(12,163,12,.16); --tint-crit:rgba(208,59,59,.16); --tint-warn:rgba(250,178,25,.16);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:"Helvetica Neue",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
-button{font:inherit;cursor:pointer}
+body{font-family:system-ui,-apple-system,"Segoe UI",Helvetica,sans-serif;background:var(--page);color:var(--ink-1);font-size:15px;line-height:1.45}
+button{font:inherit;cursor:pointer;color:inherit}
 input,select{font:inherit}
-h1,h2,h3{letter-spacing:-.01em}
-.upper{text-transform:uppercase;letter-spacing:.06em}
+.upper{text-transform:uppercase;letter-spacing:.04em}
 a{color:var(--indigo)}
 
-/* ============ TOP NAV ============ */
-.topnav{position:sticky;top:0;z-index:60;background:#0a0a0a;color:#fff;display:flex;align-items:center;gap:18px;padding:0 22px;height:56px}
+/* ============ TOP NAV (Stagwell chrome — both themes) ============ */
+.topnav{position:sticky;top:0;z-index:60;background:#0a0a0a;color:#fff;display:flex;align-items:center;gap:16px;padding:0 22px;height:56px}
 .topnav .logo{font-weight:800;letter-spacing:.28em;font-size:17px;white-space:nowrap}
 .topnav .spacer{flex:1}
 .topnav .navlink{color:#d7d7d7;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .badge-new{background:var(--indigo);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px}
 .badge-demo{background:var(--volt);color:#111;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.08em}
+.theme-btn{background:#1d1d1f;border:1px solid #3a3a3a;color:#ddd;border-radius:999px;padding:6px 12px;font-size:12px}
 .userchip{width:32px;height:32px;border-radius:50%;background:var(--indigo);color:#fff;display:none;align-items:center;justify-content:center;font-size:12px;font-weight:700}
 @media(max-width:640px){.topnav .navlink.hide-sm{display:none}}
 
-/* ============ ONBOARDING SCREENS ============ */
+/* ============ ONBOARDING ============ */
 .screen{max-width:1180px;margin:0 auto;padding:34px 20px 80px}
-.hero-dark{background:radial-gradient(1200px 400px at 80% -10%, #26262b 0%, #0a0a0a 60%);color:#fff;margin:0;max-width:none}
+.hero-dark{background:radial-gradient(1200px 400px at 80% -10%, #26262b 0%, #0a0a0a 60%);color:#fff}
 .hero-inner{max-width:1180px;margin:0 auto;padding:64px 20px 54px}
 .hero-q{font-size:26px;font-weight:600;margin-bottom:18px}
 .searchbar{display:flex;align-items:center;background:#fff;border-radius:14px;padding:6px 6px 6px 20px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
-.searchbar svg{flex:none}
-.searchbar input{flex:1;border:0;outline:0;font-size:20px;padding:14px 12px;background:transparent;min-width:0}
+.searchbar input{flex:1;border:0;outline:0;font-size:20px;padding:14px 12px;background:transparent;min-width:0;color:#111}
 .searchbar .go{background:var(--indigo);border:0;color:#fff;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
 .suggest-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
 .suggest{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#eee;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:14px;text-align:left}
 .suggest:hover{background:rgba(255,255,255,.12)}
 .suggest .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,255,255,.1)}
 .coach{margin-top:22px;display:inline-flex;gap:10px;align-items:flex-start;background:rgba(79,70,229,.14);border:1px solid rgba(129,120,255,.45);border-radius:12px;padding:12px 16px;font-size:13.5px;color:#e6e4ff;max-width:520px}
-.notice{margin-top:16px;background:#fff;border-left:4px solid var(--amber);border-radius:10px;padding:14px 16px;color:#111;display:none;align-items:center;gap:14px;flex-wrap:wrap}
-.notice b{color:var(--ink)}
-.notice button{background:var(--ink);color:var(--volt);border:0;border-radius:9px;padding:9px 14px;font-weight:700}
+.notice{margin-top:16px;background:#fff;border-left:4px solid var(--warn);border-radius:10px;padding:14px 16px;color:#111;display:none;align-items:center;gap:14px;flex-wrap:wrap}
+.notice button{background:#111;color:var(--volt);border:0;border-radius:9px;padding:9px 14px;font-weight:700}
 
 .step-pill{display:inline-flex;align-items:center;gap:8px;background:var(--indigo-soft);color:var(--indigo);font-weight:700;font-size:12.5px;border-radius:999px;padding:6px 14px;margin-bottom:14px}
+html[data-theme="dark"] .step-pill{color:#b9b3ff}
 .center{text-align:center}
 .screen h2.big{font-size:32px;font-weight:700;margin-bottom:8px}
-.screen p.sub{color:var(--muted);margin-bottom:26px}
-
-.freebanner{background:linear-gradient(90deg,var(--indigo-soft),#f6f1ff);border-radius:12px;padding:16px;text-align:center;font-size:20px;font-weight:700;margin:22px 0}
+.screen p.sub{color:var(--ink-muted);margin-bottom:26px}
+.freebanner{background:var(--indigo-soft);border-radius:12px;padding:16px;text-align:center;font-size:20px;font-weight:700;margin:22px 0}
 .cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.icard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.icard{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
 .icard h3{font-size:15.5px;display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .icard .ico{width:32px;height:32px;border-radius:8px;background:var(--indigo-soft);display:flex;align-items:center;justify-content:center;font-size:15px}
-.icard .sowhat{font-size:13.5px;color:var(--ink2);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line2)}
-.icard .sowhat::before{content:"✦ ";color:var(--indigo)}
-.srcnote{font-size:11px;color:var(--faint);margin-top:8px}
+.sowhat{font-size:13px;color:var(--ink-2);margin-top:12px;padding-top:10px;border-top:1px dashed var(--baseline)}
+.sowhat::before{content:"✦ ";color:var(--indigo)}
+.srcnote{font-size:10px;color:var(--ink-muted);margin-top:8px;text-align:right}
 .bignum{font-size:42px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
 .cta-row{display:flex;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
 .btn-primary{background:var(--indigo);color:#fff;border:0;border-radius:11px;padding:14px 26px;font-weight:700;font-size:15px}
-.btn-ghost{background:transparent;color:var(--muted);border:0;font-weight:600;padding:14px 10px}
-.btn-dark{background:var(--ink);color:var(--volt);border:0;border-radius:11px;padding:14px 26px;font-weight:700;font-size:15px}
-.preview-note{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
-
+.btn-ghost{background:transparent;color:var(--ink-muted);border:0;font-weight:600;padding:14px 10px}
+.btn-dark{background:#111;color:var(--volt);border:0;border-radius:11px;padding:14px 26px;font-weight:700;font-size:15px}
+.preview-note{text-align:center;color:var(--ink-muted);font-size:13px;margin-top:20px}
 .prio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-.prio{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:16px;text-align:left;position:relative;transition:border-color .15s}
-.prio .tick{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:2px solid var(--line2);background:#fff}
+.prio{background:var(--surface-1);border:2px solid var(--border);border-radius:14px;padding:16px;text-align:left;position:relative;transition:border-color .15s}
+.prio .tick{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:2px solid var(--baseline);background:var(--surface-1)}
 .prio.sel{border-color:var(--indigo)}
 .prio.sel .tick{background:var(--indigo);border-color:var(--indigo)}
 .prio.sel .tick::after{content:"✓";color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;height:100%}
 .prio .ico{width:38px;height:38px;border-radius:10px;background:var(--indigo-soft);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}
 .prio h4{font-size:14.5px;margin-bottom:5px}
-.prio p{font-size:12.5px;color:var(--muted)}
-.prio-count{color:var(--muted);font-size:13px;margin-top:16px}
-
-.signup-wrap{max-width:520px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
-.signup-wrap label{display:block;font-size:12.5px;font-weight:700;color:var(--ink2);margin:14px 0 5px}
-.signup-wrap input[type=text],.signup-wrap input[type=email]{width:100%;border:1px solid var(--line2);border-radius:9px;padding:11px 12px;font-size:14.5px}
+.prio p{font-size:12.5px;color:var(--ink-muted)}
+.prio-count{color:var(--ink-muted);font-size:13px;margin-top:16px}
+.signup-wrap{max-width:520px;margin:0 auto;background:var(--surface-1);border:1px solid var(--border);border-radius:16px;padding:28px}
+.signup-wrap label{display:block;font-size:12.5px;font-weight:700;color:var(--ink-2);margin:14px 0 5px}
+.signup-wrap input[type=text],.signup-wrap input[type=email]{width:100%;border:1px solid var(--baseline);border-radius:9px;padding:11px 12px;font-size:14.5px;background:var(--surface-1);color:var(--ink-1)}
 .deliv{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-.deliv label{display:flex;align-items:center;gap:7px;border:1px solid var(--line2);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;margin:0;cursor:pointer}
+.deliv label{display:flex;align-items:center;gap:7px;border:1px solid var(--baseline);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;margin:0;cursor:pointer}
 .deliv input{accent-color:var(--indigo)}
-.demonote{font-size:12px;color:var(--faint);margin-top:14px;text-align:center}
+.demonote{font-size:12px;color:var(--ink-muted);margin-top:14px;text-align:center}
 
-/* ============ DASHBOARD ============ */
+/* ============ DASHBOARD SHELL ============ */
 #screen-dashboard{max-width:none;padding:0}
-.dash-head{background:#0a0a0a;color:#fff;padding:26px 22px 0}
+.dash-head{background:var(--header-band);color:#fff;padding:26px 22px 0}
 .dash-head-inner{max-width:1280px;margin:0 auto}
-.dash-title-row{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
 .dash-title{font-size:30px;font-weight:800;text-transform:uppercase;letter-spacing:.02em}
 .dash-title .volt{color:var(--volt)}
 .meta-badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
@@ -106,7 +116,7 @@ a{color:var(--indigo)}
 .tabs{max-width:1280px;margin:14px auto 0;display:flex;gap:2px;overflow-x:auto}
 .tab{background:transparent;color:#a8a8a8;border:0;padding:12px 13px;font-weight:700;font-size:12.5px;white-space:nowrap;border-bottom:3px solid transparent;text-transform:uppercase;letter-spacing:.03em}
 .tab.active{color:var(--volt);border-bottom-color:var(--volt)}
-.tabs-sticky{position:sticky;top:56px;z-index:50;background:#0a0a0a}
+.tabs-sticky{position:sticky;top:56px;z-index:50;background:var(--header-band)}
 .dash-body{max-width:1280px;margin:0 auto;padding:22px 22px 90px}
 .with-chat .dash-body{max-width:none;margin:0;padding-right:392px}
 .with-chat .dash-body>.tabpane{max-width:1280px;margin:0 auto}
@@ -115,151 +125,178 @@ a{color:var(--indigo)}
 
 .sec{margin-bottom:22px}
 .sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
-.sec-h h3{font-size:15px;text-transform:uppercase;letter-spacing:.06em}
-.src{font-size:11px;color:var(--faint)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
-.card.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sec-h h3{font-size:15px;text-transform:uppercase;letter-spacing:.04em}
+.src{font-size:10px;color:var(--ink-muted)}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;position:relative}
+.card .srcnote{margin-top:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:980px){.grid2,.grid3{grid-template-columns:1fr}}
 
+/* stat tiles */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
-.kpi .lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.kpi .val{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
-.kpi .sub{font-size:12px;color:var(--muted);margin-top:4px}
-.kpi.alert{background:#fdf0ee;border-color:#f2c4bd}
-.kpi.alert .val{color:var(--neg)}
-.kpi.voltk{background:var(--ink);border-color:var(--ink)}
-.kpi.voltk .val{color:var(--volt)}
-.kpi.voltk .lbl,.kpi.voltk .sub{color:#b9b9b9}
-.delta{font-weight:700;font-size:12.5px;white-space:nowrap}
-.delta.up{color:var(--pos)}.delta.down{color:var(--neg)}.delta.flat{color:var(--muted)}
+.kpi{background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.kpi .lbl{font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.kpi .val{font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.kpi .val.smaller{font-size:28px}
+.kpi .sub{font-size:12px;color:var(--ink-muted);margin-top:5px}
+.kpi.alert{border-left:3px solid var(--crit)}
+.kpi.alert .val{color:var(--crit)}
+.chipd{display:inline-block;font-weight:700;font-size:12px;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.chipd.up{color:var(--delta-up);background:var(--tint-good)}
+.chipd.down{color:var(--delta-down);background:var(--tint-crit)}
+.statchip{display:inline-block;font-weight:700;font-size:11.5px;border-radius:999px;padding:2px 9px}
+.statchip.crit{color:var(--crit);background:var(--tint-crit)}
+.statchip.warn{color:#8a6202;background:var(--tint-warn)}
+html[data-theme="dark"] .statchip.warn{color:var(--warn)}
+.statchip.good{color:var(--delta-up);background:var(--tint-good)}
 
-.flags{counter-reset:flag;list-style:none}
-.flags li{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line2);font-size:13.5px;align-items:flex-start}
+/* red flags */
+.flags{list-style:none}
+.flags li{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--baseline);font-size:13.5px;align-items:flex-start}
 .flags li:last-child{border-bottom:0}
 .flags .dot{flex:none;width:10px;height:10px;border-radius:50%;margin-top:5px}
-.dot.red{background:var(--neg)}.dot.amber{background:var(--amber)}
+.dot.critical{background:var(--crit)}.dot.serious{background:var(--serious)}.dot.warning{background:var(--warn)}
 .flags b{display:block}
+.flags .goto{background:none;border:0;color:var(--indigo);font-size:12px;font-weight:700;padding:0;margin-top:2px}
 
+/* bar lists */
 .bar-chart{display:flex;flex-direction:column;gap:7px}
-.bar-row{display:grid;grid-template-columns:130px 1fr 84px;align-items:center;gap:10px;font-size:12.5px}
-.bar-row .blabel{text-align:right;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-track{background:#f0f0ec;border-radius:5px;height:16px;position:relative}
-.bar-fill{height:100%;border-radius:4px;min-width:2px}
-.bar-val{font-weight:700;font-variant-numeric:tabular-nums}
-.chart-note{font-size:12.5px;color:var(--ink2);margin-top:10px;padding-top:8px;border-top:1px dashed var(--line2)}
-.chart-note::before{content:"✦ ";color:var(--amber)}
-.scale-note{font-size:11px;color:var(--faint);margin-top:6px}
+.bar-row{display:grid;grid-template-columns:140px 1fr 92px;align-items:center;gap:10px;font-size:12px}
+.bar-row .blabel{text-align:right;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.bar-track{background:var(--grid);border-radius:4px;height:14px;position:relative}
+.bar-fill{height:100%;border-radius:0 4px 4px 0;min-width:2px;position:absolute;top:0}
+.bar-val{font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.chart-note{font-size:13px;color:var(--ink-2);margin-top:10px;padding-top:8px;border-top:1px dashed var(--baseline)}
+.chart-note::before{content:"✦ ";color:var(--ink-muted)}
+.scale-note{font-size:11px;color:var(--ink-muted);margin-top:6px}
+.brandchip{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.brandchip i{width:12px;height:12px;border-radius:50%;flex:none}
+.retail-tag{font-size:8.5px;font-weight:800;letter-spacing:.06em;color:var(--ink-muted);border:1px solid var(--baseline);border-radius:4px;padding:0 4px}
 
-.dvg{display:flex;flex-direction:column;gap:8px}
-.dvg-row{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center;font-size:12.5px}
-.dvg-track{display:flex;height:18px;border-radius:5px;overflow:hidden;background:#f0f0ec}
-.dvg-m{background:#5B7290;display:flex;align-items:center;justify-content:flex-end;color:#fff;font-size:10.5px;font-weight:700;padding-right:5px}
-.dvg-f{background:#B95C8A;display:flex;align-items:center;color:#fff;font-size:10.5px;font-weight:700;padding-left:5px;border-left:2px solid #fff}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:8px}
+/* 100% stacked strip */
+.stack100{display:flex;height:30px;border-radius:6px;overflow:hidden;margin:8px 0}
+.stack100 span{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap;border-right:2px solid var(--surface-1)}
+.stack100 span:last-child{border-right:0}
+.stack100.thin{height:22px}
+.legend{display:flex;gap:12px 16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-muted);margin-top:8px}
 .legend .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
 
-table.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
-.tbl th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:left;padding:8px 8px;border-bottom:2px solid var(--ink)}
-.tbl td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top;font-variant-numeric:tabular-nums}
+/* meters */
+.meter-row{display:grid;grid-template-columns:110px 1fr 110px;gap:10px;align-items:center;font-size:12px;margin:6px 0}
+.meter-row .mlabel{text-align:right;color:var(--ink-2)}
+.meter{background:var(--grid);border-radius:4px;height:8px;position:relative;overflow:hidden}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.meter-row .mval{font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* vertical bars (B4) */
+.vbars{display:flex;align-items:flex-end;gap:8px;height:190px;padding-top:26px}
+.vbars .vb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.vbars .vb .vfill{width:100%;max-width:44px;border-radius:4px 4px 0 0;min-height:2px}
+.vbars .vb .vlab{font-size:9.5px;color:var(--ink-muted);margin-top:5px;white-space:nowrap}
+.vbars .vb .vval{font-size:9.5px;color:var(--ink-2);font-weight:700;margin-bottom:3px;white-space:nowrap}
+
+/* tables */
+table.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-muted);text-align:left;padding:8px;border-bottom:1px solid var(--baseline);white-space:nowrap}
+.tbl td{padding:8px;border-bottom:1px solid var(--grid);vertical-align:top}
+.tbl td.num,.tbl th.num{text-align:right;font-variant-numeric:tabular-nums}
 .tbl tr:last-child td{border-bottom:0}
-.tbl .best{background:#e7f6ee;color:#136b41;font-weight:700;border-radius:4px}
-.tbl .worst{background:#fdeceb;color:#a72315;font-weight:700;border-radius:4px}
-.tbl .nikecol{font-weight:800;background:#fbfbe9}
+.tbl .best{background:var(--tint-good);font-weight:700}
+.tbl .worst{background:var(--tint-crit);font-weight:700}
+.tbl .loser{background:var(--tint-warn)}
+.tbl .nikecol{font-weight:700;border-left:2px solid var(--c-nike)}
 .tbl th.sortable{cursor:pointer}
-.tbl th.sortable:hover{color:var(--ink)}
+.tbl th.sortable:hover{color:var(--ink-1)}
 .tblwrap{overflow-x:auto}
-.trunc-note{font-size:11.5px;color:var(--faint);margin-top:8px}
-
-.kd{display:inline-block;width:52px;height:7px;background:#eee;border-radius:4px;vertical-align:1px;margin-left:6px;position:relative;overflow:hidden}
+.trunc-note{font-size:11.5px;color:var(--ink-muted);margin-top:8px}
+.kd{display:inline-block;width:40px;height:6px;background:var(--grid);border-radius:4px;vertical-align:1px;margin-right:6px;position:relative;overflow:hidden}
 .kd i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.lockcell{color:var(--ink-muted)}
+.lockcell::before{content:"🔒 ";font-size:11px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
 
-.bcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
-details.bcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-details.bcard summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:12px;padding:14px 16px}
-details.bcard summary::-webkit-details-marker{display:none}
-.bmark{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;flex:none}
-.bcard .bsum{flex:1;min-width:0}
-.bcard .bsum b{display:block;font-size:14.5px}
-.bcard .bsum span{font-size:12px;color:var(--muted)}
-.bcard .chev{color:var(--faint);transition:transform .15s}
-details[open] .chev{transform:rotate(90deg)}
-.bcard .bbody{padding:0 16px 16px;font-size:13px;color:var(--ink2)}
-.bcard .bbody dl{display:grid;grid-template-columns:110px 1fr;gap:4px 10px}
-.bcard .bbody dt{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
-.bcard .bbody dd{margin:0}
-.bcard .pos-line{margin-top:10px;padding:9px 11px;background:#f7f7f4;border-radius:9px;font-size:12.5px}
+/* brand cards */
+.bcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+.bcard{background:var(--surface-1);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
+.bcard .bhead{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bmark{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:13px;flex:none}
+.bcard .bhead b{font-size:14.5px}
+.bcard .bhead .sub{font-size:11.5px;color:var(--ink-muted)}
+.curbadge{margin-left:auto;font-size:10px;font-weight:800;border:1px solid var(--baseline);border-radius:5px;padding:1px 6px;color:var(--ink-muted)}
+.ministats{display:flex;gap:14px;margin:8px 0;flex-wrap:wrap}
+.ministats div b{font-size:16px;display:block}
+.ministats div span{font-size:10px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.04em}
+.bcard .brow{font-size:12.5px;color:var(--ink-2);margin:6px 0}
+.bcard .brow b{color:var(--ink-1);font-size:11px;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:2px;color:var(--ink-muted)}
+.tagchips{display:flex;gap:5px;flex-wrap:wrap}
+.tagchips span{border:1px solid var(--baseline);border-radius:999px;padding:2px 8px;font-size:11px;color:var(--ink-2)}
+details.bdetails{margin-top:10px;border-top:1px dashed var(--baseline);padding-top:8px}
+details.bdetails summary{cursor:pointer;font-size:12px;font-weight:700;color:var(--indigo);list-style:none}
+details.bdetails summary::-webkit-details-marker{display:none}
+details.bdetails summary::after{content:" ▸";}
+details[open].bdetails summary::after{content:" ▾";}
+.aud-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin-top:8px}
+@media(max-width:640px){.aud-grid{grid-template-columns:1fr}}
+.aud-grid h5{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-muted);margin:8px 0 4px;grid-column:auto}
+.ag-row{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center;font-size:11px;margin:3px 0}
+.ag-track{display:flex;height:12px;gap:2px}
+.ag-track i{border-radius:3px;min-width:1px}
 
-.callout{border-radius:var(--radius);padding:18px;background:#0a0a0a;color:#fff}
-.callout.riskbg{background:linear-gradient(100deg,#2b0e0a,#0a0a0a)}
-.callout h4{color:var(--volt);text-transform:uppercase;letter-spacing:.06em;font-size:12.5px;margin-bottom:8px}
-.callout p{font-size:15px}
-.callout .huge{font-size:26px;font-weight:800;line-height:1.25}
-.callout .blabel{color:#bdbdbd}
-.callout .bar-val{color:#fff}
-.callout .bar-track{background:rgba(255,255,255,.14)}
-.callout .legend{color:#bdbdbd}
+/* callout */
+.callout{border-radius:var(--radius);padding:18px;background:var(--surface-1);border:1px solid var(--border)}
+.callout.warnb{border:2px solid var(--warn)}
+.callout h4{text-transform:uppercase;letter-spacing:.05em;font-size:12.5px;margin-bottom:8px;color:var(--ink-muted)}
+.callout .huge{font-size:24px;font-weight:800;line-height:1.3}
 
-.stack100{display:flex;height:30px;border-radius:8px;overflow:hidden;margin:8px 0}
-.stack100 span{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;min-width:0;overflow:hidden;white-space:nowrap;border-right:2px solid #fff}
-.stack100 span:last-child{border-right:0}
-
-.lockval{color:var(--faint)}
-.lockval::before{content:"🔒 ";font-size:11px}
-
-.donut-wrap{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-.mini-donuts{display:flex;gap:14px;flex-wrap:wrap}
-.mini-donut{text-align:center;font-size:11px;color:var(--muted)}
+/* sparkline tiles */
 .spark-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-.spark-tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.spark-tile{background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px}
 .spark-tile .stx b{font-size:20px;display:block}
-.spark-tile .stx span{font-size:11.5px;color:var(--muted)}
+.spark-tile .stx span{font-size:11.5px;color:var(--ink-muted)}
 
-.notes ol{margin-left:20px;display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--ink2)}
-.notes b{color:var(--ink)}
+/* notes */
+.notes ol{margin-left:20px;display:flex;flex-direction:column;gap:12px;font-size:13px;color:var(--ink-2)}
+.notes b{color:var(--ink-1)}
 
-.dash-footer{max-width:1280px;margin:10px auto 0;background:#0a0a0a;color:#ddd;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.dash-footer{max-width:1280px;margin:10px auto 0;background:var(--header-band);color:#ddd;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between}
 .dash-footer button{background:var(--volt);color:#111;border:0;border-radius:10px;padding:12px 20px;font-weight:800}
 
 /* ============ CHAT ============ */
-.chat-fab{position:fixed;right:20px;bottom:20px;z-index:70;background:var(--ink);color:var(--volt);border:0;border-radius:999px;padding:14px 20px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.3);display:none;align-items:center;gap:8px}
-.chat-panel{position:fixed;top:56px;right:0;bottom:0;width:370px;background:#fff;border-left:1px solid var(--line);display:none;flex-direction:column;z-index:65}
+.chat-fab{position:fixed;right:20px;bottom:20px;z-index:70;background:#111;color:var(--volt);border:0;border-radius:999px;padding:14px 20px;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.3);display:none;align-items:center;gap:8px}
+.chat-panel{position:fixed;top:56px;right:0;bottom:0;width:370px;background:var(--surface-1);border-left:1px solid var(--border);display:none;flex-direction:column;z-index:65}
 .chat-panel.open{display:flex}
-.chat-h{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.chat-h{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
 .chat-h .ai-ico{width:30px;height:30px;border-radius:8px;background:var(--indigo);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px}
 .chat-h b{font-size:14.5px;display:block}
-.chat-h span{font-size:11px;color:var(--muted)}
-.chat-h .close{margin-left:auto;background:none;border:0;font-size:18px;color:var(--muted)}
+.chat-h span{font-size:11px;color:var(--ink-muted)}
+.chat-h .close{margin-left:auto;background:none;border:0;font-size:18px;color:var(--ink-muted)}
 .chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .msg{max-width:88%;border-radius:12px;padding:10px 13px;font-size:13px;line-height:1.5}
-.msg.user{align-self:flex-end;background:var(--indigo-soft);color:#2a2668;border-bottom-right-radius:4px}
-.msg.bot{align-self:flex-start;background:#f5f5f2;border-bottom-left-radius:4px;color:var(--ink2)}
-.msg.bot b{color:var(--ink)}
-.msg .cite{display:block;margin-top:7px;font-size:10.5px;color:var(--faint)}
-.msg .svc{display:block;margin-top:8px;padding-top:7px;border-top:1px dashed var(--line2);font-size:12px;color:var(--indigo);font-weight:700}
-.typing{align-self:flex-start;color:var(--faint);font-size:12px;padding:4px 8px}
+.msg.user{align-self:flex-end;background:var(--indigo-soft);color:var(--ink-1);border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:var(--page);border:1px solid var(--border);border-bottom-left-radius:4px;color:var(--ink-2)}
+.msg.bot b{color:var(--ink-1)}
+.msg .cite{display:block;margin-top:7px;font-size:10.5px;color:var(--ink-muted)}
+.msg .svc{display:block;margin-top:8px;padding-top:7px;border-top:1px dashed var(--baseline);font-size:12px;color:var(--indigo);font-weight:700}
+.typing{align-self:flex-start;color:var(--ink-muted);font-size:12px;padding:4px 8px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 8px}
-.chips button{background:#fff;border:1px solid var(--line2);border-radius:999px;padding:6px 11px;font-size:11.5px;color:var(--ink2)}
+.chips button{background:var(--surface-1);border:1px solid var(--baseline);border-radius:999px;padding:6px 11px;font-size:11.5px;color:var(--ink-2)}
 .chips button:hover{border-color:var(--indigo);color:var(--indigo)}
-.chat-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line)}
-.chat-in input{flex:1;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;font-size:13px;min-width:0}
+.chat-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border)}
+.chat-in input{flex:1;border:1px solid var(--baseline);border-radius:10px;padding:10px 12px;font-size:13px;min-width:0;background:var(--surface-1);color:var(--ink-1)}
 .chat-in button{background:var(--indigo);color:#fff;border:0;border-radius:10px;width:42px}
-.chat-disc{font-size:9.5px;color:var(--faint);text-align:center;padding:0 14px 10px}
-@media(max-width:1200px){
-  .chat-panel{width:min(370px,100vw);box-shadow:-12px 0 40px rgba(0,0,0,.18)}
-}
+.chat-disc{font-size:9.5px;color:var(--ink-muted);text-align:center;padding:0 14px 10px}
+@media(max-width:1200px){.chat-panel{width:min(370px,100vw);box-shadow:-12px 0 40px rgba(0,0,0,.18)}}
 
-/* ============ MOBILE ============ */
 @media(max-width:640px){
   .hero-q{font-size:20px}
   .searchbar input{font-size:16px}
   .dash-title{font-size:22px}
-  .kpi .val{font-size:24px}
-  .bar-row{grid-template-columns:96px 1fr 70px}
+  .kpi .val{font-size:26px}
+  .bar-row{grid-template-columns:100px 1fr 76px}
   .screen h2.big{font-size:24px}
   .bignum{font-size:32px}
+  .meter-row{grid-template-columns:86px 1fr 96px}
 }
 @media print{
   .topnav,.chat-panel,.chat-fab,.tabs-sticky .tabs{display:none!important}
@@ -277,13 +314,12 @@ details[open] .chev{transform:rotate(90deg)}
   <span class="spacer"></span>
   <span class="navlink hide-sm">🌐 Public Intelligence <span class="badge-new">New</span></span>
   <span class="navlink hide-sm">💡 Examples</span>
-  <span class="navlink hide-sm">ⓘ About Stagwell AI</span>
+  <button class="theme-btn" id="theme-btn" title="Toggle light/dark">🌙 Dark</button>
   <span class="userchip" id="userchip">G</span>
 </header>
 
 <main id="app">
 
-  <!-- ===== SCREEN 1: BRAND SEARCH ===== -->
   <section id="screen-search">
     <div class="hero-dark">
       <div class="hero-inner">
@@ -310,7 +346,6 @@ details[open] .chev{transform:rotate(90deg)}
     </div>
   </section>
 
-  <!-- ===== SCREEN 2: FREE SNAPSHOT ===== -->
   <section id="screen-snapshot" class="screen" hidden>
     <div class="center"><span class="step-pill">✦ Step 1 of 3 · Free preview</span></div>
     <div class="freebanner">✨ Free Snapshot — based on public market data.</div>
@@ -321,7 +356,6 @@ details[open] .chev{transform:rotate(90deg)}
     <p class="preview-note">🔓 This is a preview of public insights. Continue to shape a dashboard around what matters to you.</p>
   </section>
 
-  <!-- ===== SCREEN 3: PRIORITIES ===== -->
   <section id="screen-priorities" class="screen" hidden>
     <div class="center">
       <span class="step-pill">✦ Step 2 of 3 · Personalize</span>
@@ -336,7 +370,6 @@ details[open] .chev{transform:rotate(90deg)}
     </div>
   </section>
 
-  <!-- ===== SCREEN 4: SIGN UP ===== -->
   <section id="screen-signup" class="screen" hidden>
     <div class="center">
       <span class="step-pill">✦ Step 3 of 3 · Keep monitoring</span>
@@ -361,13 +394,10 @@ details[open] .chev{transform:rotate(90deg)}
     </form>
   </section>
 
-  <!-- ===== SCREEN 5: DASHBOARD ===== -->
   <section id="screen-dashboard" hidden>
     <div class="dash-head">
       <div class="dash-head-inner">
-        <div class="dash-title-row">
-          <h1 class="dash-title"><span class="volt">NIKE</span> — Brand &amp; Competitive Intelligence</h1>
-        </div>
+        <h1 class="dash-title"><span class="volt">NIKE</span> — Brand &amp; Competitive Intelligence</h1>
         <div class="meta-badges">
           <span class="mbadge voltb">Data: 20–21 Jul 2026</span>
           <span class="mbadge">Sources: IMAI + SEMrush</span>
@@ -382,12 +412,11 @@ details[open] .chev{transform:rotate(90deg)}
 
 </main>
 
-<!-- ===== CHAT ===== -->
 <button class="chat-fab" id="chat-fab">✦ Ask Stagwell AI</button>
 <aside class="chat-panel" id="chat-panel" aria-label="Ask Stagwell AI">
   <div class="chat-h">
     <span class="ai-ico">✦</span>
-    <div><b>Ask Stagwell AI</b><span>Your AI marketing intelligence assistant · <b style="color:var(--amber)">scripted demo</b></span></div>
+    <div><b>Ask Stagwell AI</b><span>Your AI marketing intelligence assistant · <b style="color:var(--serious)">scripted demo</b></span></div>
     <button class="close" id="chat-close" aria-label="Close chat">✕</button>
   </div>
   <div class="chat-msgs" id="chat-msgs"></div>
@@ -401,327 +430,99 @@ details[open] .chev{transform:rotate(90deg)}
 
 <script>
 'use strict';
+/* DATA: nike-dashboard-data.json embedded VERBATIM (minified) per NIKE-DASHBOARD-HANDOFF.md */
+const DATA = {"_meta":{"title":"Nike CMO Intelligence — complete dashboard dataset","snapshotDate":"2026-07-21","sources":{"social":"InfluencerMarketing.AI (imai.co) brand reports, updated 21 Jul 2026","search":"SEMrush project fid=12722449 (nike.com): Domain Overview, Organic Research, Backlink Analytics, AI Visibility, Keyword Gap, dashboard widgets"},"conventions":{"display":"Formatted strings ('291.7M') are display-exact from source. Numeric fields are parsed for plotting.","pct":"All pct fields are percentages (61.96 means 61.96%).","currency":"Social prices: nike/puma/underarmour USD, adidas GBP, lululemon CAD, newbalance USD. EMV always USD. SEMrush always USD.","null":"null = not shown by source. 'LOCKED' = behind a paywall we did not purchase.","providerRule":"social.* (IMAI) and search/ai/backlinks/project (SEMrush) are different providers — never combine into computed ratios."},"_schemas":{"ageGender":"[ageBand, femalePct, malePct]","namePct":"[name, pct]","keywordRow":"[keyword, position, trafficNum, trafficPct, volumeNum, kdPct]","competitorRow":"[domain, competitionLevelPct, commonKeywords, seKeywords, traffic, costsUSD, paidKeywords]","gapRow":"[keyword, nikePos, footlockerPos, volume, kdPct, cpcUSD]","post":"[dateISO, captionExcerpt, likes, comments]","asBucket":"[bucketLabel, pct, domains]"}},"social":{"brandOrder":["nike","adidas","puma","underarmour","newbalance","lululemon"],"brands":{"nike":{"profile":{"name":"Nike","handle":"@nike","type":"business","country":"United States","verified":true,"currency":"USD"},"platforms":{"instagram":{"followers":291700000,"d":"291.7M"},"tiktok":{"followers":3800000,"d":"3.8M"},"youtube":{"subscribers":2100000,"d":"2.1M"},"threads":"linked"},"totalFollowers":{"v":297600000,"d":"297.6M"},"engagementPerPost":{"total":199500,"instagram":186500,"tiktok":12900,"youtube":155},"platformShare":[["Instagram",98],["TikTok",1.3],["YouTube",0.7]],"brandMentions":null,"totalReach":{"v":97200000,"d":"97.2M"},"topLocation":"United States","influencerInsight":{"followers":291700000,"growthPctMo":-0.07,"credibilityPct":71.32,"followersBreakdown":[["Regular users",61.59],["Fake/bots",21.65],["Mass followers",13.77],["Influencers",2.99]]},"imaiScore":{"audienceQuality":14,"audienceQualityLabel":"Poor","performance":null,"pros":["High audience reachability expected"],"neutral":["Average percentage of credible followers"],"cons":["This influencer is hiding likes","Poor followers growth"]},"postData":{"avgLikes":186500,"avgLikesChgPct":22.21,"avgComments":1400,"avgShares":6500,"avgImpressions":67100000,"impressionsRatePct":23,"estReach":28300000,"engagementRatePct":0.06,"postPrice":"$366.2K–$439.5K","cpe":2.3,"cpc":3.6},"emvUSD":{"post":3400000,"reels":64900,"story":1300000,"total":4800000},"storyData":{"avgViews":23300000,"viewsRatePct":8,"linkClicks":39700,"erPct":0.86,"price":"$85.7K–$102.8K","cpv":0,"cpe":0.1,"cpc":3.6},"reelsData":{"avgPlays":5700000,"viewsRatePct":1.96,"engagements":179500,"viewsErPct":3.28,"price":"$421.2K–$505.4K","cpp":0.1,"cpe":2.7,"estReach":50800000},"topicTensor":["nike","justdoit","nikerunning","nikewomen","swoosh","teamnike","nikereact","breaking2","choosego"],"trends":{"followers":{"chgPctMo":-0.07,"axisRange":"290M–300M","months":"Mar–Jul"},"following":{"chgPctMo":null,"axisRange":"230–270","months":"Mar–Jul"},"likes":{"chgPctMo":22.21,"axisRange":"50K–200K","months":"Mar–Jul"},"engagementSpread":{"axisMarkers":[1900000,1300000,637400,0],"months":["Jun","Jul"],"series":["Likes","Comments"]}},"hashtags":["#justdoit","#milanocortina2026","#olympics","#nikefootball","#paralympics","#showdem"],"mentions":["@nike","@kingjames","@nikerunning","@nikebasketball","@shubmangill","@erling","@cristiano","@nikediamond"],"mentionedBrands":null,"influencerInterests":null,"audience":{"gender":{"malePct":61.96,"femalePct":38.04},"ageGender":[["13-17",2.7,3.2],["18-24",14.9,21.4],["25-34",15.9,26.5],["35-44",3.7,8.5],["45-64",0.9,2.4]],"cities":[["São Paulo",1.2],["Los Angeles",1.12],["New York City",1.08],["Rio de Janeiro",1],["Moscow",0.76]],"countries":[["United States",19.72],["Brazil",7.51],["India",5.5]],"ethnicity":[["White / Caucasian",52.16],["Asian",18.58],["Hispanic",17.27]],"language":[["English",47.44],["Spanish",13.92],["Portuguese",7.58]],"influencersPct":8.14,"reachability":[["<500",63.35],["500-1k",15.47],["1-1.5k",7.41],[">1.5k",13.77]],"brandAffinity":[["Nike",13.36],["Apple",11.03],["Adidas",9.82],["Walt Disney",8.5],["Starbucks",4.86]],"interestAffinity":[["Friends, Family & Relationships",29.5],["Clothes, Shoes & Accessories",28.57],["Camera & Photography",26.57],["Restaurants, Food & Grocery",26.14],["Sports",25.93]],"lookalikes":["@nikesportswear","@adidas","@nikerunning"],"topFollowers":[["@cristiano","Cristiano Ronaldo"],["@lilbieber","Justin Bieber"],["@zendaya","Zendaya"]]},"topPosts":[["2026-06-02","Define Greatness. Then Redefine It. @cristiano @kingjames",13688154,64113],["2026-06-04","It was all going to plan until instincts took over… Rip The Script",2757785,59467]],"postsNote":"First 2 of 10 posts captured","positioning":"Motivational storytelling tied to major sporting moments and elite athletes; steady visibility with slightly softening engagement."},"adidas":{"profile":{"name":"adidas","handle":"@adidas","type":"business","country":"United Kingdom","currency":"GBP"},"platforms":{"instagram":{"followers":29600000,"d":"29.6M"},"tiktok":{"followers":9700000,"d":"9.7M"},"youtube":{"subscribers":949000,"d":"949K"},"threads":"linked","other":["Linktree","Pinterest"]},"totalFollowers":{"v":40200000,"d":"40.2M"},"engagementPerPost":{"total":89700,"instagram":82600,"tiktok":7000,"youtube":145},"platformShare":[["Instagram",73.5],["TikTok",24.1],["YouTube",2.4]],"brandMentions":null,"totalReach":{"v":10900000,"d":"10.9M"},"topLocation":"United States","influencerInsight":{"followers":29600000,"growthPctMo":0.59,"credibilityPct":74.72,"followersBreakdown":[["Regular users",59.14],["Mass followers",23.13],["Fake/bots",13.09],["Influencers",4.64]]},"imaiScore":{"audienceQuality":43,"audienceQualityLabel":"Fair","performance":null,"pros":["High audience reachability expected","Good followers growth rate"],"neutral":["Average percentage of credible followers"],"cons":["Poor audience engagement"]},"postData":{"avgLikes":82600,"avgLikesChgPct":-32.65,"avgComments":378,"avgShares":2400,"avgImpressions":6800000,"impressionsRatePct":23,"estReach":3200000,"engagementRatePct":0.28,"postPrice":"£53.8K–£64.6K","paidPostsPerformancePct":24.98,"cpe":0.8,"cpc":5.2},"emvUSD":{"post":381400,"reels":21000,"story":136200,"total":538600},"storyData":{"avgViews":2400000,"viewsRatePct":8,"linkClicks":4000,"erPct":0.86,"price":"£13.1K–£15.7K","cpv":0,"cpe":0.1,"cpc":5.2},"reelsData":{"avgPlays":1900000,"viewsRatePct":6.26,"engagements":371200,"viewsErPct":5.85,"price":"£61.9K–£74.3K","cpp":0,"cpe":0.9,"estReach":5600000},"topicTensor":["olympics","paris2024","teamusa","worldathletics","tokyo2025","2026olympics"],"trends":{"followers":{"chgPctMo":0.59,"axisRange":"29.3M–29.7M","months":"Mar–Jul"},"following":{"chgPctMo":0.57,"axisRange":"1030–1060","months":"Mar–Jul"},"likes":{"chgPctMo":-32.65,"axisRange":"0–150K","months":"Mar–Jul"},"engagementSpread":{"axisMarkers":[1200000,807000,403500,0],"months":["Jul"],"series":["Likes","Comments"]}},"hashtags":["#yougotthis","#adizero"],"mentions":["@adidas","@sabastiansawe","@tchalamet","@adidasfootball","@kimi_antonelli","@adidasrunning","@tigist__assefa","@yomif_kejelcha"],"mentionedBrands":null,"influencerInterests":null,"audience":{"gender":{"malePct":64.16,"femalePct":35.84},"ageGender":[["13-17",2.8,3.4],["18-24",13.8,23.6],["25-34",14.8,26.9],["35-44",3.7,8.7],["45-64",0.8,1.6]],"cities":[["São Paulo",1.4],["Rio de Janeiro",0.99],["New York City",0.84],["Greater London",0.81],["Mexico City",0.79]],"countries":[["United States",13.98],["Brazil",10.05],["India",5]],"ethnicity":[["White / Caucasian",54.29],["Hispanic",17.91],["Asian",16.07]],"language":[["English",41.08],["Spanish",15.91],["Portuguese",10.11]],"influencersPct":13.05,"reachability":[["<500",42.36],["500-1k",23.61],["1-1.5k",10.9],[">1.5k",23.13]],"brandAffinity":[["Adidas",15.12],["Nike",13.95],["Apple",11.67],["Walt Disney",7.53],["Starbucks",6.42]],"interestAffinity":[["Friends, Family & Relationships",32.71],["Clothes, Shoes & Accessories",32.02],["Sports",30.33],["Camera & Photography",27.82],["Travel, Tourism & Aviation",26.22]],"lookalikes":["@adidasoriginals","@nikesportswear","@puma"],"topFollowers":[["@leomessi","Leo Messi"],["@davidbeckham","David Beckham"],["@433","433"]]},"topPosts":[["2026-06-15","El Último Tango — Messi x @adidasfootball (World Cup boots)",6911101,94494],["2026-05-08","So... who's up next? #YouGotThis",4617679,17438]],"postsNote":"First 2 of 10 posts captured","positioning":"Football-first performance storytelling under #YouGotThis; strong growth, engagement fluctuates."},"puma":{"profile":{"name":"PUMA","handle":"@puma","type":"business","country":"United States","currency":"USD","contact":"customerservice@puma.com"},"platforms":{"instagram":{"followers":12900000,"d":"12.9M"},"tiktok":{"followers":2700000,"d":"2.7M"},"youtube":{"subscribers":922000,"d":"922K"},"threads":"linked"},"totalFollowers":{"v":15600000,"d":"15.6M"},"engagementPerPost":{"total":102200,"instagram":11600,"tiktok":90600,"youtube":null},"platformShare":[["Instagram",82.7],["TikTok",17.3]],"brandMentions":[["Balenciaga",1],["Omega",1],["Puma",1]],"totalReach":{"v":4300000,"d":"4.3M"},"topLocation":"United States","influentialCategories":["Activewear","Coffee, Tea & Beverages","Jewellery & Watches","Luxury Goods","Music","Sports"],"influencerInsight":{"followers":12900000,"growthPctMo":0.15,"credibilityPct":72.14,"followersBreakdown":[["Regular users",54.38],["Mass followers",28.5],["Fake/bots",12],["Influencers",5.12]]},"imaiScore":{"audienceQuality":22,"audienceQualityLabel":"Poor","performance":null,"pros":["High audience reachability expected"],"neutral":["Average percentage of credible followers"],"cons":["This influencer is hiding likes","Poor followers growth rate"]},"postData":{"avgLikes":11600,"avgLikesChgPct":29.44,"avgComments":126,"avgShares":731,"avgImpressions":3000000,"impressionsRatePct":23,"estReach":1300000,"engagementRatePct":0.09,"postPrice":"$33.7K–$40.4K","paidPostsPerformancePct":331.2,"cpe":3.5,"cpc":7.9},"emvUSD":{"post":155100,"reels":4900,"story":59600,"total":219600},"storyData":{"avgViews":1000000,"viewsRatePct":8,"linkClicks":1800,"erPct":0.86,"price":"$8.3K–$10K","cpv":0,"cpe":0.1,"cpc":7.9},"reelsData":{"avgPlays":434100,"viewsRatePct":3.35,"engagements":75900,"viewsErPct":3.07,"price":"$38.8K–$46.5K","cpp":0.1,"cpe":4,"estReach":2300000},"topicTensor":["wild","puma","staywild","bewild","gowild","runwild","foreverfaster","livewild","getwild"],"trends":{"followers":{"chgPctMo":0.15,"axisRange":"12.9M–13.2M","months":"Mar–Jul"},"following":{"chgPctMo":1.3,"axisRange":"150–158","months":"Mar–Jul"},"likes":{"chgPctMo":29.44,"axisRange":"6K–14K","months":"Mar–Jul"},"engagementSpread":{"axisMarkers":[48000,32000,16000,0],"months":["Jun","Jul"],"series":["Likes","Comments"]}},"hashtags":["#gowild","#pumashowtime","#footballboots","#pumasuede","#rollingnations","#pumaxhyrox","#racelouder","#pumasalehe"],"mentions":["@puma","@pumafootball","@pumarunning","@portugal","@mondo_duplantis","@neymarjr","@pumamotorsport","@hyroxworld"],"mentionedBrands":["Balenciaga","Omega","Puma","Red Bull","Spotify Music"],"influencerInterests":["Music","Coffee, Tea & Beverages","Sports","Activewear","Jewellery & Watches"],"audience":{"gender":{"malePct":53.17,"femalePct":46.83},"ageGender":[["13-17",3.4,2.4],["18-24",18.2,17.8],["25-34",19.9,23.4],["35-44",4.4,8.3],["45-64",1,1.3]],"cities":[["São Paulo",1.24],["New York City",0.99],["Rio de Janeiro",0.96],["Mexico City",0.94],["Santiago",0.78]],"countries":[["United States",11.38],["Brazil",8.22],["India",7.21]],"ethnicity":[["White / Caucasian",52.61],["Hispanic",19.1],["Asian",18.13]],"language":[["English",39.75],["Spanish",18.03],["Portuguese",8.62]],"influencersPct":15.24,"reachability":[["<500",36.58],["500-1k",23.14],["1-1.5k",11.78],[">1.5k",28.5]],"brandAffinity":[["Nike",14.4],["Adidas",11.82],["Apple",10.13],["Walt Disney",8.32],["Puma",6.68]],"interestAffinity":[["Clothes, Shoes & Accessories",35.8],["Friends, Family & Relationships",31.68],["Camera & Photography",27.64],["Travel, Tourism & Aviation",25.34],["Restaurants, Food & Grocery",24.07]],"lookalikes":["@adidasoriginals","@adidas","@pumasportstyle"],"topFollowers":[["@selenagomez","Selena Gomez"],["@zendaya","Zendaya"],["@badgalriri","Rihanna"]]},"topPosts":[["2026-06-04","Biggest show / biggest showman ✨ @neymarjr #PUMAShowtime",3525610,15576],["2025-01-31","Welcome home, @neymarjr (Santos)",2567258,11909]],"postsNote":"First 2 of 10 posts captured","positioning":"#GoWild campaign engine; TikTok delivers ~8× IG engagement; premium-lifestyle collabs (Balenciaga, Omega)."},"underarmour":{"profile":{"name":"Under Armour","handle":"@underarmour","type":"business","country":"United States","city":"Denver","currency":"USD","contact":"+1 888 727 6687"},"platforms":{"instagram":{"followers":8100000,"d":"8.1M"},"threads":"linked"},"totalFollowers":{"v":8100000,"d":"8.1M"},"engagementPerPost":{"total":3000,"instagram":3000},"platformShare":[["Instagram",100]],"brandMentions":[["BlacktipH",1],["MTV",1],["NFL",1]],"totalReach":{"v":2500000,"d":"2.5M"},"topLocation":"United States","influentialCategories":["Activewear","Fitness & Yoga","Music","Sports","Television & Film"],"influencerInsight":{"followers":8100000,"growthPctMo":0.02,"credibilityPct":72.48,"followersBreakdown":[["Regular users",54.42],["Mass followers",31.84],["Fake/bots",9.3],["Influencers",4.44]]},"imaiScore":{"audienceQuality":19,"audienceQualityLabel":"Poor","performance":null,"pros":["High audience reachability expected"],"neutral":["Average percentage of credible followers"],"cons":["This influencer is hiding likes","Poor followers growth rate"]},"postData":{"avgLikes":3000,"avgLikesChgPct":-15.04,"avgComments":45,"avgShares":172,"avgImpressions":1900000,"impressionsRatePct":23,"estReach":722900,"engagementRatePct":0.04,"postPrice":"$23.7K–$28.4K","cpe":9.2,"cpc":8.8},"emvUSD":{"post":94500,"reels":1700,"story":37400,"total":133500},"storyData":{"avgViews":649800,"viewsRatePct":8,"linkClicks":1100,"erPct":0.86,"price":"$5.9K–$7.1K","cpv":0,"cpe":0.1,"cpc":8.8},"reelsData":{"avgPlays":146800,"viewsRatePct":1.81,"engagements":3500,"viewsErPct":2.34,"price":"$27.2K–$32.6K","cpp":0.2,"cpe":10.6,"estReach":1300000},"topicTensor":["underarmour","milanocortina2026","sportsmarketing","gameweek","wewill","stingem","espn2"],"trends":{"followers":{"chgPctMo":0.02,"axisRange":"8.1M–8.3M","months":"Mar–Jul"},"following":{"chgPctMo":1.79,"axisRange":"860–920","months":"Mar–Jul"},"likes":{"chgPctMo":-15.04,"axisRange":"2K–8K","months":"Mar–Jul"},"engagementSpread":{"axisMarkers":[33400,22200,11100,0],"months":["Jul"],"series":["Likes","Comments"]}},"hashtags":["#aag2026","#roadtomilanocortina2026","#thenextera","#olympics","#milanocortina2026","#marineserrexunderarmour","#protectthishouse","#underarmourxfengchenwang"],"mentions":["@underarmour","@jdsportsus","@2xrakai","@gunna","@jjettas2","@theufcbaddy","@laneahbryan","@uanextfootball"],"mentionedBrands":["MTV","The Olympic Games","Under Armour","NFL","UFC"],"influencerInterests":["Television & Film","Music","Sports","Activewear","Fitness & Yoga"],"audience":{"gender":{"malePct":76.84,"femalePct":23.16},"ageGender":[["13-17",1.6,3.1],["18-24",7,22.4],["25-34",9.4,34.6],["35-44",4.2,13],["45-64",1.1,3.7]],"cities":[["Los Angeles",1.29],["New York City",1.05],["São Paulo",0.81],["Rio de Janeiro",0.74],["Mexico City",0.6]],"countries":[["United States",26.91],["Brazil",7.09],["India",7.04]],"ethnicity":[["White / Caucasian",50.98],["Hispanic",17.88],["Asian",17.6]],"language":[["English",54.68],["Spanish",14.81],["Portuguese",7.12]],"influencersPct":14.8,"reachability":[["<500",31.44],["500-1k",23.98],["1-1.5k",12.74],[">1.5k",31.84]],"brandAffinity":[["Nike",13.57],["Apple",9.32],["Walt Disney",8.98],["Adidas",8.39],["Under Armour",6]],"interestAffinity":[["Sports",38.44],["Friends, Family & Relationships",33.43],["Fitness & Yoga",28.17],["Clothes, Shoes & Accessories",27.52],["Restaurants, Food & Grocery",27.33]],"lookalikes":["@adidas","@niketraining","@nikesportswear"],"topFollowers":[["@stephencurry30","Stephen Curry"],["@turki","Turki Alalshikh"],["@djkhaled","DJ Khaled"]]},"topPosts":[["2026-03-05","FULL ACCESS Ep.1 — The Jet ✈️ (Rakai)",341168,4941],["2026-05-28","FULL ACCESS Ep.2 — Rolling Loud 🎶",216566,1344]],"postsNote":"First 2 of 10 posts captured","positioning":"#ProtectThisHouse performance voice; creator-series content; most male-skewed audience in set."},"newbalance":{"profile":{"name":"New Balance","handle":"@newbalance","type":"business","country":"United States","currency":"USD"},"platforms":{"instagram":{"followers":9200000,"d":"9.2M"},"youtube":{"subscribers":202000,"d":"202K"},"threads":"linked"},"totalFollowers":{"v":9400000,"d":"9.4M"},"engagementPerPost":{"total":8500,"instagram":8400,"youtube":168.1},"platformShare":[["Instagram",97.9],["YouTube",2.1]],"brandMentions":[["Bayer",1],["Miu Miu",1],["New Balance",1]],"totalReach":{"v":3100000,"d":"3.1M"},"topLocation":"Brazil","influentialCategories":["Activewear","Clothes, Shoes & Accessories","Jewellery & Watches","Luxury Goods","Sports"],"influencerInsight":{"followers":9200000,"growthPctMo":1.43,"credibilityPct":73.44,"followersBreakdown":[["Regular users",50.65],["Mass followers",35.94],["Fake/bots",8.57],["Influencers",4.84]]},"imaiScore":{"audienceQuality":43,"audienceQualityLabel":"Fair","performance":null,"pros":["Excellent followers growth rate","High audience reachability expected"],"neutral":["Average percentage of credible followers"],"cons":["This influencer is hiding likes"]},"postData":{"avgLikes":8400,"avgLikesChgPct":-34.38,"avgComments":114,"avgShares":1100,"avgImpressions":2100000,"impressionsRatePct":23,"estReach":892100,"engagementRatePct":0.09,"postPrice":"$26.3K–$31.5K","cpe":3.7,"cpc":8.5},"emvUSD":{"post":111400,"reels":6900,"story":42300,"total":160600},"storyData":{"avgViews":735800,"viewsRatePct":8,"linkClicks":1300,"erPct":0.86,"price":"$6.5K–$7.8K","cpv":0,"cpe":0.1,"cpc":8.5},"reelsData":{"avgPlays":605000,"viewsRatePct":6.58,"engagements":34900,"viewsErPct":2.01,"price":"$30.2K–$36.3K","cpp":0.1,"cpe":4.3,"estReach":1600000},"topicTensor":["newbalance","asics","nb","saucony","newbalanceshoes","nbfootball","alwaysinbeta","teamnb","freshfoam","nbrunning"],"trends":{"followers":{"chgPctMo":1.43,"axisRange":"8.8M–9.4M","months":"Mar–Jul"},"following":{"chgPctMo":-0.36,"axisRange":"558–564","months":"Mar–Jul"},"likes":{"chgPctMo":-34.38,"axisRange":"5K–25K","months":"Mar–Jul"},"engagementSpread":{"axisMarkers":[145500,97000,48500,0],"months":["Jun","Jul"],"series":["Likes","Comments"]}},"hashtags":["#stoneislandnewbalance","#wegotnow","#runyourway","#newbalancexmiumiu","#miumiu","#fc25","#beklutch"],"mentions":["@newbalance","@shoheiohtani","@bukayosaka87","@endrick","@cooper_flagg","@cocogauff","@boladebanjo","@newbalancebaseball"],"mentionedBrands":["Bayer","Miu Miu","soccerbible","TAG Heuer","The Olympic Games"],"influencerInterests":["Clothes, Shoes & Accessories","Sports","Activewear","Jewellery & Watches","Luxury Goods"],"audience":{"gender":{"malePct":55.99,"femalePct":44.01},"ageGender":[["13-17",1.8,1.7],["18-24",11.4,13.3],["25-34",20.2,25.7],["35-44",8.2,12.4],["45-64",2.3,3]],"cities":[["São Paulo",2.66],["Rio de Janeiro",1.78],["Buenos Aires",1.39],["Jakarta",1.39],["New York City",1]],"countries":[["Brazil",16.98],["United States",10.92],["Indonesia",6.82]],"ethnicity":[["White / Caucasian",48.84],["Hispanic",27.49],["Asian",17.66]],"language":[["English",31.34],["Spanish",22.99],["Portuguese",17.05]],"influencersPct":18.8,"reachability":[["<500",28.52],["500-1k",22],["1-1.5k",13.54],[">1.5k",35.94]],"brandAffinity":[["Nike",14.98],["Adidas",11.98],["Apple",9.34],["Walt Disney",9.12],["Starbucks",6.9]],"interestAffinity":[["Friends, Family & Relationships",34.61],["Clothes, Shoes & Accessories",32.8],["Sports",28.91],["Restaurants, Food & Grocery",28.15],["Travel, Tourism & Aviation",27.98]],"lookalikes":["@adidasrunning","@nikerunning","@nikesportswear"],"topFollowers":[["@justintimberlake","Justin Timberlake"],["@jamesrodriguez10","James Rodríguez"],["@turki","Turki Alalshikh"]]},"topPosts":[["2026-03-04","The 204L. Worn by @rosalia.vt.",438301,2755],["2025-07-10","Rosalía: The Ambassador — A New Balance Presentation",331644,7794]],"postsNote":"First 2 of 10 posts captured","positioning":"Fashion-forward (#wegotnow; Miu Miu / Stone Island collabs); fastest-growing; Brazil-first audience."},"lululemon":{"profile":{"name":"lululemon","handle":"@lululemon","type":"business","country":"Canada","currency":"CAD","contact":"gec@lululemon.com / +1 877 263 9300"},"platforms":{"instagram":{"followers":5800000,"d":"5.8M"},"tiktok":{"followers":870300,"d":"870.3K"},"youtube":{"subscribers":283000,"d":"283K"},"threads":"linked"},"totalFollowers":{"v":7000000,"d":"7M"},"engagementPerPost":{"total":23000,"instagram":5200,"tiktok":17700,"youtube":106},"platformShare":[["Instagram",83.5],["TikTok",12.5],["YouTube",4.1]],"brandMentions":[["Lululemon Athletica",1],["McDonald's",1],["Moët & Chandon",1]],"totalReach":{"v":1900000,"d":"1.9M"},"topLocation":"United States","influentialCategories":["Activewear","Beer, Wine & Spirits","Clothes, Shoes & Accessories","Restaurants, Food & Grocery","Shopping & Retail","Sports"],"influencerInsight":{"followers":5800000,"growthPctMo":0.3,"credibilityPct":78.26,"followersBreakdown":[["Regular users",53.03],["Mass followers",31.62],["Influencers",7.93],["Fake/bots",7.42]]},"imaiScore":{"audienceQuality":40,"audienceQualityLabel":"Fair","performance":null,"pros":["Audience majority from United States","High audience reachability expected","High percentage of credible followers"],"neutral":[],"cons":["This influencer is hiding likes","Poor followers growth rate"]},"postData":{"avgLikes":5200,"avgLikesChgPct":80.33,"avgComments":126,"avgShares":274,"avgImpressions":1300000,"impressionsRatePct":23,"estReach":565900,"engagementRatePct":0.09,"postPrice":"CAD$25.2K–CAD$30.2K","cpe":5.7,"cpc":12.1},"emvUSD":{"post":71400,"reels":4700,"story":26900,"total":102900},"storyData":{"avgViews":466700,"viewsRatePct":8,"linkClicks":793,"erPct":0.86,"price":"CAD$6.3K–CAD$7.5K","cpv":0,"cpe":0.2,"cpc":12.1},"reelsData":{"avgPlays":413300,"viewsRatePct":7.08,"engagements":12800,"viewsErPct":0.72,"price":"CAD$28.9K–CAD$34.7K","cpp":0.1,"cpe":6.6,"estReach":1000000},"topicTensor":["lululemon","thesweatlife","sweatlife","thisisyoga","lululemonmen","breatheitallin","seawheeze","lululemonausnz","theairoutthere"],"trends":{"followers":{"chgPctMo":0.3,"axisRange":"5.6M–5.9M","months":"Mar–Jul"},"following":{"chgPctMo":3.38,"axisRange":"130–160","months":"Mar–Jul"},"likes":{"chgPctMo":80.33,"axisRange":"2K–6K","months":"Mar–Jul"},"engagementSpread":{"axisMarkers":[79800,53200,26600,0],"months":["Jun","Jul"],"series":["Likes","Comments"]}},"hashtags":["#seawheeze","#seawheeze2026","#globalrunningday","#lululemon10k","#cutfromthecold","#lululemonambassador","#룰루레몬앰배서더","#광고"],"mentions":["@lewishamilton","@lululemon","@hannahberner","@sunisalee","@saul_nash","@kaylajeter_","@akiniko","@bigfoe1998"],"mentionedBrands":["McDonald's","NHL","NFL","Lululemon Athletica","Moët & Chandon"],"influencerInterests":["Shopping & Retail","Clothes, Shoes & Accessories","Beer, Wine & Spirits","Sports","Activewear"],"audience":{"gender":{"malePct":12.02,"femalePct":87.98},"ageGender":[["13-17",2.9,0.3],["18-24",23.8,2.2],["25-34",39.7,5.4],["35-44",17.4,2.9],["45-64",4.1,1.2]],"cities":[["Los Angeles",2.59],["New York City",2.26],["Chicago",1.53],["Toronto",1.45],["Greater London",1.36]],"countries":[["United States",64.12],["Canada",12.25],["Australia",3.89]],"ethnicity":[["White / Caucasian",76.24],["Asian",13.13],["Hispanic",7.84]],"language":[["English",88.73],["Spanish",3.27],["French",1.69]],"influencersPct":22.23,"reachability":[["<500",25.73],["500-1k",26.9],["1-1.5k",15.75],[">1.5k",31.62]],"brandAffinity":[["Walt Disney",17.95],["Starbucks",10.92],["Lululemon Athletica",10.44],["Apple",10.02],["Nike",8.67]],"interestAffinity":[["Friends, Family & Relationships",43.06],["Toys, Children & Baby",38.43],["Restaurants, Food & Grocery",37.41],["Clothes, Shoes & Accessories",35.63],["Fitness & Yoga",35.34]],"lookalikes":["@athleta","@fabletics","@americaneagle"],"topFollowers":[["@sonamkapoor","Sonam Kapoor"],["@agnezmo","Agnez Mo"],["@kajalaggarwalofficial","Kajal Aggarwal"]]},"topPosts":[["2025-11-24","Newest Educator: Ambassador @lewishamilton clocking in",1488625,6078],["2025-08-21","No days off.",1087648,7386]],"postsNote":"First 2 of 10 posts captured","positioning":"Wellness/community hub (#seawheeze); 88% female, 64% US audience; best credibility in set; Hamilton as marquee ambassador."}}},"search":{"domainOverview":{"worldwide":{"authorityScore":99,"authorityLabel":"Industry leader","organicTraffic":{"v":120700000,"d":"120.7M","chgPct":-0.1},"organicKeywords":{"v":11600000,"d":"11.6M","chgPct":-5.6},"paidTraffic":{"v":2900000,"d":"2.9M","chgPct":8.2},"paidKeywords":{"v":24000,"d":"24K","chgPct":27},"refDomains":{"v":199500,"d":"199.5K"},"backlinks":{"v":35100000,"d":"35.1M"},"trafficSharePct":79,"semrushRankChg":-68},"us":{"organicTraffic":{"v":35700000,"d":"35.7M","chgPct":0.31},"organicKeywords":{"v":4180334,"d":"4.2M","chgPct":-5.04},"trafficCostUSD":{"v":16000000,"d":"$16.0M","chgPct":-2.14},"paidTraffic":{"v":489000,"d":"489K"},"paidKeywords":{"v":3000,"d":"3K","chgPct":22.74}},"otherDatabases":{"uk":{"keywords":"749.6K"},"au":{"keywords":"572.2K"}},"serpDistribution":[["Organic",92.7],["AI Overviews",1.2],["Other SERP Features",6.1]],"keyTopics":[["EU-to-UK shoe size",200000],["Women's Dresses",125000],["Women's Bottoms",75000]]},"topKeywordsUS":{"note":"Page 1 of 41,804 (4,180,334 total). Schema: keywordRow.","rows":[["nike",1,2200000,6.13,2700000,94],["nike shoes",1,440000,1.23,550000,67],["nike tech",1,294400,0.82,368000,54],["nike vomero 5",1,196800,0.55,246000,46],["nike outlet",7,160800,0.44,201000,59],["nike elite backpack",1,132000,0.36,165000,50],["nike air max",1,132000,0.36,165000,74],["nike socks",1,132000,0.36,165000,52],["nike vomero",1,132000,0.36,165000,57],["jordan 4",1,111600,0.31,450000,43],["nike slides",1,108000,0.3,135000,56],["nike mind 001",1,108000,0.3,135000,41],["nike dunks",1,108000,0.3,135000,58],["nike ski mask",1,88000,0.24,110000,43],["nike running shoes",1,88000,0.24,110000,64],["nike air force 1",1,88000,0.24,110000,69],["jordan",1,74600,0.2,301000,99],["nike store",7,72400,0.2,90500,49],["nike cortez",1,72400,0.2,90500,56],["jordans",1,61000,0.17,246000,67],["air jordan",1,59200,0.16,74000,81],["nike metcon",1,59200,0.16,74000,51],["nike shorts",1,59200,0.16,74000,58],["nike pegasus",1,59200,0.16,74000,47],["nike sweatpants",1,59200,0.16,74000,50],["nike hoodie",1,59200,0.16,74000,51],["basketball shoes",1,49800,0.13,201000,59],["nike backpack",1,48400,0.13,60500,69],["nike.com",1,48400,0.13,60500,100],["nike sneakers",1,48400,0.13,60500,67],["jordan shoes",1,48400,0.13,60500,70],["air force 1",1,40900,0.11,165000,41],["nike soccer cleats",1,39600,0.11,49500,50],["nike basketball shoes",1,39600,0.11,49500,63],["nike golf shoes",1,39600,0.11,49500,36],["ja 3",1,33500,0.09,135000,22],["jordan 11",1,32500,0.09,246000,43],["jordan 5",1,21800,0.06,165000,28],["jordan 3",1,21800,0.06,165000,35],["travis scott shoes",1,22400,0.06,90500,38],["ja morant shoes",1,22400,0.06,90500,30],["nike careers",1,26500,0.07,33100,34]]},"organicCompetitorsUS":{"total":154826,"note":"Page 1 of 1,549. Schema: competitorRow. Positioning-map brands: footlocker, hibbett, champssports, flightclub, dickssportinggoods.","rows":[["footlocker.com",46,"170.1K","889.7K","4.9M","1.71M","1.8K"],["hibbett.com",41,"141.1K","677.2K","2.1M","427.56K","31"],["champssports.com",36,"104.8K","412.2K","1.2M","451.58K","309"],["dickssportinggoods.com",29,"245.4K","2.9M","17.2M","3.99M","4.3K"],["flightclub.com",29,"116.9K","388K","1.4M","464.59K","20"],["stockx.com",28,"114.4K","671.6K","3.2M","1.13M","852"],["finishline.com",26,"77.6K","284K","1.4M","805.68K","429"],["jdsports.com",18,"47.2K","207.2K","1.3M","1.17M","423"],["goat.com",17,"70.2K","536.3K","1.4M","591.94K","129"],["shoepalace.com",17,"58.4K","237.5K","622.7K","216.7K","7"],["dtlr.com",16,"51.1K","281.1K","1M","211.86K","29"],["farfetch.com",15,"57.9K","618.8K","2M","1.54M","1.1K"],["runrepeat.com",13,"39.6K","251.1K","1.6M","920.09K","0"],["famousfootwear.com",12,"40.3K","435.3K","2.3M","1.07M","495"],["stadiumgoods.com",12,"45.5K","159.3K","209.4K","95.27K","78"],["academy.com",10,"45K","1.4M","5.8M","1.19M","331"],["hypebeast.com",10,"34K","349.7K","369.3K","203.59K","0"],["soleretriever.com",10,"47.1K","169K","300.9K","106.97K","0"],["kickscrew.com",10,"33.4K","252.7K","227.2K","326.24K","53"],["fanatics.com",9,"65K","500.8K","1.9M","1.13M","658"],["adidas.com",9,"84.7K","2.2M","19.5M","13.35M","2.1K"],["asos.com",9,"35.1K","798.6K","2.5M","1.27M","965"],["shoecarnival.com",9,"27.9K","339.3K","1.4M","427.69K","455"],["kidsfootlocker.com",9,"33.3K","99.9K","933.6K","412.63K","225"],["kohls.com",8,"72.4K","3.1M","13.4M","19.41M","6.7K"],["sneakernews.com",8,"36.3K","188.3K","250.9K","103.16K","0"],["snipesusa.com",8,"22.9K","162.6K","605.3K","119.64K","76"],["zappos.com",7,"33.9K","1.1M","2.2M","3.49M","955"],["complex.com",6,"25.4K","938.2K","1.2M","401.63K","64"],["jcpenney.com",6,"47.5K","1.4M","9.4M","5.2M","3.6K"],["nordstrom.com",5,"61.9K","2.9M","16.6M","11.81M","567"],["underarmour.com",5,"35.1K","520.6K","4.3M","3.1M","2.1K"],["macys.com",5,"77.4K","4.7M","24.2M","16.59M","5K"],["scheels.com",5,"13.6K","815.4K","1.9M","322.11K","1.4K"],["newbalance.com",4,"31.6K","376.3K","8.8M","3.61M","812"],["dsw.com",4,"19.3K","621.7K","4M","1.5M","1.4K"],["on.com",3,"20.9K","250.4K","4.1M","6.12M","3.5K"],["nba.com",3,"20.8K","3.2M","47.6M","46M","372"],["ebay.com",3,"291.4K","50.1M","84.2M","53.4M","14.9K"],["premiumoutlets.com",3,"5.8K","768.7K","6.2M","7.69M","0"],["nordstromrack.com",3,"17.7K","1.1M","8.7M","2.31M","811"],["gap.com",2,"30.9K","2.2M","24.4M","8.47M","2.6K"],["lululemon.com",2,"27.7K","909.9K","13.6M","17.77M","3.1K"],["gymshark.com",2,"22K","232.6K","2.4M","1.11M","336"],["brooksrunning.com",2,"14.4K","109.8K","2.3M","990.16K","1K"],["rei.com",2,"22K","1.4M","6.5M","2.94M","1.6K"],["onepeloton.com",2,"10.4K","256.9K","1.4M","1.01M","2.5K"]],"brandRivalsSubset":["adidas.com","underarmour.com","newbalance.com","lululemon.com","on.com","brooksrunning.com","gymshark.com","onepeloton.com"]},"keywordGapVsFootlocker":{"overlap":{"nike":713900,"footlocker":516400},"nikeSegments":[["Shared",247900],["Missing",268500],["Weak",36400],["Strong",211500],["Untapped",268500],["Unique",466000]],"allTotal":982400,"topOpportunities":[["new balance",1830000],["birkenstock",1220000],["uggs",1220000],["under armour",1220000],["footlocker",1000000]],"headToHeadSample":{"note":"Page 1 of 2,479. Schema: gapRow.","rows":[["nike",1,5,2700000,94,0.73],["converse",10,15,823000,74,0.1],["nike shoes",1,12,550000,67,0.65],["jordan 4",1,2,450000,43,0.3],["nike tech",1,12,368000,54,0.19],["jordan",1,11,301000,99,0.24],["jordan 11",1,3,246000,43,0.36],["jordans",1,2,246000,67,0.24],["basketball shoes",1,24,201000,59,0.32],["air force 1",1,4,165000,41,0.41],["jordan 5",1,2,165000,28,0.34],["best walking shoes for women",21,45,135000,54,0.51],["jordan 12",3,1,135000,19,0.43],["kobe",7,12,135000,88,0.22],["soccer cleats",3,44,135000,56,0.36],["converse shoes",2,5,110000,55,0.18],["football cleats",3,34,110000,36,0.32],["gamma 11s",2,1,110000,32,0.45],["air max 95",1,3,90500,34,0.35],["tennis shoes",1,28,90500,47,0.81],["volleyball shoes",10,23,90500,39,0.36],["jordan 13",2,1,74000,21,0.54],["jordan 14",4,1,74000,21,0.5],["jordan 8",3,1,74000,21,0.53],["panda dunks",2,1,49500,26,0.43],["white shoes",2,1,60500,41,0.63],["black shoes",2,1,49500,29,0.59],["trail running shoes",16,48,49500,32,0.61],["white sneakers",12,3,49500,41,0.75],["best running shoes for women",11,34,40500,54,0.75]]}},"trafficAnalytics":{"period":"Jun 2026","scope":"Root Domain, Worldwide, Semrush Data","visits":{"v":91500000,"d":"91.5M","chgPct":-1.82},"uniqueVisitors":{"v":48300000,"d":"48.3M","chgPct":-0.94},"pagesPerVisit":{"v":4.67,"chgPct":1.9},"avgVisitDuration":{"d":"00:06:19","chgPct":-3.32},"bounceRatePct":{"v":47.58,"chgPct":-2.14},"sixMonthTrendAnchors":{"note":"Chart-read approximations, 3 anchors only — do not draw monthly precision","points":[["Jan 2026",70000000],["Apr 2026",56000000],["Jun 2026",58000000]]},"channelsTracked":["Direct","Referral","Organic Search","Organic Social","Paid Social","Paid Search","Display Ads","Email"],"channelSplit":"LOCKED — Traffic & Market Toolkit Pro ($289/mo)"},"positionTracking":{"range":"Jul 15–21, 2026","market":"United States (Google) · English","visibilityPct":82.31,"buckets":[["Top 3",83],["Top 10",87],["Top 20",87],["Top 100",87]],"sampleTracked":["12 s jordans","a'ja wilson shoes","acg boots","air force 1","air forces","air jordans"]},"siteAudit":{"updated":"2026-07-21","healthPct":85,"errors":12,"warnings":96,"crawledPages":100,"pageBreakdown":[["Healthy",11],["Broken",1],["Have issues",84],["Redirect",4],["Blocked",0]],"note":"100-page sample crawl"}},"ai":{"visibility":{"worldwide":85,"us":91,"label":"Great — frequently mentioned and often preferred by LLMs"},"mentions":{"v":1200000,"d":"1.2M","chgPct":-1.3},"citations":{"v":379000,"d":"379K","chgPct":0.3},"citedPages":{"v":485000,"d":"485K","chgPct":2.1},"byLLM":{"note":"[engine, mentionsSharePct, mentions, citedPages]","rows":[["Gemini",33.5,413600,27900],["ChatGPT",31.3,386700,385200],["AI Mode",24.2,298700,83200],["AI Overview",11,136500,31200]]},"byCountry":[["US",37.6,"464.7K"],["DE",4.8,"59K"],["ES",4.6,"56.9K"],["Other",53,"654.7K"]],"countryVisibility":[["Worldwide",85],["US",91],["DE",87],["ES",86]],"topCitedSources":[["nike.com",83500],["reddit.com",83100],["youtube.com",75500]],"topicsAndSources":{"performingTopics":317100,"topicOpportunities":5900,"citedSources":865300,"sourceOpportunities":12500,"promptsTracked":1400000},"sampleTopics":{"note":"Page 1 of 31,707. [topic, visibility, mentions, aiVolume]","rows":[["Nike Benassi Slides and Sandals",100,17,3800],["Nike Manufacturing and Supply Chain",100,33,3300],["Nike Outlet/Clearance Sacramento & Folsom",100,17,2000],["Nike Essentials",100,15,482],["Nike Dynamic Fit GK Gloves",100,15,469],["Bolsas y mochilas Nike",100,15,427],["Nike Invincible Running Shoes",100,15,416],["Nike Mercurial Boots History",100,16,333],["Espinilleras Nike Mercurial",100,15,256],["Nike Mercurial Sprinters",100,15,121]]},"competitorSet":["adidas.ie","jdsports.ie","sportsdirect.com","underarmour.ie"]},"backlinks":{"headline":{"backlinks":{"v":35100000,"d":"35.1M","chgPct":-5},"refDomains":{"v":199000,"d":"199K","chgPct":-2},"refIPs":"106K","refSubnets":"38.1K","outboundDomains":"1.9K","monthlyVisits":"91.5M","organicTraffic":"121M","authorityScore":99,"category":"Retail","liveNote":"99+ backlinks found today"},"types":[["Text",65,22100000],["Image",34,11800000],["Frame",0.07,23700],["Form",0.004,1400]],"attributes":[["Follow",86,30100000],["Nofollow",14,4900000],["Sponsored",1,397000],["UGC",0.2,73400]],"refDomainsByAS":{"note":"Schema: asBucket, ordered low→high","rows":[["0-10",69,138000],["11-20",10,20500],["21-30",10,19300],["31-40",6,11800],["41-50",3,5900],["51-60",1,2400],["61-70",0.55,1100],["71-80",0.3,594],["81-90",0.11,222],["91-100",0.06,112]]},"tld":[[".com",65,130004],[".dev",4,7953],[".org",3,5513],[".edu",0.2,403],[".gov",0.03,55],["other",28,56332]],"topCountries":[["United States",66,103139],["United Kingdom",6,9738],["France",4,5655],["Germany",4,5621],["Japan",3,4912],["Canada",2,2799]],"categories":[["Mass Media",23,2300],["Online Services",12,1200],["Education",10,980],["Sports",6,624],["Retail",5,516]],"topAnchors":["Empty Anchor","view deal","india english","http://www.nike.com","https://www.celinebagser.com/","nike men's full…10 | fb1362-101","nike, opens in new window","nike men's air …13 | fv8105-161","nike.com","investors"],"topLinkedPages":[["https://www.nike.com/",43831],["https://nike.com/",15461],["http://www.nike.com/",12055],["http://nike.com/",8424],["https://www.nike.com/launch",4881]],"similarProfiles":[["adidas.com",22],["nba.com",17],["starbucks.com",16],["walmart.com",16],["nfl.com",15]],"audit":{"overallToxicity":"High","sampleNote":"Audit analyzes a ~73.5K-link / 18.6K-domain sample; Analytics covers the full 35.1M index","toxicitySplit":[["Toxic",19.3,3600],["Potentially toxic",15.4,2900],["Non-toxic",65.2,12100]],"refDomains":{"total":18569,"new":343,"broken":5096,"lost":371},"analyzedBacklinks":{"total":73538,"new":3915,"broken":11059,"lost":2461},"worstOffenders":["tabaa.hasibu.id","telemedicinepredictdisease.com","ufoteeshirt.com","iotwithstapleit.com","gstopic.com","meredithwedsdhruv.com","oumarlanger.com"]}},"redFlags":[{"severity":"critical","title":"Backlink toxicity HIGH","detail":"19.3% of analyzed backlinks toxic (3.6K spam-blog links targeting Jordan/Nike terms)","tab":"backlinks"},{"severity":"critical","title":"Worst-in-set social audience quality","detail":"IMAI AQS 14 (Poor) vs Adidas/NB 43; 21.65% fake/bot followers — highest in competitive set","tab":"social"},{"severity":"serious","title":"Organic keyword base shrinking","detail":"-5.6% WW / -5.04% US this month (11.6M → trend down)","tab":"search"},{"severity":"serious","title":"Engagement-rate laggard","detail":"IG ER 0.06% vs Adidas 0.28%; likes hidden","tab":"social"},{"severity":"warning","title":"Missing rival-brand keyword coverage","detail":"Not ranking on 'new balance' (1.83M vol), 'under armour' (1.22M), 'uggs', 'birkenstock' — retail partners capture these","tab":"search"},{"severity":"warning","title":"AI answers lean on third parties","detail":"reddit.com (83.1K) & youtube.com (75.5K) cited nearly as often as nike.com (83.5K)","tab":"ai"}],"locked":[{"item":"Advertising Research detail (ad copies, full PPC keywords, PPC competitors)","requires":"SEMrush Advertising Toolkit $99–220/mo"},{"item":"Traffic Analytics channel %, geo, demographics, top pages","requires":"Traffic & Market Toolkit Pro $289/mo"},{"item":"IMAI TikTok/YouTube deep tabs, brand-safety scores, posts 3–10 per brand","requires":"IMAI unlock / not captured"},{"item":"SEMrush row-level completeness beyond page 1 of big tables","requires":"Export/API (may consume credits)"}]};
 /* =====================================================================
-   DATA — transcribed verbatim from NIKE-CMO-MASTER-REPORT.md
-   (snapshot 20–21 Jul 2026 · IMAI + SEMrush). Numbers are the single
-   source of truth; display strings kept exactly as reported.
+   Stagwell AI demo app — dashboard per NIKE-CHART-SPECS.md
+   Brand palette is CVD-validated (specs §1.2); volt is UI accent only.
    ===================================================================== */
-const DATA = {
-  meta: { snapshot: '20–21 Jul 2026', sources: 'IMAI (social) + SEMrush (search/web/AI/links)' },
+const ORDER = DATA.social.brandOrder;
+const BRAND_NAME = {};
+ORDER.forEach(id => BRAND_NAME[id] = DATA.social.brands[id].profile.name);
+const bc = id => `var(--c-${id})`;                 // brand slot color (theme-aware)
+const RAMP = ['#cde2fb','#a9cdf7','#86b6ef','#5f9be2','#2a78d6','#1e5fae','#174a8a','#0d366b']; // sequential blue
+const ENGINE_COLOR = { 'Gemini':'var(--c-nike)', 'ChatGPT':'var(--c-adidas)', 'AI Mode':'var(--c-puma)', 'AI Overview':'var(--c-underarmour)' };
 
-  kpis: [
-    { lbl:'Total social followers', val:'297.6M', sub:'IG + TikTok + YouTube', src:'IMAI', style:'voltk' },
-    { lbl:'Organic traffic (WW)', val:'120.7M', sub:'per month', delta:-0.1, deltaTxt:'-0.1%' },
-    { lbl:'Site visits (Jun 2026)', val:'91.5M', sub:'worldwide', delta:-1.82, deltaTxt:'-1.82%' },
-    { lbl:'AI Visibility', val:'85/100', sub:'“Great” · US: 91' },
-    { lbl:'Authority Score', val:'99', sub:'Industry leader' },
-    { lbl:'Backlink toxicity', val:'HIGH', sub:'19.3% toxic ⚠', style:'alert' }
-  ],
-
-  redFlags: [
-    { sev:'amber', t:'Organic keyword base shrinking', d:'-5.6% WW, -5.04% US this month; IG likes recovering (+22.21%) but IG follower count slightly negative.' },
-    { sev:'red', t:'Backlink toxicity HIGH', d:'19.3% of analyzed backlinks toxic (3.6K links from spam blogs targeting Jordan/Nike terms) — brand-safety and SEO risk.' },
-    { sev:'red', t:'Worst-in-class social audience quality', d:'IMAI Audience Quality Score 14 (Poor) vs Adidas/NB 43, Lululemon 40; 21.65% fake/bot followers — highest in the competitive set.' },
-    { sev:'amber', t:'Engagement rate laggard', d:'0.06% IG ER vs Adidas 0.28%; Nike “hides likes” flag.' },
-    { sev:'amber', t:'Missing brand-term coverage', d:'Not ranking for high-volume rival brand terms (new balance 1.83M vol, under armour 1.22M, uggs, birkenstock) that retail partners capture.' },
-    { sev:'amber', t:'AI-search dependence on 3rd parties', d:'reddit.com (83.1K) and youtube.com (75.5K) are cited nearly as often as nike.com (83.5K) in AI answers.' }
-  ],
-
-  brands: [
-    { id:'nike', name:'Nike', color:'#111111', txt:'#D4FF00', handle:'@nike', hq:'US',
-      ig:{v:291.7,d:'291.7M'}, tt:{v:3.8,d:'3.8M'}, yt:{v:2.1,d:'2.1M'}, total:{v:297.6,d:'297.6M'},
-      engPost:{v:199.5,d:'199.5K'}, igEngPost:{v:186.5,d:'186.5K'}, er:{v:0.06,d:'0.06%'},
-      growth:{v:-0.07,d:'-0.07%'}, likesTrend:{v:22.21,d:'+22.21%'}, cred:{v:71.32,d:'71.32%'},
-      fake:{v:21.65,d:'21.65% ⚠'}, aqs:{v:14,d:'14 (Poor) ⚠'}, price:{d:'$366–440K'},
-      emv:{v:4800,d:'$4.8M'}, reach:{v:97.2,d:'97.2M'}, gender:{m:62,f:38,d:'62 / 38'}, country:{d:'US 19.7%'},
-      card:{ platforms:'IG 291.7M · TikTok 3.8M · YouTube 2.1M · Threads', faces:'LeBron James, Shubman Gill, Erling Haaland, Cristiano Ronaldo',
-        hashtags:'#justdoit #milanocortina2026 #olympics #nikefootball #paralympics', topPost:'“Define Greatness. Then Redefine It.” — 13.69M likes (Jun 2 2026)',
-        pos:'Motivational storytelling tied to sporting moments and elite athletes; steady visibility with slightly softening engagement.', cur:'Prices in USD.' } },
-    { id:'adidas', name:'Adidas', color:'#2A6FB0', handle:'@adidas', hq:'UK',
-      ig:{v:29.6,d:'29.6M'}, tt:{v:9.7,d:'9.7M'}, yt:{v:0.949,d:'949K'}, total:{v:40.2,d:'40.2M'},
-      engPost:{v:89.7,d:'89.7K'}, igEngPost:{v:82.6,d:'82.6K'}, er:{v:0.28,d:'0.28%'},
-      growth:{v:0.59,d:'+0.59%'}, likesTrend:{v:-32.65,d:'-32.65%'}, cred:{v:74.72,d:'74.72%'},
-      fake:{v:13.09,d:'13.09%'}, aqs:{v:43,d:'43 (Fair)'}, price:{d:'£54–65K'},
-      emv:{v:538.6,d:'$538.6K'}, reach:{v:10.9,d:'10.9M'}, gender:{m:64,f:36,d:'64 / 36'}, country:{d:'US 14.0%'},
-      card:{ platforms:'IG 29.6M · TikTok 9.7M · YouTube 949K', faces:'Messi (“El Último Tango” — 6.9M likes), Beckham, Chalamet, Antonelli',
-        hashtags:'#yougotthis #adizero', topPost:'“El Último Tango” (Messi) — 6.9M likes',
-        pos:'Football/performance storytelling; good growth, poor-engagement flag.', cur:'Prices in GBP (£).' } },
-    { id:'puma', name:'Puma', color:'#C6373C', handle:'@puma', hq:'US',
-      ig:{v:12.9,d:'12.9M'}, tt:{v:2.7,d:'2.7M'}, yt:{v:0.922,d:'922K'}, total:{v:15.6,d:'15.6M'},
-      engPost:{v:102.2,d:'102.2K'}, igEngPost:{v:11.6,d:'11.6K'}, er:{v:0.09,d:'0.09%'},
-      growth:{v:0.15,d:'+0.15%'}, likesTrend:{v:29.44,d:'+29.44%'}, cred:{v:72.14,d:'72.14%'},
-      fake:{v:12.00,d:'12.00%'}, aqs:{v:22,d:'22 (Poor)'}, price:{d:'$34–40K'},
-      emv:{v:219.6,d:'$219.6K'}, reach:{v:4.3,d:'4.3M'}, gender:{m:53,f:47,d:'53 / 47'}, country:{d:'US 11.4%'},
-      card:{ platforms:'IG 12.9M · TikTok 2.7M · YouTube 922K', faces:'Neymar (3.5M-like post), Mondo Duplantis; Rihanna/Selena among top followers',
-        hashtags:'#gowild #pumashowtime', topPost:'Neymar post — 3.5M likes',
-        pos:'TikTok drives engagement (90.6K/post vs IG 11.6K); paid posts performance 331.20%.', cur:'Prices in USD.' } },
-    { id:'ua', name:'Under Armour', color:'#6B7280', handle:'@underarmour', hq:'Denver, US',
-      ig:{v:8.1,d:'8.1M'}, tt:null, yt:null, total:{v:8.1,d:'8.1M'},
-      engPost:{v:3,d:'3K'}, igEngPost:{v:3,d:'3K'}, er:{v:0.04,d:'0.04%'},
-      growth:{v:0.02,d:'+0.02%'}, likesTrend:{v:-15.04,d:'-15.04%'}, cred:{v:72.48,d:'72.48%'},
-      fake:{v:9.30,d:'9.30%'}, aqs:{v:19,d:'19 (Poor)'}, price:{d:'$24–28K'},
-      emv:{v:133.5,d:'$133.5K'}, reach:{v:2.5,d:'2.5M'}, gender:{m:77,f:23,d:'77 / 23'}, country:{d:'US 26.9%'},
-      card:{ platforms:'IG 8.1M (plus Threads)', faces:'Steph Curry (top follower), UFC/music creators',
-        hashtags:'#protectthishouse #milanocortina2026 #underarmourxfengchenwang', topPost:'“FULL ACCESS” creator series — 341K/216K likes',
-        pos:'Most male-skewed audience (76.8%); highest sports affinity (38.4%); lowest ER in set.', cur:'Prices in USD.' } },
-    { id:'nb', name:'New Balance', color:'#B45309', handle:'@newbalance', hq:'US',
-      ig:{v:9.2,d:'9.2M'}, tt:null, yt:{v:0.202,d:'202K'}, total:{v:9.4,d:'9.4M'},
-      engPost:{v:8.5,d:'8.5K'}, igEngPost:{v:8.4,d:'8.4K'}, er:{v:0.09,d:'0.09%'},
-      growth:{v:1.43,d:'+1.43%'}, likesTrend:{v:-34.38,d:'-34.38%'}, cred:{v:73.44,d:'73.44%'},
-      fake:{v:8.57,d:'8.57%'}, aqs:{v:43,d:'43 (Fair)'}, price:{d:'$26–32K'},
-      emv:{v:160.6,d:'$160.6K'}, reach:{v:3.1,d:'3.1M'}, gender:{m:56,f:44,d:'56 / 44'}, country:{d:'BR 17.0%'},
-      card:{ platforms:'IG 9.2M · YouTube 202K', faces:'Ohtani, Saka, Coco Gauff, Rosalía (204L campaign 438K/332K likes); collabs: Miu Miu, Stone Island, TAG Heuer',
-        hashtags:'#wegotnow #runyourway #stoneislandnewbalance', topPost:'Rosalía 204L campaign — 438K likes',
-        pos:'Fastest follower growth in set (+1.43%, “Excellent” flag); most international audience (Brazil #1, 17.0%).', cur:'Prices in USD.' } },
-    { id:'lulu', name:'Lululemon', color:'#9D5B8B', handle:'@lululemon', hq:'Canada',
-      ig:{v:5.8,d:'5.8M'}, tt:{v:0.8703,d:'870.3K'}, yt:{v:0.283,d:'283K'}, total:{v:7,d:'7M'},
-      engPost:{v:23,d:'23K'}, igEngPost:{v:5.2,d:'5.2K'}, er:{v:0.09,d:'0.09%'},
-      growth:{v:0.30,d:'+0.30%'}, likesTrend:{v:80.33,d:'+80.33%'}, cred:{v:78.26,d:'78.26%'},
-      fake:{v:7.42,d:'7.42%'}, aqs:{v:40,d:'40 (Fair)'}, price:{d:'CAD$25–30K'},
-      emv:{v:102.9,d:'$102.9K'}, reach:{v:1.9,d:'1.9M'}, gender:{m:12,f:88,d:'12 / 88'}, country:{d:'US 64.1%'},
-      card:{ platforms:'IG 5.8M · TikTok 870K · YouTube 283K', faces:'Lewis Hamilton “Educator” campaign (1.49M likes), Suni Lee',
-        hashtags:'#seawheeze #lululemon10k #globalrunningday', topPost:'Lewis Hamilton “Educator” — 1.49M likes',
-        pos:'88% female, most US-concentrated (64.1%); best credibility (78.26%), lowest bots (7.42%); biggest likes jump (+80.33%).', cur:'Prices in CAD$.' } }
-  ],
-
-  scoreRows: [
-    { key:'ig', label:'IG Followers', dir:'high' },
-    { key:'tt', label:'TikTok Followers', dir:'high' },
-    { key:'yt', label:'YouTube Subs', dir:'high' },
-    { key:'total', label:'Total followers', dir:'high' },
-    { key:'engPost', label:'Engagement/post (blended)', dir:'high' },
-    { key:'igEngPost', label:'IG engagement/post', dir:'high' },
-    { key:'er', label:'IG engagement rate', dir:'high' },
-    { key:'growth', label:'IG follower growth (mo)', dir:'high' },
-    { key:'likesTrend', label:'Avg likes trend (mo)', dir:'high' },
-    { key:'cred', label:'Followers credibility', dir:'high' },
-    { key:'fake', label:'Fake/bot followers', dir:'low' },
-    { key:'aqs', label:'Audience Quality Score', dir:'high' },
-    { key:'price', label:'Est. post price', dir:null },
-    { key:'emv', label:'EMV total', dir:'high' },
-    { key:'reach', label:'Total reach', dir:'high' },
-    { key:'gender', label:'Male / Female', dir:null },
-    { key:'country', label:'Top audience country', dir:null }
-  ],
-
-  search: {
-    overview: [
-      { lbl:'Organic traffic (WW)', val:'120.7M', delta:-0.1, deltaTxt:'-0.1%' },
-      { lbl:'Organic traffic (US)', val:'35.7M', delta:0.31, deltaTxt:'+0.31%' },
-      { lbl:'Organic keywords (WW)', val:'11.6M', delta:-5.6, deltaTxt:'-5.6%' },
-      { lbl:'Organic keywords (US)', val:'4.2M', delta:-5.04, deltaTxt:'-5.04%' },
-      { lbl:'US traffic value', val:'$16.0M', sub:'per month', delta:-2.14, deltaTxt:'-2.14%' },
-      { lbl:'US traffic share', val:'79%', sub:'of tracked market' },
-      { lbl:'Paid traffic (WW)', val:'2.9M', delta:8.2, deltaTxt:'+8.2%' },
-      { lbl:'Paid keywords (WW)', val:'24K', delta:27, deltaTxt:'+27%' }
-    ],
-    serpMix: [ {l:'Organic', v:92.7, c:'#111111'}, {l:'AI Overviews', v:1.2, c:'#4F46E5'}, {l:'Other SERP features', v:6.1, c:'#9aa0a8'} ],
-    topics: 'Key organic topics (US): EU-to-UK shoe size (200K traffic) · Women’s Dresses (125K) · Women’s Bottoms (75K). Other DBs: UK 749.6K keywords · AU 572.2K.',
-    keywords: [
-      { kw:'nike', pos:1, tr:2200000, trD:'2.2M', vol:2700000, volD:'2.7M', kd:94, kdD:'94' },
-      { kw:'nike shoes', pos:1, tr:440000, trD:'440K', vol:550000, volD:'550K', kd:67, kdD:'67' },
-      { kw:'nike tech', pos:1, tr:294400, trD:'294.4K', vol:368000, volD:'368K', kd:54, kdD:'54' },
-      { kw:'nike vomero 5', pos:1, tr:196800, trD:'196.8K', vol:246000, volD:'246K', kd:46, kdD:'46' },
-      { kw:'nike outlet', pos:7, tr:160800, trD:'160.8K', vol:201000, volD:'201K', kd:59, kdD:'59' },
-      { kw:'nike air max', pos:1, tr:132000, trD:'132K', vol:165000, volD:'165K', kd:74, kdD:'74' },
-      { kw:'jordan 4', pos:1, tr:111600, trD:'111.6K', vol:450000, volD:'450K', kd:43, kdD:'43' },
-      { kw:'nike slides / dunks / mind 001', pos:1, tr:108000, trD:'108K ea', vol:135000, volD:'135K ea', kd:41, kdD:'41–58' },
-      { kw:'nike running shoes', pos:1, tr:88000, trD:'88K', vol:110000, volD:'110K', kd:64, kdD:'64' },
-      { kw:'nike air force 1', pos:1, tr:88000, trD:'88K', vol:110000, volD:'110K', kd:69, kdD:'69' },
-      { kw:'jordan', pos:1, tr:74600, trD:'74.6K', vol:301000, volD:'301K', kd:99, kdD:'99' },
-      { kw:'basketball shoes', pos:1, tr:49800, trD:'49.8K', vol:201000, volD:'201K', kd:59, kdD:'59' },
-      { kw:'travis scott shoes', pos:1, tr:22400, trD:'22.4K', vol:90500, volD:'90.5K', kd:38, kdD:'38' },
-      { kw:'ja morant shoes', pos:1, tr:22400, trD:'22.4K', vol:90500, volD:'90.5K', kd:30, kdD:'30' }
-    ],
-    competitors: [
-      { d:'footlocker.com', comp:46, kw:'170.1K', tr:'4.9M' },
-      { d:'hibbett.com', comp:41, kw:'141.1K', tr:'2.1M' },
-      { d:'champssports.com', comp:36, kw:'104.8K', tr:'1.2M' },
-      { d:'dickssportinggoods.com', comp:29, kw:'245.4K', tr:'17.2M' },
-      { d:'flightclub.com', comp:29, kw:'116.9K', tr:'1.4M' },
-      { d:'stockx.com', comp:28, kw:'114.4K', tr:'3.2M' },
-      { d:'finishline.com', comp:26, kw:'77.6K', tr:'1.4M' },
-      { d:'goat.com', comp:17, kw:'70.2K', tr:'1.4M' },
-      { d:'adidas.com', comp:9, kw:'84.7K', tr:'19.5M', brand:'adidas' },
-      { d:'underarmour.com', comp:5, kw:'35.1K', tr:'4.3M', brand:'ua' },
-      { d:'newbalance.com', comp:4, kw:'31.6K', tr:'8.8M', brand:'nb' },
-      { d:'on.com', comp:3, kw:'20.9K', tr:'4.1M' },
-      { d:'lululemon.com', comp:2, kw:'27.7K', tr:'13.6M', brand:'lulu' },
-      { d:'brooksrunning.com', comp:2, kw:'14.4K', tr:'2.3M' }
-    ],
-    gap: {
-      note:'Overlap: nike.com 713.9K vs footlocker.com 516.4K keywords (US organic, all-segment total 982.4K).',
-      segments: [ {l:'Strong', v:211.5, c:'#1E9E5A'}, {l:'Shared', v:247.9, c:'#2A6FB0'}, {l:'Weak', v:36.4, c:'#D98E04'}, {l:'Missing/Untapped', s:'Missing', v:268.5, c:'#E4402F'}, {l:'Unique', v:466, c:'#111111'} ],
-      opps: [ {kw:'new balance', vol:'1.83M'}, {kw:'birkenstock', vol:'1.22M'}, {kw:'uggs', vol:'1.22M'}, {kw:'under armour', vol:'1.22M'}, {kw:'footlocker', vol:'1.0M'} ],
-      h2h: [ ['jordan 12','1','3'], ['gamma 11s','1','2'], ['jordan 13 / 14 / 8','1','2–4'], ['panda dunks','1','2'], ['white/black shoes','1','2'] ]
-    },
-    traffic: [
-      { lbl:'Visits', val:'91.5M', delta:-1.82, deltaTxt:'-1.82%' },
-      { lbl:'Unique visitors', val:'48.3M', delta:-0.94, deltaTxt:'-0.94%' },
-      { lbl:'Pages / visit', val:'4.67', delta:1.9, deltaTxt:'+1.9%' },
-      { lbl:'Avg duration', val:'06:19', delta:-3.32, deltaTxt:'-3.32%' },
-      { lbl:'Bounce rate', val:'47.58%', delta:-2.14, deltaTxt:'-2.14%', invert:true }
-    ],
-    trendAnchors: [ {x:'Jan ’26', y:70, l:'~70M'}, {x:'dip', y:56, l:'~56M'}, {x:'Jun ’26', y:58, l:'~58M'} ],
-    position: { vis:'82.31%', buckets:[ {l:'Top 3', v:83}, {l:'Top 10', v:87}, {l:'Top 20', v:87}, {l:'Top 100', v:87} ], of:87,
-      samples:'Sample tracked terms at #1: air force 1, air jordans, acg boots, a’ja wilson shoes.' },
-    health: { pct:85, errors:12, warnings:96, pages:'11 healthy / 84 with issues / 4 redirect / 1 broken', note:'100-page sample crawl, 21 Jul 2026' }
-  },
-
-  ai: {
-    kpis: [
-      { lbl:'AI Visibility (WW)', val:'85', sub:'“Great”', style:'voltk' },
-      { lbl:'AI Visibility (US)', val:'91', sub:'“Great”' },
-      { lbl:'Mentions', val:'1.2M', delta:-1.3, deltaTxt:'-1.3%' },
-      { lbl:'Citations', val:'379K', delta:0.3, deltaTxt:'+0.3%' },
-      { lbl:'Cited pages', val:'485K', delta:2.1, deltaTxt:'+2.1%' },
-      { lbl:'Performing topics', val:'317.1K', sub:'+ 5.9K topic opportunities' }
-    ],
-    llm: [ {l:'Gemini', share:33.5, pages:413.6, pagesD:'413.6K', c:'#4338CA'}, {l:'ChatGPT', share:31.3, pages:386.7, pagesD:'386.7K', c:'#0E7490'}, {l:'AI Mode', share:24.2, pages:298.7, pagesD:'298.7K', c:'#A16207'}, {l:'AI Overview', share:11, pages:136.5, pagesD:'136.5K', c:'#6B7280'} ],
-    sources: [ {l:'nike.com', v:83.5, d:'83.5K', c:'#D4FF00'}, {l:'reddit.com', v:83.1, d:'83.1K', c:'#E4402F'}, {l:'youtube.com', v:75.5, d:'75.5K', c:'#E4402F'} ],
-    countries: [ ['US','37.6%','464.7K'], ['Germany','4.8%','—'], ['Spain','4.6%','—'], ['Other','53%','—'] ],
-    extras: { promptsTracked:'1.4M', citedSources:'865.3K', sourceOpps:'12.5K', topicOpps:'5.9K',
-      competitorSet:'adidas · JD Sports · Sports Direct · Under Armour',
-      topics:'Sample perfect-visibility topics (100): Nike Benassi Slides · Nike Manufacturing & Supply Chain (3.3K AI vol) · Nike Invincible Running · Mercurial history.' }
-  },
-
-  backlinks: {
-    kpis: [
-      { lbl:'Backlinks', val:'35.1M', delta:-5, deltaTxt:'-5%' },
-      { lbl:'Referring domains', val:'199.5K', delta:-2, deltaTxt:'-2%' },
-      { lbl:'Authority Score', val:'99', sub:'Industry leader' },
-      { lbl:'Toxicity', val:'HIGH', sub:'19.3% toxic ⚠', style:'alert' }
-    ],
-    tox: { segs:[ {l:'Toxic 19.3%', v:19.3, c:'#E4402F'}, {l:'Potentially toxic 15.4%', v:15.4, c:'#D98E04'}, {l:'Non-toxic 65.2%', v:65.2, c:'#1E9E5A'} ],
-      counts:'Toxic 3.6K · Potentially toxic 2.9K · Non-toxic 12.1K',
-      sample:'Computed on a ~73.5K-link / 18.6K-domain audit sample — not the full 35.1M-link index.',
-      domains:['tabaa.hasibu.id','telemedicinepredictdisease.com','ufoteeshirt.com','iotwithstapleit.com','gstopic.com','meredithwedsdhruv.com','oumarlanger.com'],
-      movement:'Ref domains: +343 new / 5,096 broken / 371 lost · Links: +3,915 new / 11,059 broken / 2,461 lost · “99+ backlinks found today.”' },
-    attrs: [ {l:'Follow', v:86, d:'86% (30.1M)'}, {l:'Nofollow', v:14, d:'14% (4.9M)'}, {l:'Sponsored', v:1, d:'1% (397K)'}, {l:'UGC', v:0.2, d:'<1% (73.4K)'} ],
-    types: [ {l:'Text', v:65, d:'65% (22.1M)'}, {l:'Image', v:34, d:'34% (11.8M)'}, {l:'Form', v:0.5, d:'<1%'}, {l:'Frame', v:0.5, d:'<1%'} ],
-    asDist: [ {l:'0–10', v:69, d:'69% (138K)'}, {l:'11–20', v:10, d:'10% (20.5K)'}, {l:'21–30', v:10, d:'10% (19.3K)'}, {l:'31–40', v:6, d:'6%'}, {l:'41–50', v:3, d:'3%'}, {l:'51–60', v:1, d:'1% (2.4K)'}, {l:'61–70', v:0.55, d:'1.1K'}, {l:'71–80', v:0.3, d:'594'}, {l:'81–90', v:0.11, d:'222'}, {l:'91–100', v:0.06, d:'112'} ],
-    tld: [ {l:'.com', v:65, d:'65% (130K)'}, {l:'other', v:28, d:'28%'}, {l:'.dev', v:4, d:'4%'}, {l:'.org', v:3, d:'3%'}, {l:'.edu', v:0.2, d:'403'}, {l:'.gov', v:0.03, d:'55'} ],
-    geo: [ {l:'US', v:66, d:'66% (103.1K)'}, {l:'UK', v:6, d:'6%'}, {l:'FR', v:4, d:'4%'}, {l:'DE', v:4, d:'4%'}, {l:'JP', v:3, d:'3%'}, {l:'CA', v:2, d:'2%'} ],
-    cats:'Categories: Mass Media 23% · Online Services 12% · Education 10% · Sports 6% · Retail 5%. Top linked pages: nike.com/ (43.8K RD) · nike.com/launch (4.9K RD).',
-    comps: [ ['adidas.com','22%'], ['nba.com','17%'], ['starbucks.com','16%'], ['walmart.com','16%'], ['nfl.com','15%'] ]
-  },
-
-  notes: [
-    { b:'Locked in SEMrush plan:', t:'Advertising Research detail (ad copies, PPC keywords — needs Advertising Toolkit $99–220/mo); Traffic Analytics channel %, geo and demographics (needs Traffic & Market Toolkit Pro $289/mo). Paid summary numbers ARE available and shown in Search & Keywords.' },
-    { b:'Large tables truncated at page 1:', t:'organic keywords (100 of 4.18M), organic competitors (100 of 154,826), AI topics (10 of 317.1K), gap keywords (100 of 982.4K). Totals are exact; row lists are samples.' },
-    { b:'IMAI caveats:', t:'posts sections captured first 2 of 10 per brand; TikTok/YouTube deep tabs and brand-safety scores gated; currencies differ (adidas £, lululemon CAD$); EMV always USD. IMAI “Total Reach” & scores are model estimates.' },
-    { b:'Two backlink universes:', t:'Audit toxicity % computed on ~73.5K sampled links; Analytics covers the full 35.1M-link index.' },
-    { b:'Provider boundary:', t:'Social IMAI data and SEMrush data come from different providers — never cross-compute (e.g., don’t divide SEMrush traffic by IMAI reach). This dashboard keeps them separate.' },
-    { b:'Not internal analytics:', t:'GA/GSC not connected; all figures are third-party modeled estimates, not Nike internal analytics. Snapshot: 20–21 Jul 2026; deltas are month-over-month or as labeled.' }
-  ],
-
-  priorities: [
-    { id:'comp', ico:'📣', t:'Competitor Campaigns', d:'Track competitor campaigns, messaging, and share of voice across markets.', sel:true },
-    { id:'infl', ico:'🧑‍🤝‍🧑', t:'Influencer Performance', d:'Monitor influencer activity, engagement, and impact across channels.', sel:true },
-    { id:'sales', ico:'📈', t:'Sales Trends', d:'Analyze sales performance and category trends over time.', sel:false },
-    { id:'aud', ico:'👤', t:'Audience Growth', d:'Understand audience expansion, demographics, and engagement shifts.', sel:true },
-    { id:'media', ico:'📰', t:'Media Coverage', d:'Stay updated on brand mentions and media narrative trends.', sel:false },
-    { id:'eu', ico:'🌍', t:'European Expansion', d:'Identify opportunities, market signals, and risks across European markets.', sel:false },
-    { id:'rep', ico:'🛡️', t:'Reputation Risk', d:'Detect emerging issues and reputation threats early.', sel:false }
-  ]
-};
-
-/* =====================================================================
-   STATE + UTILS
-   ===================================================================== */
-const state = { screen:'search', priorities:new Set(DATA.priorities.filter(p=>p.sel).map(p=>p.t)), name:'', tab:'exec', renderedTabs:{} };
+const state = { screen:'search', priorities:new Set(), name:'', tab:'exec', renderedTabs:{}, theme:'light' };
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function deltaHtml(v, txt, invert){
+function fmt(n){
+  if(n===null||n===undefined) return '—';
+  const a=Math.abs(n);
+  if(a>=1e6) return (n/1e6).toFixed(a>=1e8?0:1).replace(/\.0$/,'')+'M';
+  if(a>=1e3) return (n/1e3).toFixed(1).replace(/\.0$/,'')+'K';
+  return String(n);
+}
+function chip(v, txt, invert){
   if(v===undefined||v===null) return '';
   const good = invert ? v<0 : v>0;
-  const cls = v===0 ? 'flat' : (good ? 'up' : 'down');
   const glyph = v>0 ? '▲' : (v<0 ? '▼' : '•');
-  return `<span class="delta ${cls}">${glyph} ${esc(txt)}</span>`;
+  return `<span class="chipd ${good?'up':'down'}">${glyph} ${esc(txt)}</span>`;
+}
+function brandchip(id, label){
+  return `<span class="brandchip"><i style="background:${bc(id)}"></i>${esc(label||BRAND_NAME[id])}</span>`;
 }
 function kpiTiles(list){
   return `<div class="kpis">` + list.map(k =>
-    `<div class="kpi ${k.style||''}"><div class="lbl">${esc(k.lbl)}</div><div class="val">${esc(k.val)}</div>
-     <div class="sub">${k.sub?esc(k.sub)+' ':''}${deltaHtml(k.delta,k.deltaTxt,k.invert)}</div></div>`).join('') + `</div>`;
+    `<div class="kpi ${k.alert?'alert':''}"><div class="lbl">${k.alert?'⚠ ':''}${esc(k.lbl)}</div>
+     <div class="val ${String(k.val).length>6?'smaller':''}">${esc(k.val)}</div>
+     <div class="sub">${k.sub?esc(k.sub)+' ':''}${chip(k.delta,k.deltaTxt,k.invert)}</div></div>`).join('') + `</div>`;
 }
-/* horizontal bar list; scale:'linear'|'log' */
+/* horizontal bar list. items: {l,label html?,v,d,c,tag} */
 function barList(items, opts={}){
-  const scale = opts.scale||'linear';
-  const vals = items.map(i => scale==='log' ? Math.log10(Math.max(i.v,0.001))+1 : i.v);
-  const max = Math.max(...vals.map(v=>Math.max(v,0)), 0.0001);
-  const min = Math.min(...vals, 0);
-  const rows = items.map((it,i) => {
+  const max = opts.max || Math.max(...items.map(i=>Math.max(i.v,0)), 0.0001);
+  const min = Math.min(...items.map(i=>i.v), 0);
+  const rows = items.map(it=>{
     let fill;
-    if(min<0){ // diverging
-      const span = max-min;
-      const zero = (-min)/span*100, w = Math.abs(vals[i])/span*100;
-      const left = vals[i]<0 ? zero-w : zero;
-      fill = `<div class="bar-track"><div class="bar-fill" style="margin-left:${left}%;width:${w}%;background:${it.c}"></div></div>`;
+    if(min<0){
+      const span=max-min, zero=(-min)/span*100, w=Math.abs(it.v)/span*100;
+      const left = it.v<0 ? zero-w : zero;
+      const rad = it.v<0 ? '4px 0 0 4px' : '0 4px 4px 0';
+      fill = `<div class="bar-track"><div style="position:absolute;left:${zero}%;top:-2px;bottom:-2px;width:1px;background:var(--baseline)"></div><div class="bar-fill" style="left:${left}%;width:${Math.max(w,0.6)}%;background:${it.c};border-radius:${rad}"></div></div>`;
     } else {
-      fill = `<div class="bar-track"><div class="bar-fill" style="width:${Math.max(vals[i]/max*100,1)}%;background:${it.c}"></div></div>`;
+      fill = `<div class="bar-track"><div class="bar-fill" style="left:0;width:${Math.max(it.v/max*100,0.8)}%;background:${it.c}"></div></div>`;
     }
-    return `<div class="bar-row"><span class="blabel">${esc(it.l)}</span>${fill}<span class="bar-val">${esc(it.d)}</span></div>`;
+    const lab = it.html || esc(it.l);
+    const gridStyle = opts.labelW ? ` style="grid-template-columns:${opts.labelW}px 1fr 92px"` : '';
+    return `<div class="bar-row"${gridStyle} title="${esc(it.l)}: ${esc(it.d)}"><span class="blabel">${lab}${it.tag?` <span class="retail-tag">${it.tag}</span>`:''}</span>${fill}<span class="bar-val">${esc(it.d)}</span></div>`;
   }).join('');
   return `<div class="bar-chart">${rows}</div>` + (opts.scaleNote?`<div class="scale-note">${esc(opts.scaleNote)}</div>`:'');
 }
-function stack100(segs, unit){
+function stack100(segs){ // {l, s?, v, c, d?}
   const total = segs.reduce((a,s)=>a+s.v,0);
   return `<div class="stack100">` + segs.map(s=>{
-    const pct = s.v/total*100;
-    return `<span style="width:${pct}%;background:${s.c}" title="${esc(s.l)}">${pct>9?esc(s.s||s.l):''}</span>`;
-  }).join('') + `</div><div class="legend">` + segs.map(s=>`<span><i class="sw" style="background:${s.c}"></i>${esc(s.l)}${unit?` — ${s.v}${unit}`:''}</span>`).join('') + `</div>`;
+    const pct=s.v/total*100;
+    return `<span style="width:${pct}%;background:${s.c}${s.tc?`;color:${s.tc}`:''}" title="${esc(s.l)}${s.d?` — ${esc(s.d)}`:''}">${pct>12?esc(s.s||s.l):''}</span>`;
+  }).join('') + `</div><div class="legend">` + segs.map(s=>`<span><i class="sw" style="background:${s.c}"></i>${esc(s.l)}${s.d?` — ${esc(s.d)}`:''}</span>`).join('') + `</div>`;
 }
-function donutSvg(segs, size=150){
-  const r=54, cx=75, cy=75, C=2*Math.PI*r, total=segs.reduce((a,s)=>a+s.v,0);
-  let off=C*0.25, out='';
-  segs.forEach(s=>{
-    const len=s.v/total*C;
-    out += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${s.c}" stroke-width="22" stroke-dasharray="${Math.max(len-2,0.5)} ${C-Math.max(len-2,0.5)}" stroke-dashoffset="${-off+C*0.25}" transform="rotate(-90 ${cx} ${cy})"/>`;
-    off+=len;
-  });
-  return `<svg viewBox="0 0 150 150" width="${size}" height="${size}" role="img">${out}</svg>`;
+function meterRow(label, frac, valTxt, color, labelHtml){
+  return `<div class="meter-row" title="${esc(label)}: ${esc(valTxt)}"><span class="mlabel">${labelHtml||esc(label)}</span><div class="meter"><i style="width:${Math.min(frac*100,100)}%;background:${color}"></i></div><span class="mval">${esc(valTxt)}</span></div>`;
 }
-function miniDonut(frac, label, valTxt){
-  const r=26, C=2*Math.PI*r, len=frac*C;
-  return `<div class="mini-donut"><svg viewBox="0 0 70 70" width="76" height="76">
-    <circle cx="35" cy="35" r="${r}" fill="none" stroke="#eeeeea" stroke-width="9"/>
-    <circle cx="35" cy="35" r="${r}" fill="none" stroke="#111" stroke-width="9" stroke-dasharray="${len} ${C-len}" transform="rotate(-90 35 35)" stroke-linecap="round"/>
-    <text x="35" y="40" text-anchor="middle" font-size="15" font-weight="800" fill="#111">${valTxt}</text>
-  </svg><div>${esc(label)}</div></div>`;
-}
-function gaugeSvg(pct){
-  const r=56, C=Math.PI*r, len=pct/100*C;
-  return `<svg viewBox="0 0 140 84" width="170" height="102">
-    <path d="M 14 76 A 56 56 0 0 1 126 76" fill="none" stroke="#eeeeea" stroke-width="13" stroke-linecap="round"/>
-    <path d="M 14 76 A 56 56 0 0 1 126 76" fill="none" stroke="#111" stroke-width="13" stroke-linecap="round" stroke-dasharray="${len} ${C}"/>
-    <text x="70" y="66" text-anchor="middle" font-size="26" font-weight="800" fill="#111">${pct}%</text>
-    <text x="70" y="80" text-anchor="middle" font-size="9" fill="#6b6f76">site health</text>
-  </svg>`;
-}
-function sparkDelta(deltaTxt, up){
-  const col = up ? 'var(--pos)' : 'var(--neg)';
+function sparkDelta(up){
+  const col = up ? 'var(--delta-up)' : 'var(--delta-down)';
   const path = up ? 'M4 26 L30 22 L56 8' : 'M4 8 L30 14 L56 26';
   return `<svg viewBox="0 0 60 32" width="60" height="32"><path d="${path}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round"/><circle cx="56" cy="${up?8:26}" r="3.4" fill="${col}"/></svg>`;
 }
 
-/* =====================================================================
-   ROUTER
-   ===================================================================== */
+/* ===================== THEME ===================== */
+$('#theme-btn').addEventListener('click',()=>{
+  state.theme = state.theme==='light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', state.theme);
+  $('#theme-btn').textContent = state.theme==='light' ? '🌙 Dark' : '☀️ Light';
+});
+
+/* ===================== ROUTER + ONBOARDING ===================== */
 function show(id){
-  ['search','snapshot','priorities','signup','dashboard'].forEach(s=>{
-    $('#screen-'+s).hidden = s!==id;
-  });
+  ['search','snapshot','priorities','signup','dashboard'].forEach(s=>{ $('#screen-'+s).hidden = s!==id; });
   state.screen=id;
   window.scrollTo(0,0);
-  if(id==='dashboard'){ initDashboard(); }
+  if(id==='dashboard') initDashboard();
 }
-
-/* ===== screen 1: search (Nike-only gate) ===== */
 $('#searchform').addEventListener('submit', e=>{
   e.preventDefault();
   const q = $('#searchinput').value.trim().toLowerCase();
-  if(q.includes('nike') || q==='' ){
-    if(q==='') { $('#searchinput').value='Nike'; }
+  if(q.includes('nike') || q===''){
+    if(q==='') $('#searchinput').value='Nike';
     show('snapshot'); renderSnapshot();
   } else {
     $('#search-notice').style.display='flex';
@@ -732,50 +533,59 @@ document.querySelectorAll('.suggest').forEach(b=>b.addEventListener('click',()=>
 }));
 $('#usenike').addEventListener('click',()=>{ $('#searchinput').value='Nike'; show('snapshot'); renderSnapshot(); });
 
-/* ===== screen 2: free snapshot ===== */
 function renderSnapshot(){
-  const N=DATA.brands[0], A=DATA.brands[1];
+  const N=DATA.social.brands.nike, A=DATA.social.brands.adidas;
+  const dov=DATA.search.domainOverview.worldwide;
   $('#snapshot-cards').innerHTML = `
   <div class="icard">
     <h3><span class="ico">📱</span>1. Social Reach</h3>
-    <div class="bignum">297.6M</div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">total followers (IG + TikTok + YouTube)</div>
+    <div class="bignum">${esc(N.totalFollowers.d)}</div>
+    <div style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">total followers (IG + TikTok + YouTube)</div>
     ${barList([
-      {l:'Nike', v:Math.log10(297.6), d:'297.6M', c:'#111111'},
-      {l:'Adidas', v:Math.log10(40.2), d:'40.2M', c:'#2A6FB0'},
-      {l:'Puma', v:Math.log10(15.6), d:'15.6M', c:'#C6373C'}
-    ],{scaleNote:'Bar length: log scale (Nike dwarfs rivals at true scale).'})}
-    <div class="sowhat">Nike’s combined social footprint is 297.6M — about 7× Adidas (40.2M), the next largest in the set.</div>
-    <div class="srcnote">Source: IMAI social reports, 21 Jul 2026</div>
+      {l:'Nike', v:Math.log10(291.7), d:N.platforms.instagram.d, c:bc('nike')},
+      {l:'adidas', v:Math.log10(29.6), d:A.platforms.instagram.d, c:bc('adidas')},
+      {l:'PUMA', v:Math.log10(12.9), d:'12.9M', c:bc('puma')}
+    ],{scaleNote:'IG followers · bar length: log scale (Nike dwarfs rivals at true scale).'})}
+    <div class="sowhat">Nike’s combined social footprint is 297.6M — about 7× adidas (40.2M), the next largest in the set.</div>
+    <div class="srcnote">IMAI · 21 Jul 2026</div>
   </div>
   <div class="icard">
     <h3><span class="ico">🔎</span>2. Search Presence</h3>
-    <div class="bignum">99<span style="font-size:16px;font-weight:600;color:var(--muted)"> /100</span></div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">SEMrush Authority Score — “Industry leader”</div>
+    <div class="bignum">99<span style="font-size:16px;font-weight:600;color:var(--ink-muted)"> /100</span></div>
+    <div style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">SEMrush Authority Score — “Industry leader”</div>
     <div style="display:flex;gap:22px;flex-wrap:wrap;margin:6px 0 2px">
-      <div><b style="font-size:20px">120.7M</b> ${deltaHtml(-0.1,'-0.1%')}<br><span style="font-size:11.5px;color:var(--muted)">organic traffic / mo (WW)</span></div>
-      <div><b style="font-size:20px">11.6M</b> ${deltaHtml(-5.6,'-5.6%')}<br><span style="font-size:11.5px;color:var(--muted)">organic keywords (WW)</span></div>
+      <div><b style="font-size:20px">${esc(dov.organicTraffic.d)}</b> ${chip(-0.1,'-0.1%')}<br><span style="font-size:11.5px;color:var(--ink-muted)">organic traffic / mo (WW)</span></div>
+      <div><b style="font-size:20px">${esc(dov.organicKeywords.d)}</b> ${chip(-5.6,'-5.6%')}<br><span style="font-size:11.5px;color:var(--ink-muted)">organic keywords (WW)</span></div>
     </div>
     <div class="sowhat">Traffic is flat while the keyword base shrinks -5.6% month-over-month — visibility is narrowing, not growing.</div>
-    <div class="srcnote">Source: SEMrush Domain Overview, 21 Jul 2026</div>
+    <div class="srcnote">SEMrush · 21 Jul 2026</div>
   </div>
   <div class="icard">
     <h3><span class="ico">⚠️</span>3. Early Warning</h3>
-    <div class="bignum" style="color:var(--neg)">${N.er.d}</div>
-    <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Nike IG engagement rate</div>
+    <div class="bignum" style="color:var(--crit)">0.06%</div>
+    <div style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">Nike IG engagement rate</div>
     ${barList([
-      {l:'Adidas', v:A.er.v, d:A.er.d, c:'#2A6FB0'},
-      {l:'Nike', v:N.er.v, d:N.er.d, c:'#111111'}
+      {l:'adidas', v:0.28, d:'0.28%', c:bc('adidas')},
+      {l:'Nike', v:0.06, d:'0.06%', c:bc('nike')}
     ])}
-    <div class="sowhat">Adidas engages at 0.28% — while ${N.fake.d.replace(' ⚠','')} of Nike’s audience is fake/bot accounts (Audience Quality Score 14, worst in set).</div>
-    <div class="srcnote">Source: IMAI social reports, 21 Jul 2026</div>
+    <div class="sowhat">adidas engages at 0.28% — while 21.65% of Nike’s audience is fake/bot accounts (Audience Quality Score 14, worst in set).</div>
+    <div class="srcnote">IMAI · 21 Jul 2026</div>
   </div>`;
 }
 $('#to-priorities').addEventListener('click',()=>{ show('priorities'); renderPriorities(); });
 
-/* ===== screen 3: priorities ===== */
+const PRIORITIES = [
+  { ico:'📣', t:'Competitor Campaigns', d:'Track competitor campaigns, messaging, and share of voice across markets.', sel:true },
+  { ico:'🧑‍🤝‍🧑', t:'Influencer Performance', d:'Monitor influencer activity, engagement, and impact across channels.', sel:true },
+  { ico:'📈', t:'Sales Trends', d:'Analyze sales performance and category trends over time.', sel:false },
+  { ico:'👤', t:'Audience Growth', d:'Understand audience expansion, demographics, and engagement shifts.', sel:true },
+  { ico:'📰', t:'Media Coverage', d:'Stay updated on brand mentions and media narrative trends.', sel:false },
+  { ico:'🌍', t:'European Expansion', d:'Identify opportunities, market signals, and risks across European markets.', sel:false },
+  { ico:'🛡️', t:'Reputation Risk', d:'Detect emerging issues and reputation threats early.', sel:false }
+];
+PRIORITIES.filter(p=>p.sel).forEach(p=>state.priorities.add(p.t));
 function renderPriorities(){
-  $('#prio-grid').innerHTML = DATA.priorities.map(p=>`
+  $('#prio-grid').innerHTML = PRIORITIES.map(p=>`
     <button class="prio ${state.priorities.has(p.t)?'sel':''}" data-t="${esc(p.t)}">
       <span class="tick"></span><span class="ico">${p.ico}</span>
       <h4>${esc(p.t)}</h4><p>${esc(p.d)}</p>
@@ -788,23 +598,19 @@ function renderPriorities(){
     updPrioCount();
   }));
 }
-function updPrioCount(){ $('#prio-count').textContent = `✓ ${state.priorities.size} of ${DATA.priorities.length} priorities selected`; }
+function updPrioCount(){ $('#prio-count').textContent = `✓ ${state.priorities.size} of ${PRIORITIES.length} priorities selected`; }
 $('#to-signup').addEventListener('click',()=>show('signup'));
 $('#skip-prio').addEventListener('click',()=>show('signup'));
-
-/* ===== screen 4: signup ===== */
 $('#signupform').addEventListener('submit',e=>{
   e.preventDefault();
   state.name = $('#su-name').value.trim();
-  const chip=$('#userchip');
-  chip.style.display='flex';
-  chip.textContent = state.name ? state.name.split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase() : 'G';
+  const chipEl=$('#userchip');
+  chipEl.style.display='flex';
+  chipEl.textContent = state.name ? state.name.split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase() : 'G';
   show('dashboard');
 });
 
-/* =====================================================================
-   DASHBOARD
-   ===================================================================== */
+/* ===================== DASHBOARD ===================== */
 const TABS = [ ['exec','Executive Overview'], ['social','Social Competitive'], ['searchkw','Search & Keywords'], ['ai','AI Visibility'], ['links','Backlinks & Risk'], ['notes','Data Notes'] ];
 let dashInit=false;
 function initDashboard(){
@@ -820,211 +626,399 @@ function initDashboard(){
   renderTab(state.tab);
   startChat();
 }
-function selectTab(id){
+function selectTab(id){ // preserves scroll position per specs §5.10
   state.tab=id;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
   TABS.forEach(([t])=>{ $('#pane-'+t).hidden = t!==id; });
   renderTab(id);
-  window.scrollTo(0,0);
 }
 function renderTab(id){
   if(state.renderedTabs[id]) return;
   state.renderedTabs[id]=true;
   const pane=$('#pane-'+id);
   if(id==='exec') pane.innerHTML=tabExec();
-  if(id==='social'){ pane.innerHTML=tabSocial(); }
+  if(id==='social') pane.innerHTML=tabSocial();
   if(id==='searchkw'){ pane.innerHTML=tabSearch(); wireKwSort(); }
   if(id==='ai') pane.innerHTML=tabAI();
   if(id==='links') pane.innerHTML=tabLinks();
   if(id==='notes') pane.innerHTML=tabNotes();
   pane.insertAdjacentHTML('beforeend', footerCta());
   pane.querySelectorAll('[data-openchat]').forEach(b=>b.addEventListener('click',()=>{ openChat(); botSay(CHAT.expert); }));
+  pane.querySelectorAll('.goto').forEach(b=>b.addEventListener('click',()=>selectTab(b.dataset.goto)));
 }
 function footerCta(){
   return `<div class="dash-footer"><span>Looking to execute on these opportunities? Stagwell offers integrated solutions across strategy, media, creators, and creative.</span><button data-openchat>Talk to a Stagwell Expert</button></div>`;
 }
 
-/* ---------- TAB 1: EXECUTIVE ---------- */
+/* ---------- TAB 1 · EXECUTIVE (E1–E6) ---------- */
 function tabExec(){
-  const B=DATA.brands;
-  const igBars = barList(B.map(b=>({l:b.name, v:Math.log10(b.ig.v), d:b.ig.d, c:b.color})), {scaleNote:'Bar length: log₁₀ scale — at true scale Nike (291.7M) is ~10× Adidas and ~50× Lululemon.'});
-  const erBars = barList(B.map(b=>({l:b.name, v:b.er.v, d:b.er.d, c:b.color})));
+  const B=DATA.social.brands, dov=DATA.search.domainOverview.worldwide, ta=DATA.search.trafficAnalytics;
+  // E1
+  const e1 = kpiTiles([
+    { lbl:'Total social followers', val:B.nike.totalFollowers.d, sub:'IG + TikTok + YouTube' },
+    { lbl:'Organic traffic (WW)', val:dov.organicTraffic.d, sub:'per month', delta:dov.organicTraffic.chgPct, deltaTxt:'-0.1%' },
+    { lbl:'Site visits (Jun 2026)', val:ta.visits.d, sub:'worldwide', delta:ta.visits.chgPct, deltaTxt:'-1.82%' },
+    { lbl:'AI Visibility', val:'85 / 100', sub:'“Great” · US: 91' },
+    { lbl:'Authority Score', val:String(dov.authorityScore), sub:dov.authorityLabel },
+    { lbl:'Backlink toxicity', val:'HIGH', sub:'19.3% toxic', alert:true }
+  ]);
+  // E2 — red flags from DATA.redFlags
+  const sevIcon = {critical:'⛔', serious:'⚠', warning:'▲'};
+  const tabLabel = {backlinks:'Backlinks & Risk', social:'Social Competitive', search:'Search & Keywords', ai:'AI Visibility'};
+  const tabId = {backlinks:'links', social:'social', search:'searchkw', ai:'ai'};
+  const e2 = `<ol class="flags">` + DATA.redFlags.map((f,i)=>
+    `<li><span class="dot ${f.severity}"></span><span><b>${i+1}. ${sevIcon[f.severity]} ${esc(f.title)}</b>${esc(f.detail)}
+     <button class="goto" data-goto="${tabId[f.tab]}">→ ${tabLabel[f.tab]}</button></span></li>`).join('') + `</ol>`;
+  // E3 — IG share strip (NOT a linear follower bar chart, per spec)
+  const igs = ORDER.map(id=>({id, v:B[id].platforms.instagram ? B[id].platforms.instagram.followers : 0, d:B[id].platforms.instagram.d}));
+  const igTotal = igs.reduce((a,x)=>a+x.v,0);
+  const e3segs = igs.map(x=>({ l:`${BRAND_NAME[x.id]} ${(x.v/igTotal*100).toFixed(1)}%`, s:`${BRAND_NAME[x.id]} ${(x.v/igTotal*100).toFixed(1)}%`, v:x.v, c:bc(x.id), d:x.d }));
+  // E4 — ER bars sorted desc
+  const ers = ORDER.map(id=>({id, v:B[id].postData.engagementRatePct})).sort((a,b)=>b.v-a.v);
+  const e4 = barList(ers.map(x=>({l:BRAND_NAME[x.id], html:brandchip(x.id), v:x.v, d:x.v.toFixed(2)+'%', c:bc(x.id)})), {max:0.30, scaleNote:'Axis 0–0.30%.'});
+  // E5 — growth diverging
+  const gr = ORDER.map(id=>({id, v:B[id].influencerInsight.growthPctMo}));
+  const e5 = barList(gr.map(x=>({l:BRAND_NAME[x.id], html:brandchip(x.id), v:x.v, d:(x.v>0?'+':'')+x.v.toFixed(2)+'%', c:bc(x.id)})));
   return `
-  <div class="sec"><div class="sec-h"><h3>30-second read</h3><span class="src">Sources: IMAI + SEMrush, 20–21 Jul 2026</span></div>${kpiTiles(DATA.kpis)}</div>
+  <div class="sec"><div class="sec-h"><h3>30-second read</h3><span class="src">IMAI + SEMrush · 20–21 Jul 2026</span></div>${e1}</div>
   <div class="sec grid2">
     <div class="card">
-      <div class="sec-h"><h3>🚩 CMO red flags</h3><span class="src">Master report §1.2</span></div>
-      <ol class="flags">${DATA.redFlags.map((f,i)=>`<li><span class="dot ${f.sev}"></span><span><b>${i+1}. ${esc(f.t)}</b>${esc(f.d)}</span></li>`).join('')}</ol>
+      <div class="sec-h"><h3>🚩 CMO red flags</h3><span class="src">severity: ⛔ critical · ⚠ serious · ▲ warning</span></div>
+      ${e2}
     </div>
     <div style="display:flex;flex-direction:column;gap:16px">
       <div class="card">
-        <div class="sec-h"><h3>Competitive position — IG followers</h3><span class="src">Source: IMAI, 21 Jul 2026</span></div>
-        ${igBars}
-        <div class="chart-note">Scale masks nothing: Nike’s audience is an order of magnitude larger — the problem is quality, not size.</div>
+        <div class="sec-h"><h3>Share of six-brand IG audience</h3></div>
+        ${stack100(e3segs)}
+        <div class="chart-note">Nike is 82% of the six-brand Instagram audience — scale is not the problem.</div>
+        <div class="srcnote">IMAI · 21 Jul 2026</div>
       </div>
       <div class="card">
-        <div class="sec-h"><h3>IG engagement rate</h3><span class="src">Source: IMAI, 21 Jul 2026</span></div>
-        ${erBars}
-        <div class="chart-note">Adidas (0.28%) engages at ~4.7× Nike’s rate (0.06%) — the biggest single social gap in the set.</div>
+        <div class="sec-h"><h3>IG engagement rate by brand</h3></div>
+        ${e4}
+        <div class="chart-note">adidas converts attention 4.7× better than Nike.</div>
+        <div class="srcnote">IMAI · 21 Jul 2026</div>
+      </div>
+      <div class="card">
+        <div class="sec-h"><h3>Follower growth %/mo</h3></div>
+        ${e5}
+        <div class="chart-note">New Balance is compounding fastest; Nike is the only shrinking account.</div>
+        <div class="srcnote">IMAI · 21 Jul 2026</div>
       </div>
     </div>
   </div>
   <div class="sec">
-    <div class="sec-h"><h3>Momentum sparklines (MoM)</h3><span class="src">Directional only — one month-over-month delta per metric</span></div>
+    <div class="sec-h"><h3>Momentum sparklines (MoM)</h3><span class="src">directional only — one month-over-month delta per metric</span></div>
     <div class="spark-tiles">
-      <div class="spark-tile">${sparkDelta('-5.6%',false)}<div class="stx"><b class="delta down">▼ -5.6%</b><span>Organic keywords (WW) — SEMrush</span></div></div>
-      <div class="spark-tile">${sparkDelta('+22.21%',true)}<div class="stx"><b class="delta up">▲ +22.21%</b><span>Avg IG likes (Nike) — IMAI</span></div></div>
-      <div class="spark-tile">${sparkDelta('+27%',true)}<div class="stx"><b class="delta up">▲ +27%</b><span>Paid keywords (WW) — SEMrush</span></div></div>
+      <div class="spark-tile">${sparkDelta(false)}<div class="stx"><b class="chipd down">▼ -5.6%</b><span>Organic keywords (WW) — SEMrush</span></div></div>
+      <div class="spark-tile">${sparkDelta(true)}<div class="stx"><b class="chipd up">▲ +22.21%</b><span>Avg IG likes (Nike) — IMAI</span></div></div>
+      <div class="spark-tile">${sparkDelta(true)}<div class="stx"><b class="chipd up">▲ +27%</b><span>Paid keywords (WW) — SEMrush</span></div></div>
     </div>
   </div>`;
 }
 
-/* ---------- TAB 2: SOCIAL ---------- */
+/* ---------- TAB 2 · SOCIAL (S0–S7) ---------- */
+const SCORE_ROWS = [
+  { label:'IG Followers', get:b=>b.platforms.instagram && b.platforms.instagram.d, val:b=>b.platforms.instagram && b.platforms.instagram.followers, dir:'high' },
+  { label:'TikTok Followers', get:b=>b.platforms.tiktok && b.platforms.tiktok.d, val:b=>b.platforms.tiktok && b.platforms.tiktok.followers, dir:'high' },
+  { label:'YouTube Subs', get:b=>b.platforms.youtube && b.platforms.youtube.d, val:b=>b.platforms.youtube && b.platforms.youtube.subscribers, dir:'high' },
+  { label:'Total followers', get:b=>b.totalFollowers.d, val:b=>b.totalFollowers.v, dir:'high' },
+  { label:'Engagement/post (blended)', get:b=>fmt(b.engagementPerPost.total), val:b=>b.engagementPerPost.total, dir:'high' },
+  { label:'IG engagement/post', get:b=>fmt(b.engagementPerPost.instagram), val:b=>b.engagementPerPost.instagram, dir:'high' },
+  { label:'IG engagement rate', get:b=>b.postData.engagementRatePct.toFixed(2)+'%', val:b=>b.postData.engagementRatePct, dir:'high' },
+  { label:'IG follower growth (mo)', get:b=>(b.influencerInsight.growthPctMo>0?'+':'')+b.influencerInsight.growthPctMo.toFixed(2)+'%', val:b=>b.influencerInsight.growthPctMo, dir:'high' },
+  { label:'Avg likes trend (mo)', get:b=>(b.postData.avgLikesChgPct>0?'+':'')+b.postData.avgLikesChgPct.toFixed(2)+'%', val:b=>b.postData.avgLikesChgPct, dir:'high' },
+  { label:'Followers credibility', get:b=>b.influencerInsight.credibilityPct.toFixed(2)+'%', val:b=>b.influencerInsight.credibilityPct, dir:'high' },
+  { label:'Fake/bot followers', get:b=>{const f=b.influencerInsight.followersBreakdown.find(x=>x[0]==='Fake/bots'); return f?f[1].toFixed(2)+'%':'—';}, val:b=>{const f=b.influencerInsight.followersBreakdown.find(x=>x[0]==='Fake/bots'); return f?f[1]:null;}, dir:'low' },
+  { label:'Audience Quality Score', get:b=>`${b.imaiScore.audienceQuality} (${b.imaiScore.audienceQualityLabel})`, val:b=>b.imaiScore.audienceQuality, dir:'high' },
+  { label:'Est. post price', get:b=>b.postData.postPrice, val:()=>null, dir:null },
+  { label:'EMV total (USD)', get:b=>'$'+fmt(b.emvUSD.total), val:b=>b.emvUSD.total, dir:'high' },
+  { label:'Total reach', get:b=>b.totalReach.d, val:b=>b.totalReach.v, dir:'high' },
+  { label:'Male / Female', get:b=>`${Math.round(b.audience.gender.malePct)} / ${Math.round(b.audience.gender.femalePct)}`, val:()=>null, dir:null },
+  { label:'Top audience country', get:b=>{const c=b.audience.countries[0]; return `${c[0].replace('United States','US')} ${c[1].toFixed(1)}%`;}, val:()=>null, dir:null }
+];
 function tabSocial(){
-  const B=DATA.brands;
-  // scoreboard
-  const head = `<tr><th>Metric</th>${B.map(b=>`<th ${b.id==='nike'?'class="nikecol"':''}>${b.name}</th>`).join('')}</tr>`;
-  const rows = DATA.scoreRows.map(r=>{
+  const B=DATA.social.brands;
+  // S0 scoreboard
+  const head = `<tr><th>Metric</th>${ORDER.map(id=>`<th ${id==='nike'?'class="nikecol"':''}>${brandchip(id)}</th>`).join('')}</tr>`;
+  const rows = SCORE_ROWS.map(r=>{
     let best=-1, worst=-1;
     if(r.dir){
       let bv=null, wv=null;
-      B.forEach((b,i)=>{ const cell=b[r.key]; if(!cell||cell.v===undefined) return;
-        const v=cell.v;
+      ORDER.forEach((id,i)=>{ const v=r.val(B[id]); if(v===null||v===undefined) return;
         if(bv===null||((r.dir==='high')?v>bv:v<bv)){bv=v;best=i;}
         if(wv===null||((r.dir==='high')?v<wv:v>wv)){wv=v;worst=i;} });
       if(best===worst){best=-1;worst=-1;}
     }
-    return `<tr><td style="font-weight:600">${esc(r.label)}</td>` + B.map((b,i)=>{
-      const cell=b[r.key];
-      const cls = [b.id==='nike'?'nikecol':'', i===best?'best':'', i===worst?'worst':''].filter(Boolean).join(' ');
-      return `<td class="${cls}">${cell?esc(cell.d):'—'}</td>`;
+    return `<tr><td style="font-weight:600;white-space:nowrap">${esc(r.label)}</td>` + ORDER.map((id,i)=>{
+      const d=r.get(B[id]);
+      const cls=[id==='nike'?'nikecol':'', i===best?'best':'', i===worst?'worst':''].filter(Boolean).join(' ');
+      const glyph = i===best?' ▲':(i===worst?' ▼':'');
+      return `<td class="${cls} num">${d?esc(d):'—'}${glyph}</td>`;
     }).join('') + `</tr>`;
   }).join('');
-  const growthBars = barList(B.map(b=>({l:b.name, v:b.growth.v, d:b.growth.d, c:b.color})));
-  const emvBars = barList(B.map(b=>({l:b.name, v:b.emv.v, d:b.emv.d, c:b.color})));
-  // scatter: credibility x (70-80), AQS y (0-50), bubble = IG followers
-  const sx = v => 40 + (v-70)/(80-70)*520, sy = v => 250 - (v/50)*220;
-  const scatter = `<svg viewBox="0 0 600 290" style="width:100%;height:auto" role="img">
-    <line x1="40" y1="250" x2="580" y2="250" stroke="#d8d8d2"/><line x1="40" y1="30" x2="40" y2="250" stroke="#d8d8d2"/>
-    ${[70,72,74,76,78,80].map(v=>`<text x="${sx(v)}" y="266" font-size="10" fill="#9aa0a8" text-anchor="middle">${v}%</text>`).join('')}
-    ${[0,10,20,30,40,50].map(v=>`<text x="30" y="${sy(v)+3}" font-size="10" fill="#9aa0a8" text-anchor="end">${v}</text>`).join('')}
-    <text x="310" y="284" font-size="10.5" fill="#6b6f76" text-anchor="middle">Followers credibility →</text>
-    <text x="14" y="140" font-size="10.5" fill="#6b6f76" text-anchor="middle" transform="rotate(-90 14 140)">Audience Quality Score →</text>
-    ${B.map(b=>{ const r=6+Math.sqrt(b.ig.v)*2.2;
-      return `<circle cx="${sx(b.cred.v)}" cy="${sy(b.aqs.v)}" r="${r.toFixed(1)}" fill="${b.color}" fill-opacity="0.75" stroke="#fff" stroke-width="2"/>`; }).join('')}
-    ${B.map(b=>{ const yOff={nike:-50,adidas:-16,nb:18,puma:-14,ua:22,lulu:-14}[b.id];
-      return `<text x="${sx(b.cred.v)}" y="${sy(b.aqs.v)+yOff}" font-size="10.5" font-weight="700" fill="#111" text-anchor="middle">${b.name}</text>`; }).join('')}
-  </svg><div class="scale-note">Bubble area ∝ IG followers.</div>`;
-  const gender = `<div class="dvg">${B.map(b=>`
-    <div class="dvg-row"><span>${esc(b.name)}</span><div class="dvg-track">
-      <div class="dvg-m" style="width:${b.gender.m}%">${b.gender.m}%</div>
-      <div class="dvg-f" style="width:${b.gender.f}%">${b.gender.f}%</div>
-    </div></div>`).join('')}</div>
-    <div class="legend"><span><i class="sw" style="background:#5B7290"></i>Male</span><span><i class="sw" style="background:#B95C8A"></i>Female</span></div>`;
-  const cards = DATA.brands.map(b=>`
-    <details class="bcard" ${b.id==='nike'?'open':''}>
-      <summary><span class="bmark" style="background:${b.color};color:${b.txt||'#fff'}">${b.name.slice(0,2).toUpperCase()}</span>
-        <span class="bsum"><b>${esc(b.name)} <span style="font-weight:400;color:var(--muted)">${esc(b.handle)}</span></b><span>${esc(b.hq)} · Total ${esc(b.total.d)} · ER ${esc(b.er.d)} · AQS ${esc(b.aqs.d)}</span></span>
-        <span class="chev">›</span></summary>
-      <div class="bbody"><dl>
-        <dt>Platforms</dt><dd>${esc(b.card.platforms)}</dd>
-        <dt>Faces</dt><dd>${esc(b.card.faces)}</dd>
-        <dt>Hashtags</dt><dd>${esc(b.card.hashtags)}</dd>
-        <dt>Top post</dt><dd>${esc(b.card.topPost)}</dd>
-        <dt>EMV</dt><dd>${esc(b.emv.d)} (USD) · Est. post price ${esc(b.price.d)}</dd>
-      </dl><div class="pos-line">✦ ${esc(b.card.pos)} <span style="color:var(--faint)">· ${esc(b.card.cur)}</span></div></div>
-    </details>`).join('');
+  // S1 engagement per post by platform (shade = platform)
+  const s1 = ORDER.map(id=>{
+    const e=B[id].engagementPerPost, col=bc(id);
+    const rows=[['Instagram',e.instagram,col],['TikTok',e.tiktok,`color-mix(in srgb, ${col} 60%, var(--surface-1))`],['YouTube',e.youtube,`color-mix(in srgb, ${col} 30%, var(--surface-1))`]]
+      .filter(x=>x[1]!==null&&x[1]!==undefined);
+    const max=186500;
+    return `<div style="margin:9px 0" title="${esc(BRAND_NAME[id])}">
+      <div style="font-size:12px;margin-bottom:3px">${brandchip(id)}</div>
+      ${rows.map(([p,v,c])=>`<div class="bar-row" style="grid-template-columns:70px 1fr 70px;margin:2px 0" title="${esc(BRAND_NAME[id])} ${p}: ${fmt(v)}">
+        <span class="blabel" style="font-size:10.5px">${p}</span>
+        <div class="bar-track" style="height:10px"><div class="bar-fill" style="left:0;width:${Math.max(v/max*100,0.5)}%;background:${c}"></div></div>
+        <span class="bar-val" style="font-size:10.5px">${fmt(v)}</span></div>`).join('')}
+    </div>`;
+  }).join('');
+  // S2 credibility & bots (sorted by bots desc)
+  const botsOf = id => { const f=B[id].influencerInsight.followersBreakdown.find(x=>x[0]==='Fake/bots'); return f?f[1]:0; };
+  const byBots = [...ORDER].sort((a,b)=>botsOf(b)-botsOf(a));
+  const s2cred = barList(byBots.map(id=>({l:BRAND_NAME[id], html:brandchip(id), v:B[id].influencerInsight.credibilityPct, d:B[id].influencerInsight.credibilityPct.toFixed(2)+'%', c:bc(id)})), {max:100, scaleNote:'Axis 0–100%.'});
+  const s2bots = barList(byBots.map(id=>({l:BRAND_NAME[id], html:brandchip(id), v:botsOf(id), d:'⚠ '+botsOf(id).toFixed(2)+'%', c:'rgba(208,59,59,.7)'})), {max:25, scaleNote:'Axis 0–25% (status color: risk).'});
+  // S3 quality map scatter — emphasis: Nike blue, rest gray, direct labels
+  const sx=v=>50+(v-68)/(80-68)*510, sy=v=>250-(v/50)*220;
+  const labOff={nike:-56,adidas:-16,newbalance:18,puma:-20,underarmour:28,lululemon:-14};
+  const scatter = `<svg viewBox="0 0 600 296" style="width:100%;height:auto" role="img">
+    <line x1="${sx(74)}" y1="30" x2="${sx(74)}" y2="250" stroke="var(--grid)" stroke-dasharray="4 4"/>
+    <line x1="50" y1="${sy(30)}" x2="580" y2="${sy(30)}" stroke="var(--grid)" stroke-dasharray="4 4"/>
+    <line x1="50" y1="250" x2="580" y2="250" stroke="var(--baseline)"/><line x1="50" y1="30" x2="50" y2="250" stroke="var(--baseline)"/>
+    ${[68,72,76,80].map(v=>`<text x="${sx(v)}" y="266" font-size="11" fill="var(--ink-muted)" text-anchor="middle">${v}%</text>`).join('')}
+    ${[0,10,20,30,40,50].map(v=>`<text x="40" y="${sy(v)+3}" font-size="11" fill="var(--ink-muted)" text-anchor="end">${v}</text>`).join('')}
+    <text x="315" y="288" font-size="11" fill="var(--ink-2)" text-anchor="middle">Followers credibility →</text>
+    <text x="14" y="140" font-size="11" fill="var(--ink-2)" text-anchor="middle" transform="rotate(-90 14 140)">Audience Quality Score →</text>
+    <text x="58" y="244" font-size="10" fill="var(--ink-muted)" font-style="italic">big but hollow</text>
+    <text x="572" y="42" font-size="10" fill="var(--ink-muted)" font-style="italic" text-anchor="end">credible &amp; healthy</text>
+    ${ORDER.map(id=>{ const b=B[id], r=Math.max(8, 6+Math.sqrt(b.platforms.instagram.followers/1e6)*2.2);
+      const fill = id==='nike' ? 'var(--c-nike)' : 'var(--deemph)';
+      return `<circle cx="${sx(b.influencerInsight.credibilityPct)}" cy="${sy(b.imaiScore.audienceQuality)}" r="${r.toFixed(1)}" style="fill:${fill};fill-opacity:.65" stroke="var(--surface-1)" stroke-width="2"><title>${esc(BRAND_NAME[id])}: credibility ${b.influencerInsight.credibilityPct}%, AQS ${b.imaiScore.audienceQuality}, IG ${esc(b.platforms.instagram.d)}</title></circle>`; }).join('')}
+    ${ORDER.map(id=>{ const b=B[id];
+      return `<text x="${sx(b.influencerInsight.credibilityPct)}" y="${sy(b.imaiScore.audienceQuality)+labOff[id]}" font-size="10.5" font-weight="700" fill="var(--ink-1)" text-anchor="middle">${esc(BRAND_NAME[id])}</text>`; }).join('')}
+  </svg><div class="scale-note">Bubble area ∝ IG followers (min 8px). Guides at credibility 74% / AQS 30.</div>`;
+  // S4 gender — female slot-5 magenta, male blue-300, ordered by female desc
+  const byF = [...ORDER].sort((a,b)=>B[b].audience.gender.femalePct-B[a].audience.gender.femalePct);
+  const s4 = byF.map(id=>{ const g=B[id].audience.gender;
+    return `<div class="meter-row" style="grid-template-columns:110px 1fr" title="${esc(BRAND_NAME[id])}: ${g.femalePct.toFixed(1)}% F / ${g.malePct.toFixed(1)}% M">
+      <span class="mlabel">${brandchip(id)}</span>
+      <div class="stack100 thin" style="margin:0">
+        <span style="width:${g.femalePct}%;background:var(--c-newbalance)">${g.femalePct>14?g.femalePct.toFixed(0)+'% F':''}</span>
+        <span style="width:${g.malePct}%;background:var(--blue-300)">${g.malePct>14?g.malePct.toFixed(0)+'% M':''}</span>
+      </div></div>`; }).join('') +
+    `<div class="legend"><span><i class="sw" style="background:var(--c-newbalance)"></i>Female</span><span><i class="sw" style="background:var(--blue-300)"></i>Male</span></div>`;
+  // S5 EMV linear
+  const s5 = barList(ORDER.map(id=>({l:BRAND_NAME[id], html:brandchip(id), v:B[id].emvUSD.total, d:'$'+fmt(B[id].emvUSD.total), c:bc(id)})), {max:5000000, scaleNote:'Axis $0–5M, linear. EMV always USD.'});
+  // S6 AQS status bands
+  const band = v => v<=25?['var(--crit)','critical']:(v<=50?['var(--warn)','warning']:(v<=75?['var(--good)','good']:['var(--good)','good']));
+  const s6 = barList(ORDER.map(id=>{ const v=B[id].imaiScore.audienceQuality, [c]=band(v);
+    return {l:BRAND_NAME[id], html:brandchip(id), v, d:`${v} (${B[id].imaiScore.audienceQualityLabel})`, c}; }), {max:100, scaleNote:'Axis 0–100. Color = status band (0–25 critical, 26–50 warning), not brand.'});
+  // S7 brand cards
+  const cards = ORDER.map(id=>brandCard(id)).join('');
   return `
   <div class="sec card">
-    <div class="sec-h"><h3>Head-to-head scoreboard — 6 brands</h3><span class="src">Source: IMAI, 21 Jul 2026 · green = best in row, red = worst</span></div>
+    <div class="sec-h"><h3>Head-to-head scoreboard — 6 brands</h3><span class="src">▲ best in row · ▼ worst in row</span></div>
     <div class="tblwrap"><table class="tbl">${head}${rows}</table></div>
-    <div class="trunc-note">Currencies as reported: Adidas £, Lululemon CAD$, others $; EMV always USD. IMAI scores/reach are model estimates.</div>
+    <div class="trunc-note">Currencies as reported: adidas £, lululemon CAD$, others $; EMV always USD. IMAI scores/reach are model estimates.</div>
+    <div class="srcnote">IMAI · 21 Jul 2026</div>
   </div>
   <div class="sec grid2">
-    <div class="card"><div class="sec-h"><h3>IG follower growth %/mo</h3><span class="src">Source: IMAI</span></div>${growthBars}
-      <div class="chart-note">New Balance is the only brand growing fast (+1.43%); Nike is the only one shrinking (-0.07%).</div></div>
-    <div class="card"><div class="sec-h"><h3>Credibility vs audience quality</h3><span class="src">Source: IMAI</span></div>${scatter}
-      <div class="chart-note">Nike is the huge-but-low-quality outlier: biggest bubble, bottom-left corner (AQS 14, credibility 71.32%).</div></div>
+    <div class="card"><div class="sec-h"><h3>Engagement per post by platform</h3></div>${s1}
+      <div class="chart-note">PUMA and Lululemon earn most engagement on TikTok, not Instagram.</div>
+      <div class="scale-note">Shade = platform (solid IG → lighter TikTok/YouTube). Shared axis, max 186.5K.</div>
+      <div class="srcnote">IMAI · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Credibility &amp; fake followers</h3></div>
+      <div style="font-weight:700;font-size:11px;margin:4px 0" class="upper">Followers credibility</div>${s2cred}
+      <div style="font-weight:700;font-size:11px;margin:12px 0 4px" class="upper">Fake/bot followers ⚠</div>${s2bots}
+      <div class="chart-note">1 in 5 Nike followers is fake — double the set average.</div>
+      <div class="srcnote">IMAI · 21 Jul 2026</div></div>
   </div>
   <div class="sec grid2">
-    <div class="card"><div class="sec-h"><h3>Audience gender split</h3><span class="src">Source: IMAI</span></div>${gender}
-      <div class="chart-note">Lululemon (88% F) and Under Armour (77% M) own opposite poles; Nike sits 62/38 male.</div></div>
-    <div class="card"><div class="sec-h"><h3>EMV total by brand (USD)</h3><span class="src">Source: IMAI</span></div>${emvBars}
-      <div class="chart-note">Nike’s $4.8M earned media value is ~9× Adidas — scale still buys dominance in EMV.</div></div>
+    <div class="card"><div class="sec-h"><h3>Quality map</h3></div>${scatter}
+      <div class="chart-note">Nike is the giant outlier in the low-quality quadrant.</div>
+      <div class="srcnote">IMAI · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Audience gender split</h3></div>${s4}
+      <div class="chart-note">Lululemon owns the female audience the rest of the set can’t reach.</div>
+      <div class="srcnote">IMAI · 21 Jul 2026</div></div>
   </div>
-  <div class="sec"><div class="sec-h"><h3>Brand profiles</h3><span class="src">Source: IMAI, 21 Jul 2026 · first 2 of 10 posts captured per brand</span></div>
+  <div class="sec grid2">
+    <div class="card"><div class="sec-h"><h3>Earned media value</h3></div>${s5}
+      <div class="chart-note">Nike’s content earns 9× the media value of the whole rest of the set combined.</div>
+      <div class="srcnote">IMAI · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Audience Quality Score</h3></div>${s6}
+      <div class="chart-note">Nobody in the set exceeds “Fair”; Nike is last at 14.</div>
+      <div class="srcnote">IMAI · 21 Jul 2026</div></div>
+  </div>
+  <div class="sec"><div class="sec-h"><h3>Brand profiles</h3><span class="src">IMAI · 21 Jul 2026 · first 2 of 10 posts captured per brand</span></div>
   <div class="bcards">${cards}</div></div>`;
 }
+function brandCard(id){
+  const b=DATA.social.brands[id], a=b.audience;
+  const p=b.platforms;
+  const platLine=[p.instagram?`IG ${p.instagram.d}`:null, p.tiktok?`TikTok ${p.tiktok.d}`:null, p.youtube?`YouTube ${p.youtube.d}`:null].filter(Boolean).join(' · ');
+  const faces=(b.mentions||[]).filter(m=>m!=='@'+id && m!==b.profile.handle).slice(0,4).join(' ');
+  const [date,cap,likes]=b.topPosts[0];
+  const topAge=[...a.ageGender].sort((x,y)=>(y[1]+y[2])-(x[1]+x[2]))[0];
+  const g=a.gender;
+  const audLine=`${Math.round(g.malePct)}% M / ${Math.round(g.femalePct)}% F · top country ${a.countries[0][0]} ${a.countries[0][1].toFixed(1)}% · biggest age band ${topAge[0]} (${(topAge[1]+topAge[2]).toFixed(1)}%)`;
+  const agMax=Math.max(...a.ageGender.map(r=>Math.max(r[1],r[2])));
+  const ag=a.ageGender.map(r=>`<div class="ag-row" title="${r[0]}: F ${r[1]}% / M ${r[2]}%"><span style="color:var(--ink-muted)">${r[0]}</span>
+    <div class="ag-track"><i style="width:${r[1]/agMax*50}%;background:var(--c-newbalance)" title="F ${r[1]}%"></i><i style="width:${r[2]/agMax*50}%;background:var(--blue-300)" title="M ${r[2]}%"></i></div></div>`).join('');
+  const meterCol=(title,rows,denom)=>`<div><h5>${title}</h5>${rows.slice(0,5).map(r=>meterRow(r[0], r[1]/denom, r[1].toFixed(1)+'%', RAMP[4])).join('')}</div>`;
+  return `<div class="bcard">
+    <div class="bhead"><span class="bmark" style="background:${bc(id)}">${b.profile.name.slice(0,2).toUpperCase()}</span>
+      <div><b>${esc(b.profile.name)} <span style="font-weight:400;color:var(--ink-muted)">${esc(b.profile.handle)}</span></b>
+      <div class="sub">${esc(b.profile.city?b.profile.city+', ':'')}${esc(b.profile.country)}</div></div>
+      <span class="curbadge">${esc(b.profile.currency)}</span></div>
+    <div class="brow">${esc(platLine)}</div>
+    <div class="ministats">
+      <div><b class="${b.influencerInsight.growthPctMo<0?'chipd down':'chipd up'}" style="font-size:15px">${b.influencerInsight.growthPctMo>0?'+':''}${b.influencerInsight.growthPctMo}%</b><span>growth/mo</span></div>
+      <div><b>${b.influencerInsight.credibilityPct.toFixed(1)}%</b><span>credibility</span></div>
+      <div><b>${b.imaiScore.audienceQuality} <span class="statchip ${b.imaiScore.audienceQuality<=25?'crit':'warn'}" style="font-size:9px">${esc(b.imaiScore.audienceQualityLabel)}</span></b><span>AQS</span></div>
+      <div><b>$${fmt(b.emvUSD.total)}</b><span>EMV (USD)</span></div>
+    </div>
+    <div class="brow"><b>Positioning</b>${esc(b.positioning)}</div>
+    <div class="brow"><b>Hashtags</b><span class="tagchips">${b.hashtags.slice(0,6).map(h=>`<span>${esc(h)}</span>`).join('')}</span></div>
+    <div class="brow"><b>Faces</b>${esc(faces)}</div>
+    <div class="brow"><b>Top post</b>“${esc(cap.length>80?cap.slice(0,80)+'…':cap)}” — ${fmt(likes)} likes (${esc(date)})</div>
+    <div class="brow"><b>Audience</b>${esc(audLine)}</div>
+    <details class="bdetails"><summary>Full audience detail</summary>
+      <h5 style="font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-muted);margin:8px 0 4px">Age × gender <span style="text-transform:none">(<i class="sw" style="background:var(--c-newbalance);display:inline-block;width:8px;height:8px;border-radius:2px"></i> F · <i class="sw" style="background:var(--blue-300);display:inline-block;width:8px;height:8px;border-radius:2px"></i> M)</span></h5>
+      ${ag}
+      <div class="aud-grid">
+        ${meterCol('Countries', a.countries, 70)}
+        ${meterCol('Cities', a.cities, 3)}
+        ${meterCol('Ethnicity', a.ethnicity, 80)}
+        ${meterCol('Language', a.language, 90)}
+        ${meterCol('Reachability', a.reachability, 70)}
+        ${meterCol('Brand affinity', a.brandAffinity, 20)}
+      </div>
+    </details>
+    <div class="srcnote">IMAI · 21 Jul 2026 · ${esc(b.postsNote)}</div>
+  </div>`;
+}
 
-/* ---------- TAB 3: SEARCH ---------- */
+/* ---------- TAB 3 · SEARCH (K0–K8) ---------- */
 function tabSearch(){
-  const S=DATA.search;
-  const kwRows = S.keywords.map(k=>`
-    <tr><td>${esc(k.kw)}</td><td data-v="${k.pos}">${k.pos}</td><td data-v="${k.tr}">${esc(k.trD)}</td><td data-v="${k.vol}">${esc(k.volD)}</td>
-    <td data-v="${k.kd}">${esc(k.kdD)}<span class="kd"><i style="width:${k.kd}%;background:${k.kd>70?'var(--neg)':k.kd>45?'var(--amber)':'var(--pos)'}"></i></span></td></tr>`).join('');
-  const compBars = barList(S.competitors.map(c=>{
-    const b = c.brand ? DATA.brands.find(x=>x.id===c.brand) : null;
-    return { l:c.d.replace('.com',''), v:c.comp, d:c.comp+'%', c: b?b.color:'#9aa0a8' };
-  }));
-  const oppList = S.gap.opps.map(o=>`<div class="bar-row"><span class="blabel">${esc(o.kw)}</span><div class="bar-track"><div class="bar-fill" style="width:${parseFloat(o.vol)/1.83*100}%;background:var(--neg)"></div></div><span class="bar-val">${esc(o.vol)}</span></div>`).join('');
-  const h2h = S.gap.h2h.map(r=>`<tr><td>${esc(r[0])}</td><td>#${esc(r[1])}</td><td style="color:var(--neg);font-weight:700">#${esc(r[2])}</td></tr>`).join('');
-  // 3-anchor line
-  const pts = S.trendAnchors, lx=i=>60+i*230, ly=v=>150-(v-50)/(75-50)*110;
-  const line = `<svg viewBox="0 0 580 180" style="width:100%;height:auto">
-    <polyline points="${pts.map((p,i)=>`${lx(i)},${ly(p.y)}`).join(' ')}" fill="none" stroke="#111" stroke-width="2" stroke-dasharray="6 5"/>
-    ${pts.map((p,i)=>`<circle cx="${lx(i)}" cy="${ly(p.y)}" r="5" fill="#111"/><text x="${lx(i)}" y="${ly(p.y)-12}" font-size="12" font-weight="700" text-anchor="middle" fill="#111">${p.l}</text>
-    <text x="${lx(i)}" y="172" font-size="10.5" fill="#6b6f76" text-anchor="middle">${p.x}</text>`).join('')}
-  </svg><div class="scale-note">Approx., chart-read — only 3 anchor points known; no monthly precision implied.</div>`;
-  const donuts = S.position.buckets.map(b=>miniDonut(b.v/S.position.of, b.l, b.v)).join('');
+  const S=DATA.search, dov=S.domainOverview, us=dov.us, ww=dov.worldwide, ta=S.trafficAnalytics;
+  const k0 = kpiTiles([
+    { lbl:'Organic traffic (WW)', val:ww.organicTraffic.d, delta:ww.organicTraffic.chgPct, deltaTxt:'-0.1%' },
+    { lbl:'Organic traffic (US)', val:us.organicTraffic.d, delta:us.organicTraffic.chgPct, deltaTxt:'+0.31%' },
+    { lbl:'Organic keywords (US)', val:us.organicKeywords.d, delta:us.organicKeywords.chgPct, deltaTxt:'-5.04%' },
+    { lbl:'US traffic value', val:us.trafficCostUSD.d, sub:'per month', delta:us.trafficCostUSD.chgPct, deltaTxt:'-2.14%' },
+    { lbl:'US traffic share', val:ww.trafficSharePct+'%', sub:'of tracked market' },
+    { lbl:'Paid traffic (WW)', val:ww.paidTraffic.d, delta:ww.paidTraffic.chgPct, deltaTxt:'+8.2%' }
+  ]);
+  const serp = stack100(dov.serpDistribution.map((s,i)=>({l:`${s[0]} ${s[1]}%`, s:s[0], v:s[1], c:[RAMP[5],RAMP[3],RAMP[1]][i]})));
+  // K1 keywords table (sorted traffic desc)
+  const kws=[...S.topKeywordsUS.rows].sort((a,b)=>b[2]-a[2]);
+  const kdColor=v=>RAMP[Math.min(7, Math.floor(v/100*7)+1)];
+  const kwRows = kws.map(r=>`
+    <tr><td>${esc(r[0])}</td>
+    <td class="num" data-v="${r[1]}">${r[1]===1?`<span class="statchip good">#1</span>`:'#'+r[1]}</td>
+    <td class="num" data-v="${r[2]}">${fmt(r[2])}</td>
+    <td class="num" data-v="${r[3]}">${r[3].toFixed(2)}%</td>
+    <td class="num" data-v="${r[4]}">${fmt(r[4])}</td>
+    <td class="num" data-v="${r[5]}"><span class="kd"><i style="width:${r[5]}%;background:${kdColor(r[5])}"></i></span>${r[5]}</td></tr>`).join('');
+  // K2 competitors: top 12 + 4 brand rivals
+  const rivalIds={'adidas.com':'adidas','underarmour.com':'underarmour','newbalance.com':'newbalance','lululemon.com':'lululemon'};
+  const compRows=[...S.organicCompetitorsUS.rows.slice(0,12), ...S.organicCompetitorsUS.rows.filter(r=>rivalIds[r[0]])];
+  const k2 = barList(compRows.map(r=>{
+    const rid=rivalIds[r[0]];
+    return { l:r[0].replace('.com',''), html:rid?brandchip(rid, r[0].replace('.com','')):undefined,
+      v:r[1], d:r[1]+'%', c:rid?bc(rid):RAMP[4], tag:rid?undefined:'RETAIL' };
+  }), {max:50, labelW:190});
+  // K3 gap stacked + h2h
+  const gap=S.keywordGapVsFootlocker;
+  const gapSegs=gap.nikeSegments.map((s,i)=>({l:`${s[0]} ${fmt(s[1])}`, s:s[0], v:s[1], c:RAMP[1+i], tc:i<2?'#0b0b0b':undefined}));
+  const h2h=gap.headToHeadSample.rows.map(r=>{
+    const nikeLoses=r[1]>r[2];
+    return `<tr><td>${esc(r[0])}</td>
+      <td class="num ${nikeLoses?'loser':''}">#${r[1]}${nikeLoses?' ▼':''}</td>
+      <td class="num ${!nikeLoses&&r[2]>r[1]?'loser':''}">#${r[2]}${r[2]>r[1]?' ▼':''}</td>
+      <td class="num">${fmt(r[3])}</td><td class="num">${r[4]}</td><td class="num">$${r[5].toFixed(2)}</td></tr>`;
+  }).join('');
+  // K4 opportunities
+  const k4 = barList(gap.topOpportunities.map(o=>({l:o[0], v:o[1], d:fmt(o[1]), c:RAMP[4]})));
+  // K5 web engagement tiles
+  const k5 = kpiTiles([
+    { lbl:'Visits', val:ta.visits.d, delta:ta.visits.chgPct, deltaTxt:'-1.82%' },
+    { lbl:'Unique visitors', val:ta.uniqueVisitors.d, delta:ta.uniqueVisitors.chgPct, deltaTxt:'-0.94%' },
+    { lbl:'Pages / visit', val:String(ta.pagesPerVisit.v), delta:ta.pagesPerVisit.chgPct, deltaTxt:'+1.9%' },
+    { lbl:'Avg duration', val:'06:19', delta:ta.avgVisitDuration.chgPct, deltaTxt:'-3.32%' },
+    { lbl:'Bounce rate', val:ta.bounceRatePct.v+'%', sub:'lower is better', delta:ta.bounceRatePct.chgPct, deltaTxt:'-2.14%', invert:true }
+  ]);
+  // K6 dashed 3-anchor line, y 0–84M
+  const pts=ta.sixMonthTrendAnchors.points, lx=i=>70+i*230, ly=v=>176-(v/84e6)*150;
+  const k6 = `<svg viewBox="0 0 590 210" style="width:100%;height:auto">
+    ${[0,28,56,84].map(v=>`<line x1="60" y1="${176-(v/84)*150}" x2="580" y2="${176-(v/84)*150}" stroke="var(--grid)"/><text x="52" y="${180-(v/84)*150}" font-size="10" fill="var(--ink-muted)" text-anchor="end">${v}M</text>`).join('')}
+    <polyline points="${pts.map((p,i)=>`${lx(i)},${ly(p[1])}`).join(' ')}" fill="none" stroke="var(--ink-1)" stroke-width="2" stroke-dasharray="6 5"/>
+    ${pts.map((p,i)=>`<circle cx="${lx(i)}" cy="${ly(p[1])}" r="5" style="fill:var(--ink-1)"><title>${esc(p[0])}: ~${fmt(p[1])}</title></circle>
+      <text x="${lx(i)}" y="${ly(p[1])-12}" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink-1)">~${fmt(p[1])}</text>
+      <text x="${lx(i)}" y="200" font-size="10.5" fill="var(--ink-muted)" text-anchor="middle">${esc(p[0])}</text>`).join('')}
+  </svg><div class="scale-note">Approximate — chart-read anchors only; no monthly precision implied. Channel split ${esc('🔒')} Traffic &amp; Market Toolkit Pro ($289/mo).</div>`;
+  // K7 rank buckets
+  const pos=S.positionTracking;
+  const k7 = `<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
+    <div><div class="kpi" style="border:0;padding:0"><div class="lbl">Visibility</div><div class="val">${pos.visibilityPct}%</div></div></div>
+    <div style="flex:1;min-width:230px">${pos.buckets.map(b=>meterRow(b[0], b[1]/87, `${b[1]} kw`, RAMP[4])).join('')}
+    <div class="scale-note">Ranked keywords out of 87 tracked sample terms · ${esc(pos.range)} · ${esc(pos.market)}</div></div></div>`;
+  // K8 site health
+  const sa=S.siteAudit;
+  const pbColor={Healthy:'var(--good)', Broken:'var(--crit)', 'Have issues':'var(--warn)', Redirect:'var(--blue-300)', Blocked:'var(--deemph)'};
+  const k8 = `
+    ${meterRow('Site health', sa.healthPct/100, sa.healthPct+'%', 'var(--good)')}
+    <div style="margin:10px 0"><span class="statchip crit">⛔ ${sa.errors} errors</span> <span class="statchip warn">⚠ ${sa.warnings} warnings</span></div>
+    ${stack100(sa.pageBreakdown.filter(p=>p[1]>0).map(p=>({l:`${p[0]} ${p[1]}`, s:String(p[1]), v:p[1], c:pbColor[p[0]]})))}
+    <div class="scale-note">${esc(sa.note)} · updated ${esc(sa.updated)}</div>`;
   return `
-  <div class="sec"><div class="sec-h"><h3>Domain overview</h3><span class="src">Source: SEMrush Domain Overview, 21 Jul 2026</span></div>
-    ${kpiTiles(S.overview)}
+  <div class="sec"><div class="sec-h"><h3>Domain overview</h3><span class="src">SEMrush · 21 Jul 2026</span></div>
+    ${k0}
     <div class="card" style="margin-top:12px">
       <div style="display:flex;gap:26px;flex-wrap:wrap;align-items:center">
-        <div style="flex:1;min-width:260px">${stack100(S.serpMix,'%')}</div>
-        <div style="font-size:12.5px;color:var(--ink2);flex:1;min-width:240px">${esc(S.topics)}<br>
-        <span class="lockval" title="Requires SEMrush Traffic & Market Toolkit Pro ($289/mo)">Channel % / geo / demographics locked</span> ·
-        <span class="lockval" title="Requires SEMrush Advertising Toolkit ($99–220/mo)">Ad copies &amp; PPC keyword detail locked</span></div>
+        <div style="flex:1;min-width:260px">${serp}</div>
+        <div style="font-size:12.5px;color:var(--ink-2);flex:1;min-width:240px">
+          Key organic topics (US): EU-to-UK shoe size (200K traffic) · Women’s Dresses (125K) · Women’s Bottoms (75K). Other DBs: UK 749.6K keywords · AU 572.2K. Paid keywords (WW) 24K ${chip(27,'+27%')}<br>
+          <span class="lockcell" title="Requires SEMrush Traffic & Market Toolkit Pro ($289/mo)">Channel % / geo / demographics locked</span> ·
+          <span class="lockcell" title="Requires SEMrush Advertising Toolkit ($99–220/mo)">Ad copies &amp; PPC keyword detail locked</span></div>
       </div>
     </div>
   </div>
   <div class="sec card">
-    <div class="sec-h"><h3>Top US organic keywords</h3><span class="src">Source: SEMrush Organic Research · click a column to sort</span></div>
-    <div class="tblwrap"><table class="tbl" id="kwtbl"><tr><th>Keyword</th><th class="sortable" data-col="1">Pos ↕</th><th class="sortable" data-col="2">Traffic ↕</th><th class="sortable" data-col="3">Volume ↕</th><th class="sortable" data-col="4">KD% ↕</th></tr>${kwRows}</table></div>
-    <div class="trunc-note">Showing 14 sample rows from page 1 of 41,804 — total 4,180,334 US keywords (exact).</div>
+    <div class="sec-h"><h3>Top US organic keywords</h3><span class="src">SEMrush Organic Research · click a column to sort</span></div>
+    <div class="tblwrap" style="max-height:420px;overflow-y:auto"><table class="tbl" id="kwtbl"><thead><tr><th>Keyword</th><th class="sortable num" data-col="1">Pos ↕</th><th class="sortable num" data-col="2">Traffic ↕</th><th class="sortable num" data-col="3">Traffic % ↕</th><th class="sortable num" data-col="4">Volume ↕</th><th class="sortable num" data-col="5">KD% ↕</th></tr></thead><tbody>${kwRows}</tbody></table></div>
+    <div class="trunc-note">Showing 42 of 4,180,334 — page 1 of 41,804 (SEMrush UI cap).</div>
+    <div class="srcnote">SEMrush · 21 Jul 2026</div>
   </div>
   <div class="sec grid2">
-    <div class="card"><div class="sec-h"><h3>Organic competitors — competition level</h3><span class="src">Source: SEMrush · showing 14 of 154,826</span></div>
-      ${compBars}
-      <div class="chart-note">Nike’s search battle is against retailers/marketplaces (Foot Locker 46%), not brand rivals (Adidas 9%) — but adidas.com carries 19.5M US organic visits.</div></div>
-    <div class="card"><div class="sec-h"><h3>Keyword gap vs footlocker.com</h3><span class="src">Source: SEMrush Keyword Gap (US organic) · top 100 of 982.4K captured</span></div>
-      <div style="font-size:12.5px;color:var(--ink2);margin-bottom:6px">${esc(S.gap.note)}</div>
-      ${stack100(S.gap.segments,'K')}
-      <div style="font-weight:700;font-size:12px;margin:12px 0 6px" class="upper">Top missing opportunities (US volume)</div>
-      <div class="bar-chart">${oppList}</div>
-      <div style="font-weight:700;font-size:12px;margin:14px 0 6px" class="upper">Head-to-head sample (position)</div>
-      <table class="tbl"><tr><th>Keyword</th><th>Foot Locker</th><th>Nike</th></tr>${h2h}</table>
-      <div class="chart-note">The biggest gaps are rival brand terms (new balance: 1.83M monthly searches) that retail partners monetize — Nike doesn’t rank.</div></div>
+    <div class="card"><div class="sec-h"><h3>Organic competitors — competition level</h3></div>
+      ${k2}
+      <div class="chart-note">Nike’s SERP war is against its own retail channel — Foot Locker 46% overlap vs adidas 9% (though adidas.com carries 19.5M US organic visits).</div>
+      <div class="trunc-note">Showing top 12 + 4 brand rivals of 154,826 competitors (page 1 of 1,549).</div>
+      <div class="srcnote">SEMrush · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Missing-keyword opportunities</h3></div>
+      ${k4}
+      <div class="chart-note">Five rival-brand terms Nike doesn’t rank for total 6.5M monthly searches.</div>
+      <div style="margin-top:16px" class="upper"><b style="font-size:11px">Keyword gap vs footlocker.com — Nike segments</b></div>
+      <div style="font-size:12px;color:var(--ink-2);margin:4px 0">Overlap: nike.com 713.9K vs footlocker.com 516.4K keywords (all-segment total 982.4K).</div>
+      ${stack100(gapSegs)}
+      <div class="srcnote">SEMrush Keyword Gap · 21 Jul 2026</div></div>
+  </div>
+  <div class="sec card">
+    <div class="sec-h"><h3>Head-to-head vs Foot Locker (sample)</h3><span class="src">▼ = losing position · warning tint on the loser</span></div>
+    <div class="tblwrap" style="max-height:380px;overflow-y:auto"><table class="tbl"><thead><tr><th>Keyword</th><th class="num">Nike</th><th class="num">Foot Locker</th><th class="num">Volume</th><th class="num">KD%</th><th class="num">CPC</th></tr></thead><tbody>${h2h}</tbody></table></div>
+    <div class="trunc-note">Sample page 1 of 2,479.</div>
+    <div class="srcnote">SEMrush Keyword Gap · 21 Jul 2026</div>
   </div>
   <div class="sec grid2">
-    <div class="card"><div class="sec-h"><h3>Web engagement — Jun 2026 (WW)</h3><span class="src">Source: SEMrush Traffic Analytics</span></div>
-      ${kpiTiles(S.traffic)}
-      <div style="margin-top:14px">${line}</div></div>
-    <div class="card"><div class="sec-h"><h3>Position tracking &amp; site health</h3><span class="src">Source: SEMrush project, US, Jul 15–21 · 100-page sample crawl</span></div>
-      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
-        <div><div class="bignum" style="font-size:34px">${esc(S.position.vis)}</div><div style="font-size:11.5px;color:var(--muted)">visibility</div></div>
-        <div class="mini-donuts">${donuts}</div>
-      </div>
-      <div class="scale-note">Ranked keywords out of ${S.position.of} tracked sample terms. ${esc(S.position.samples)}</div>
-      <hr style="border:0;border-top:1px dashed var(--line2);margin:14px 0">
-      <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
-        ${gaugeSvg(S.health.pct)}
-        <div style="font-size:13px">
-          <div><b style="color:var(--neg)">${S.health.errors} errors</b> · <b style="color:var(--amber)">${S.health.warnings} warnings</b></div>
-          <div style="color:var(--muted);margin-top:4px">${esc(S.health.pages)}</div>
-          <div class="scale-note">${esc(S.health.note)}</div>
-        </div>
-      </div></div>
+    <div class="card"><div class="sec-h"><h3>Web engagement — Jun 2026 (WW)</h3></div>
+      ${k5}
+      <div style="margin-top:14px">${k6}</div>
+      <div class="chart-note">Traffic dipped ~20% into spring and only partially recovered.</div>
+      <div class="srcnote">SEMrush Traffic Analytics · Jun 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Position tracking &amp; site health</h3></div>
+      ${k7}
+      <hr style="border:0;border-top:1px dashed var(--baseline);margin:14px 0">
+      ${k8}
+      <div class="srcnote">SEMrush project · Jul 15–21 2026</div></div>
   </div>`;
 }
 function wireKwSort(){
@@ -1033,122 +1027,189 @@ function wireKwSort(){
     let asc=false;
     th.addEventListener('click',()=>{
       const col=+th.dataset.col;
-      const rows=[...tbl.querySelectorAll('tr')].slice(1);
-      rows.sort((a,b)=>{
-        const av=+a.cells[col].dataset.v, bv=+b.cells[col].dataset.v;
-        return asc? av-bv : bv-av;
-      });
+      const tbody=tbl.querySelector('tbody');
+      const rows=[...tbody.querySelectorAll('tr')];
+      rows.sort((a,b)=>{ const av=+a.cells[col].dataset.v, bv=+b.cells[col].dataset.v; return asc? av-bv : bv-av; });
       asc=!asc;
-      rows.forEach(r=>tbl.appendChild(r));
+      rows.forEach(r=>tbody.appendChild(r));
     });
   });
 }
 
-/* ---------- TAB 4: AI ---------- */
+/* ---------- TAB 4 · AI (A0–A4) ---------- */
 function tabAI(){
-  const A=DATA.ai;
-  const donut = donutSvg(A.llm.map(x=>({v:x.share,c:x.c})));
-  const legend = `<div class="legend" style="flex-direction:column;gap:7px">` + A.llm.map(x=>`<span><i class="sw" style="background:${x.c}"></i><b>${esc(x.l)}</b> — ${x.share}% of mentions</span>`).join('')+`</div>`;
-  const pagesBars = barList(A.llm.map(x=>({l:x.l, v:x.pages, d:x.pagesD, c:x.c})));
-  const srcBars = barList(A.sources.map(s=>({l:s.l, v:s.v, d:s.d, c:s.c})));
-  const countries = A.countries.map(c=>`<tr><td>${esc(c[0])}</td><td>${esc(c[1])}</td><td>${esc(c[2])}</td></tr>`).join('');
+  const A=DATA.ai, ts=A.topicsAndSources;
+  const a0 = kpiTiles([
+    { lbl:'AI Visibility', val:'85 / 91', sub:'WW / US · “Great”' },
+    { lbl:'Mentions', val:A.mentions.d, delta:A.mentions.chgPct, deltaTxt:'-1.3%' },
+    { lbl:'Citations', val:A.citations.d, delta:A.citations.chgPct, deltaTxt:'+0.3%' },
+    { lbl:'Cited pages', val:A.citedPages.d, delta:A.citedPages.chgPct, deltaTxt:'+2.1%' },
+    { lbl:'Performing topics', val:'317.1K', sub:'+ 5.9K topic opportunities' }
+  ]);
+  // A1 — 100% stacked bar (NOT a donut), engine slot colors 1–4
+  const a1 = stack100(A.byLLM.rows.map(r=>({l:`${r[0]} ${r[1]}%`, s:`${r[0]} ${r[1]}%`, v:r[1], c:ENGINE_COLOR[r[0]], d:fmt(r[2])+' mentions'})));
+  // A2 — cited pages by engine, sorted desc, same engine colors
+  const byPages=[...A.byLLM.rows].sort((a,b)=>b[3]-a[3]);
+  const a2 = barList(byPages.map(r=>({l:r[0], v:r[3], d:fmt(r[3]), c:ENGINE_COLOR[r[0]]})));
+  // A3 — emphasis: nike.com blue, others gray
+  const a3 = barList(A.topCitedSources.map(s=>({l:s[0], v:s[1], d:fmt(s[1]), c:s[0]==='nike.com'?'var(--c-nike)':'var(--deemph)'})));
+  // A4 country table with visibility col
+  const visOf={US:91, DE:87, ES:86};
+  const countries = A.byCountry.map(c=>`<tr><td>${esc(c[0])}</td><td class="num">${c[1]}%</td><td class="num">${esc(c[2])}</td><td class="num">${visOf[c[0]]!==undefined?visOf[c[0]]:'—'}</td></tr>`).join('');
+  const topics = A.sampleTopics.rows.slice(0,6).map(t=>`<tr><td>${esc(t[0])}</td><td class="num">${t[1]}</td><td class="num">${t[2]}</td><td class="num">${fmt(t[3])}</td></tr>`).join('');
   return `
-  <div class="sec"><div class="sec-h"><h3>AI search visibility</h3><span class="src">Source: SEMrush AI SEO, 21 Jul 2026 · 1.4M prompts tracked</span></div>${kpiTiles(A.kpis)}</div>
+  <div class="sec"><div class="sec-h"><h3>AI search visibility</h3><span class="src">SEMrush AI SEO · 21 Jul 2026 · ${fmt(ts.promptsTracked)} prompts tracked</span></div>${a0}</div>
   <div class="sec">
-    <div class="callout riskbg">
-      <h4>⚠ The CMO takeaway</h4>
+    <div class="callout warnb">
+      <h4>⚠ Who AI cites for “Nike” — the CMO takeaway</h4>
       <p class="huge">reddit.com (83.1K) and youtube.com (75.5K) are cited nearly as often as nike.com (83.5K) in AI answers.</p>
-      <p style="margin-top:8px;color:#c9c9c9;font-size:13.5px">Nike doesn’t control the majority of what AI assistants say about it — third-party sources nearly match the brand’s own site.</p>
-      <div style="margin-top:14px;background:rgba(255,255,255,.06);border-radius:10px;padding:12px">${srcBars}</div>
+      <p style="margin-top:8px;color:var(--ink-2);font-size:13.5px">Nike does not control its own AI narrative — Reddit is 400 mentions behind.</p>
+      <div style="margin-top:14px">${a3}</div>
+      <div class="srcnote">SEMrush AI SEO · 21 Jul 2026</div>
     </div>
   </div>
   <div class="sec grid2">
-    <div class="card"><div class="sec-h"><h3>Mentions share by LLM</h3><span class="src">Source: SEMrush AI SEO</span></div>
-      <div class="donut-wrap">${donut}${legend}</div>
-      <div class="chart-note">Gemini (33.5%) and ChatGPT (31.3%) drive two-thirds of Nike’s AI mentions.</div></div>
-    <div class="card"><div class="sec-h"><h3>Cited pages by engine</h3><span class="src">Source: SEMrush AI SEO</span></div>
-      ${pagesBars}
-      <div class="chart-note">413.6K Nike pages surface in Gemini alone — AI answers are now a top-of-funnel surface of their own.</div></div>
+    <div class="card"><div class="sec-h"><h3>Mentions share by LLM</h3></div>
+      ${a1}
+      <div class="chart-note">Gemini and ChatGPT together drive two-thirds of Nike’s AI presence.</div>
+      <div class="srcnote">SEMrush AI SEO · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Cited pages by engine</h3></div>
+      ${a2}
+      <div class="chart-note">ChatGPT cites Nike pages 4.6× more than all other engines combined — optimize for its crawler first.</div>
+      <div class="srcnote">SEMrush AI SEO · 21 Jul 2026</div></div>
   </div>
   <div class="sec grid2">
-    <div class="card"><div class="sec-h"><h3>Mentions by country</h3><span class="src">Source: SEMrush AI SEO</span></div>
-      <table class="tbl"><tr><th>Country</th><th>Share</th><th>Mentions</th></tr>${countries}</table></div>
-    <div class="card"><div class="sec-h"><h3>Opportunity counters</h3><span class="src">Source: SEMrush AI SEO</span></div>
-      <div class="kpis">
-        <div class="kpi"><div class="lbl">Topic opportunities</div><div class="val">5.9K</div><div class="sub">of 317.1K performing topics</div></div>
-        <div class="kpi"><div class="lbl">Source opportunities</div><div class="val">12.5K</div><div class="sub">of 865.3K cited sources</div></div>
+    <div class="card"><div class="sec-h"><h3>Geography &amp; opportunities</h3></div>
+      <table class="tbl"><tr><th>Country</th><th class="num">Share</th><th class="num">Mentions</th><th class="num">Visibility</th></tr>${countries}</table>
+      <div class="kpis" style="margin-top:12px">
+        <div class="kpi"><div class="lbl">Topic opportunities</div><div class="val smaller">5.9K</div><div class="sub">of 317.1K performing topics</div></div>
+        <div class="kpi"><div class="lbl">Source opportunities</div><div class="val smaller">12.5K</div><div class="sub">of 865.3K cited sources</div></div>
       </div>
-      <div style="font-size:12.5px;color:var(--ink2);margin-top:12px">${esc(A.extras.topics)}</div>
-      <div class="scale-note">SEMrush AI-competitor set: ${esc(A.extras.competitorSet)}. AI topics list truncated — 10 of 317.1K captured.</div></div>
+      <div class="srcnote">SEMrush AI SEO · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Perfect-visibility topics (sample)</h3></div>
+      <table class="tbl"><tr><th>Topic</th><th class="num">Visibility</th><th class="num">Mentions</th><th class="num">AI volume</th></tr>${topics}</table>
+      <div class="trunc-note">Page 1 of 31,707 topics. SEMrush AI-competitor set: ${DATA.ai.competitorSet.map(esc).join(' · ')}.</div>
+      <div class="srcnote">SEMrush AI SEO · 21 Jul 2026</div></div>
   </div>`;
 }
 
-/* ---------- TAB 5: BACKLINKS ---------- */
+/* ---------- TAB 5 · BACKLINKS (B1–B8) ---------- */
 function tabLinks(){
-  const L=DATA.backlinks;
-  const asBars = barList(L.asDist.map(x=>({l:'AS '+x.l, v:x.v, d:x.d, c:'#6B7280'})));
+  const L=DATA.backlinks, h=L.headline, au=L.audit;
+  const b1 = kpiTiles([
+    { lbl:'Backlinks', val:h.backlinks.d, delta:h.backlinks.chgPct, deltaTxt:'-5%' },
+    { lbl:'Referring domains', val:h.refDomains.d, delta:h.refDomains.chgPct, deltaTxt:'-2%' },
+    { lbl:'Authority Score', val:String(h.authorityScore), sub:'Industry leader' },
+    { lbl:'Toxicity', val:'HIGH', sub:'19.3% toxic', alert:true }
+  ]);
+  const toxColor={'Toxic':'var(--crit)','Potentially toxic':'var(--warn)','Non-toxic':'var(--good)'};
+  const toxIcon={'Toxic':'⛔','Potentially toxic':'⚠','Non-toxic':'✓'};
+  const b2 = stack100(au.toxicitySplit.map(t=>({l:`${toxIcon[t[0]]} ${t[0]} ${t[1]}%`, s:`${toxIcon[t[0]]} ${t[1]}%`, v:t[1], c:toxColor[t[0]], d:fmt(t[2])+' links'})));
+  const b3 = `<div class="mono" style="display:flex;flex-direction:column;gap:6px">${au.worstOffenders.map(d=>`<span><span style="color:var(--crit)">●</span> ${esc(d)} <span class="statchip crit" style="font-size:9.5px">Toxicity 100</span></span>`).join('')}</div>
+    <table class="tbl" style="margin-top:12px"><tr><th></th><th class="num">Total</th><th class="num">New</th><th class="num">Broken</th><th class="num">Lost</th></tr>
+    <tr><td>Ref domains (audit)</td><td class="num">${au.refDomains.total.toLocaleString('en-US')}</td><td class="num">+${au.refDomains.new}</td><td class="num">${au.refDomains.broken.toLocaleString('en-US')}</td><td class="num">${au.refDomains.lost}</td></tr>
+    <tr><td>Analyzed backlinks</td><td class="num">${au.analyzedBacklinks.total.toLocaleString('en-US')}</td><td class="num">+${fmt(au.analyzedBacklinks.new)}</td><td class="num">${fmt(au.analyzedBacklinks.broken)}</td><td class="num">${fmt(au.analyzedBacklinks.lost)}</td></tr></table>`;
+  // B4 vertical AS distribution, blue ramp light→dark
+  const b4 = `<div class="vbars">${L.refDomainsByAS.rows.map((r,i)=>`
+    <div class="vb" title="AS ${r[0]}: ${r[1]}% (${fmt(r[2])} domains)"><span class="vval">${r[1]>=1?r[1]+'%':fmt(r[2])}</span>
+      <div class="vfill" style="height:${Math.max(r[1]/69*100,1.5)}%;background:${RAMP[Math.min(i, RAMP.length-1)]}"></div>
+      <span class="vlab">${r[0]}</span></div>`).join('')}</div>
+    <div class="scale-note">Authority Score buckets low→high; labels show % of 199K referring domains (counts where &lt;1%).</div>`;
+  const b5a = stack100([{l:'Follow 86% (30.1M)', s:'Follow 86%', v:86, c:RAMP[4]}, {l:'Nofollow 14% (4.9M)', s:'14%', v:14, c:RAMP[2], tc:'#0b0b0b'}]);
+  const b5b = stack100([{l:'Text 65% (22.1M)', s:'Text 65%', v:65, c:RAMP[5]}, {l:'Image 34% (11.8M)', s:'Image 34%', v:34, c:RAMP[3]}, {l:'Other <1%', s:'', v:1, c:RAMP[1]}]);
+  const b6 = L.tld.map(t=>meterRow(t[0], t[1]/65, t[1]>=1?`${t[1]}% (${fmt(t[2])})`:String(t[2]), RAMP[4])).join('');
+  const b7 = L.topCountries.map(c=>meterRow(c[0].replace('United States','US').replace('United Kingdom','UK'), c[1]/66, `${c[1]}% (${fmt(c[2])})`, RAMP[4])).join('');
+  const b8 = L.similarProfiles.map(p=>meterRow(p[0], p[1]/25, p[1]+'%', p[0]==='adidas.com'?bc('adidas'):RAMP[4], p[0]==='adidas.com'?brandchip('adidas','adidas.com'):undefined)).join('');
   return `
-  <div class="sec"><div class="sec-h"><h3>Backlink profile</h3><span class="src">Source: SEMrush Backlink Analytics, 21 Jul 2026 · 106K ref IPs · 38.1K subnets · category: Retail</span></div>${kpiTiles(L.kpis)}</div>
-  <div class="sec">
-    <div class="callout riskbg">
-      <h4>⚠ Toxicity — HIGH</h4>
-      ${stack100(L.tox.segs)}
-      <p style="font-size:13px;color:#c9c9c9;margin-top:6px">${esc(L.tox.counts)} · ${esc(L.tox.sample)}</p>
-      <div style="margin-top:12px;font-size:12.5px"><b style="color:#fff">Worst offenders (toxicity 100)</b> — spam blogs targeting Jordan / RJ Barrett / Nike TN terms:<br>
-      <span style="color:#e79b90">${L.tox.domains.map(esc).join(' · ')}</span></div>
-      <p style="margin-top:10px;font-size:12px;color:#9a9a9a">${esc(L.tox.movement)}</p>
+  <div class="sec"><div class="sec-h"><h3>Backlink profile</h3><span class="src">SEMrush Backlink Analytics · 21 Jul 2026 · ${esc(h.refIPs)} ref IPs · ${esc(h.refSubnets)} subnets · category: ${esc(h.category)} · “${esc(h.liveNote)}”</span></div>${b1}</div>
+  <div class="sec grid2">
+    <div class="callout warnb" style="border-color:var(--crit)">
+      <h4>⛔ Toxicity — HIGH</h4>
+      ${b2}
+      <div class="chart-note">One in three sampled links is toxic or suspect.</div>
+      <div class="scale-note">${esc(au.sampleNote)}.</div>
+      <div class="srcnote">SEMrush Backlink Audit · 21 Jul 2026</div>
     </div>
+    <div class="card"><div class="sec-h"><h3>Worst offenders — spam blogs targeting Jordan / RJ Barrett / Nike TN terms</h3></div>
+      ${b3}
+      <div class="srcnote">SEMrush Backlink Audit · 21 Jul 2026</div></div>
+  </div>
+  <div class="sec grid2">
+    <div class="card"><div class="sec-h"><h3>Ref domains by Authority Score</h3></div>${b4}
+      <div class="chart-note">69% of linking domains have almost no authority — volume without weight (only 112 domains score 91–100).</div>
+      <div class="srcnote">SEMrush · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Link composition</h3></div>
+      <div class="upper" style="font-size:11px;font-weight:700;margin-bottom:2px">Attributes</div>${b5a}
+      <div class="scale-note">Also: Sponsored 1% (397K) · UGC &lt;1% (73.4K).</div>
+      <div class="upper" style="font-size:11px;font-weight:700;margin:12px 0 2px">Types</div>${b5b}
+      <div class="chart-note">86% follow links — authority flows, which also makes the toxic share costlier.</div>
+      <div class="srcnote">SEMrush · 21 Jul 2026</div></div>
   </div>
   <div class="sec grid3">
-    <div class="card"><div class="sec-h"><h3>Follow vs nofollow</h3></div>${barList(L.attrs.map(x=>({l:x.l,v:x.v,d:x.d,c:x.l==='Follow'?'#111111':'#9aa0a8'})))}
-      <div class="chart-note">86% follow links — authority flows, which also makes the toxic share costlier.</div></div>
-    <div class="card"><div class="sec-h"><h3>Link types</h3></div>${barList(L.types.map(x=>({l:x.l,v:x.v,d:x.d,c:x.l==='Text'?'#111111':'#9aa0a8'})))}
-      <div class="chart-note">Two-thirds of links are text anchors; images carry a third.</div></div>
-    <div class="card"><div class="sec-h"><h3>Ref domains by Authority Score</h3></div>${asBars}
-      <div class="chart-note">69% of referring domains score 0–10 — the profile is heavily skewed to low-authority sites (only 112 domains score 91–100).</div></div>
-  </div>
-  <div class="sec grid3">
-    <div class="card"><div class="sec-h"><h3>TLD split</h3></div>${barList(L.tld.map(x=>({l:x.l,v:x.v,d:x.d,c:'#6B7280'})))}</div>
-    <div class="card"><div class="sec-h"><h3>Ref domains by country</h3></div>${barList(L.geo.map(x=>({l:x.l,v:x.v,d:x.d,c:'#6B7280'})))}</div>
-    <div class="card"><div class="sec-h"><h3>Backlink-profile competitors</h3></div>
-      <table class="tbl"><tr><th>Domain</th><th>Overlap</th></tr>${L.comps.map(c=>`<tr><td>${esc(c[0])}</td><td>${esc(c[1])}</td></tr>`).join('')}</table>
-      <div style="font-size:12px;color:var(--ink2);margin-top:10px">${esc(L.cats)}</div></div>
+    <div class="card"><div class="sec-h"><h3>TLD split</h3></div>${b6}<div class="srcnote">SEMrush · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Ref domains by country</h3></div>${b7}<div class="srcnote">SEMrush · 21 Jul 2026</div></div>
+    <div class="card"><div class="sec-h"><h3>Similar backlink profiles</h3></div>${b8}
+      <div style="font-size:12px;color:var(--ink-2);margin-top:10px">Categories: Mass Media 23% · Online Services 12% · Education 10% · Sports 6% · Retail 5%. Top linked pages: nike.com/ (43.8K RD) · nike.com/launch (4.9K RD).</div>
+      <div class="srcnote">SEMrush · 21 Jul 2026</div></div>
   </div>`;
 }
 
-/* ---------- TAB 6: NOTES ---------- */
+/* ---------- TAB 6 · DATA NOTES ---------- */
 function tabNotes(){
+  const locked = DATA.locked.map(l=>`<tr><td>${esc(l.item)}</td><td class="lockcell">${esc(l.requires)}</td></tr>`).join('');
   return `
-  <div class="sec card notes">
-    <div class="sec-h"><h3>Data gaps &amp; caveats — read before quoting numbers</h3><span class="src">Master report Part 6, rendered in full · snapshot 20–21 Jul 2026</span></div>
-    <ol>${DATA.notes.map(n=>`<li><b>${esc(n.b)}</b> ${esc(n.t)}</li>`).join('')}</ol>
+  <div class="sec grid2">
+  <div class="card notes">
+    <div class="sec-h"><h3>Sources &amp; conventions</h3><span class="src">nike-dashboard-data.json _meta</span></div>
+    <ol>
+      <li><b>Social:</b> ${esc(DATA._meta.sources.social)}</li>
+      <li><b>Search / AI / Backlinks:</b> ${esc(DATA._meta.sources.search)}</li>
+      <li><b>Provider boundary:</b> ${esc(DATA._meta.conventions.providerRule)}</li>
+      <li><b>Currencies:</b> ${esc(DATA._meta.conventions.currency)}</li>
+      <li><b>Not internal analytics:</b> GA/GSC not connected; all figures are third-party modeled estimates, not Nike internal analytics. Snapshot ${esc(DATA._meta.snapshotDate)}; deltas are month-over-month or as labeled.</li>
+      <li><b>Two backlink universes:</b> Audit toxicity % computed on a ~73.5K-link sample; Analytics covers the full 35.1M-link index.</li>
+      <li><b>IMAI caveats:</b> posts sections captured first 2 of 10 per brand; TikTok/YouTube deep tabs and brand-safety scores gated; IMAI “Total Reach” &amp; scores are model estimates.</li>
+    </ol>
+  </div>
+  <div class="card notes">
+    <div class="sec-h"><h3>Locked datasets — never faked, always 🔒</h3></div>
+    <table class="tbl"><tr><th>Item</th><th>Unlock</th></tr>${locked}</table>
+    <div class="sec-h" style="margin-top:16px"><h3>Truncation notes</h3></div>
+    <ol>
+      <li>Organic keywords: ${esc(DATA.search.topKeywordsUS.note)}</li>
+      <li>Organic competitors: total ${DATA.search.organicCompetitorsUS.total.toLocaleString('en-US')} — ${esc(DATA.search.organicCompetitorsUS.note.split('.')[0])}.</li>
+      <li>Keyword gap head-to-head: ${esc(DATA.search.keywordGapVsFootlocker.headToHeadSample.note)}</li>
+      <li>AI topics: ${esc(DATA.ai.sampleTopics.note.split('.')[0])}.</li>
+      <li>Backlink audit: ${esc(DATA.backlinks.audit.sampleNote)}.</li>
+      <li>Totals are exact; row lists are samples.</li>
+    </ol>
+  </div>
   </div>
   <div class="sec card notes">
-    <div class="sec-h"><h3>About this demo build</h3></div>
+    <div class="sec-h"><h3>Design &amp; demo build notes</h3></div>
     <ol>
-      <li><b>Demo scope:</b> this experience is populated with Nike data only. Searching other brands intentionally does not return results.</li>
-      <li><b>AI chat is scripted:</b> the “Ask Stagwell AI” panel replays canned answers drawn from the 21 Jul 2026 report — it is not connected to a live model.</li>
-      <li><b>Self-contained:</b> single HTML file, no CDN or network calls; all charts are hand-rolled SVG/CSS, so every number survives offline.</li>
+      <li><b>Palette validation receipt (NIKE-CHART-SPECS §1.2, 21 Jul 2026):</b> brand palette machine-validated — light: ALL PASS, worst adjacent CVD ΔE 9.1, normal-vision 19.6; dark: ALL PASS, worst CVD 8.4, all ≥3:1 contrast. Sub-3:1 light fills (PUMA/UA/NB) always ship with direct labels; the scoreboard table is the relief channel. Volt is a UI accent only — never a data series.</li>
+      <li><b>Demo scope:</b> this experience is populated with Nike data only; searching other brands intentionally returns nothing.</li>
+      <li><b>AI chat is scripted:</b> the “Ask Stagwell AI” panel replays canned answers drawn from the 21 Jul 2026 dataset — it is not connected to a live model.</li>
+      <li><b>Self-contained:</b> single HTML file, no CDN or network calls; charts are hand-rolled SVG/CSS. Dark mode is a stepped dark palette, not a CSS invert.</li>
       <li><b>Signup &amp; preferences:</b> demo only — nothing is sent or stored anywhere.</li>
     </ol>
   </div>`;
 }
 
-/* =====================================================================
-   CHAT (scripted demo)
-   ===================================================================== */
+/* ===================== CHAT (scripted demo) ===================== */
 const CHAT = {
-  greet: `Hi${''} — I’m <b>Stagwell AI</b>, your marketing intelligence assistant. I’ve loaded the <b>Nike snapshot from 20–21 Jul 2026</b> (IMAI + SEMrush). Ask me about anything on the dashboard, or tap a suggestion below.<span class="cite">Demo note: my answers are scripted from the master report, not a live model.</span>`,
+  greet: `Hi — I’m <b>Stagwell AI</b>, your marketing intelligence assistant. I’ve loaded the <b>Nike snapshot from 20–21 Jul 2026</b> (IMAI + SEMrush). Ask me about anything on the dashboard, or tap a suggestion below.<span class="cite">Demo note: my answers are scripted from the master dataset, not a live model.</span>`,
   expert: `Happy to connect you with a <b>Stagwell expert</b>. In the full product I’d collect your goals, markets, and pain points here, then hand a structured brief to the Stagwell.ai sales team — who assemble the right mix of Stagwell companies for a coordinated pitch.<span class="svc">→ In this demo, scheduling is disabled — but this is where the demo booking would happen.</span>`,
-  fallback: `I’m a scripted demo assistant, so I can only answer from the 21 Jul 2026 Nike report. Try asking about <b>engagement</b>, <b>fake followers</b>, <b>toxic backlinks</b>, <b>AI search</b>, or <b>who’s beating Nike where</b> — or tap a suggestion below.`,
+  fallback: `I’m a scripted demo assistant, so I can only answer from the 21 Jul 2026 Nike dataset. Try asking about <b>engagement</b>, <b>fake followers</b>, <b>toxic backlinks</b>, <b>AI search</b>, or <b>who’s beating Nike where</b> — or tap a suggestion below.`,
   routes: [
-    { re:/(engag|adidas|er\b|likes)/i, a:`Nike’s IG engagement rate is <b>0.06%</b> vs Adidas at <b>0.28%</b> — a ~4.7× gap, and Nike carries a “hides likes” flag. The silver lining: average likes are recovering, <b>+22.21% MoM</b>, while Adidas’ likes fell -32.65%. But with an Audience Quality Score of <b>14 (Poor)</b>, low engagement is structural, not creative.<span class="cite">Source: IMAI head-to-head scoreboard, 21 Jul 2026 · see Social Competitive tab</span><span class="svc">→ Stagwell can help: creator strategy &amp; audience-quality audit — ask about a Creator Intelligence demo.</span>` },
-    { re:/(fake|bot|audience quality|aqs|credib|follow)/i, a:`<b>21.65% of Nike’s IG followers are fake/bot accounts</b> — the highest in the competitive set (Lululemon is best at 7.42%). That drives an Audience Quality Score of <b>14 (Poor)</b> vs 43 for Adidas and New Balance. Nike’s 291.7M followers are the biggest audience in the set, but the lowest-quality one.<span class="cite">Source: IMAI, 21 Jul 2026 · see the credibility-vs-quality scatter, Social tab</span><span class="svc">→ Stagwell can help: audience verification &amp; growth-quality program.</span>` },
-    { re:/(toxic|backlink|spam|risk|brand.?safety)/i, a:`Backlink toxicity is rated <b>HIGH</b>: 19.3% of the ~73.5K-link audit sample is toxic (3.6K links) plus 15.4% potentially toxic. The worst offenders are spam blogs (e.g. tabaa.hasibu.id, ufoteeshirt.com) targeting <b>Jordan / Nike TN terms</b> — a brand-safety and SEO risk compounding the shrinking keyword base (-5.6% MoM).<span class="cite">Source: SEMrush Backlink Audit, 21 Jul 2026 · see Backlinks &amp; Risk tab</span><span class="svc">→ Stagwell can help: technical SEO &amp; disavow remediation engagement.</span>` },
-    { re:/(ai|chatgpt|gemini|reddit|youtube|llm|answer)/i, a:`Nike’s AI visibility is strong — <b>85/100 worldwide, 91 in the US</b> (“Great”), with 1.2M mentions across 1.4M tracked prompts (Gemini 33.5%, ChatGPT 31.3%). The risk: <b>reddit.com (83.1K) and youtube.com (75.5K) are cited nearly as often as nike.com (83.5K)</b> in AI answers — Nike doesn’t control most of what assistants say about it.<span class="cite">Source: SEMrush AI SEO, 21 Jul 2026 · see AI Visibility tab</span><span class="svc">→ Stagwell can help: AI-search (GEO) content strategy to win citations back.</span>` },
-    { re:/(beat|compet|new balance|puma|lulu|under armour|who)/i, a:`Different rivals win on different fronts: <b>Adidas</b> beats Nike on engagement rate (0.28% vs 0.06%), <b>New Balance</b> on follower growth (+1.43%/mo, the only “Excellent” flag), <b>Lululemon</b> on audience credibility (78.26%, lowest bots). In search, the real fight is <b>retailers</b>: Foot Locker overlaps 46% of Nike’s keywords vs Adidas at just 9%.<span class="cite">Sources: IMAI scoreboard + SEMrush organic competitors, 21 Jul 2026</span><span class="svc">→ Stagwell can help: competitive analytics deep dive across the full set.</span>` },
-    { re:/(keyword|search|serp|foot ?locker|gap|organic|traffic)/i, a:`Nike’s organic keyword base is shrinking: <b>-5.6% WW / -5.04% US this month</b> (US traffic value $16.0M, -2.14%). The keyword gap vs Foot Locker shows 268.5K missing/untapped terms — topped by rival brand searches Nike doesn’t rank for: <b>new balance (1.83M vol), birkenstock, uggs, under armour (1.22M each)</b>. Retail partners capture that demand today.<span class="cite">Source: SEMrush Organic Research + Keyword Gap, 21 Jul 2026 · see Search &amp; Keywords tab</span><span class="svc">→ Stagwell can help: SEO content strategy for comparison &amp; category terms.</span>` },
-    { re:/(growing|trend|health|summary|overview|fire)/i, a:`The 30-second read: <b>search is flat-to-declining</b> (traffic -0.1%, keywords -5.6%), <b>social is a quality problem</b> (297.6M followers but AQS 14, 21.65% bots), and <b>three things are on fire</b>: toxic backlinks (19.3%), the engagement-rate gap vs Adidas, and AI answers leaning on Reddit/YouTube almost as much as nike.com.<span class="cite">Source: Executive Overview, 20–21 Jul 2026</span><span class="svc">→ Every red flag is findable in ≤2 clicks from the Executive tab.</span>` },
+    { re:/(engag|adidas|er\b|likes)/i, a:`Nike’s IG engagement rate is <b>0.06%</b> vs adidas at <b>0.28%</b> — a ~4.7× gap, and Nike carries a “hides likes” flag. The silver lining: average likes are recovering, <b>+22.21% MoM</b>, while adidas’ likes fell -32.65%. But with an Audience Quality Score of <b>14 (Poor)</b>, low engagement is structural, not creative.<span class="cite">Source: IMAI scoreboard, 21 Jul 2026 · see Social Competitive tab</span><span class="svc">→ Stagwell can help: creator strategy &amp; audience-quality audit — ask about a Creator Intelligence demo.</span>` },
+    { re:/(fake|bot|audience quality|aqs|credib|follow)/i, a:`<b>21.65% of Nike’s IG followers are fake/bot accounts</b> — the highest in the competitive set (Lululemon is best at 7.42%). That drives an Audience Quality Score of <b>14 (Poor)</b> vs 43 for adidas and New Balance. Nike’s 291.7M followers are the biggest audience in the set, but the lowest-quality one.<span class="cite">Source: IMAI, 21 Jul 2026 · see the quality map, Social tab</span><span class="svc">→ Stagwell can help: audience verification &amp; growth-quality program.</span>` },
+    { re:/(toxic|backlink|spam|risk|brand.?safety)/i, a:`Backlink toxicity is rated <b>HIGH</b>: 19.3% of the ~73.5K-link audit sample is toxic (3.6K links) plus 15.4% potentially toxic — one in three sampled links is toxic or suspect. Worst offenders are spam blogs (e.g. tabaa.hasibu.id, ufoteeshirt.com) targeting <b>Jordan / Nike TN terms</b>, compounding the shrinking keyword base (-5.6% MoM).<span class="cite">Source: SEMrush Backlink Audit, 21 Jul 2026 · see Backlinks &amp; Risk tab</span><span class="svc">→ Stagwell can help: technical SEO &amp; disavow remediation engagement.</span>` },
+    { re:/(ai|chatgpt|gemini|reddit|youtube|llm|answer)/i, a:`Nike’s AI visibility is strong — <b>85/100 worldwide, 91 in the US</b> (“Great”), 1.2M mentions across 1.4M tracked prompts. Mentions skew to Gemini (33.5%) and ChatGPT (31.3%), but <b>cited pages skew hard to ChatGPT: 385.2K</b> vs 83.2K (AI Mode), 31.2K (AI Overview), 27.9K (Gemini). The risk: <b>reddit.com (83.1K) and youtube.com (75.5K) are cited nearly as often as nike.com (83.5K)</b>.<span class="cite">Source: SEMrush AI SEO, 21 Jul 2026 · see AI Visibility tab</span><span class="svc">→ Stagwell can help: AI-search (GEO) content strategy to win citations back.</span>` },
+    { re:/(beat|compet|new balance|puma|lulu|under armour|who)/i, a:`Different rivals win on different fronts: <b>adidas</b> beats Nike on engagement rate (0.28% vs 0.06%), <b>New Balance</b> on follower growth (+1.43%/mo, the only “Excellent” flag), <b>Lululemon</b> on audience credibility (78.26%, lowest bots). In search, the real fight is <b>retailers</b>: Foot Locker overlaps 46% of Nike’s keywords vs adidas at just 9%.<span class="cite">Sources: IMAI scoreboard + SEMrush organic competitors, 21 Jul 2026</span><span class="svc">→ Stagwell can help: competitive analytics deep dive across the full set.</span>` },
+    { re:/(keyword|search|serp|foot ?locker|gap|organic|traffic)/i, a:`Nike’s organic keyword base is shrinking: <b>-5.6% WW / -5.04% US this month</b> (US traffic value $16.0M, -2.14%). The keyword gap vs Foot Locker shows 268.5K missing terms — topped by rival brand searches Nike doesn’t rank for: <b>new balance (1.83M vol), birkenstock, uggs, under armour (1.22M each)</b>. Retail partners capture that demand today.<span class="cite">Source: SEMrush Organic Research + Keyword Gap, 21 Jul 2026 · see Search &amp; Keywords tab</span><span class="svc">→ Stagwell can help: SEO content strategy for comparison &amp; category terms.</span>` },
+    { re:/(growing|trend|health|summary|overview|fire)/i, a:`The 30-second read: <b>search is flat-to-declining</b> (traffic -0.1%, keywords -5.6%), <b>social is a quality problem</b> (297.6M followers but AQS 14, 21.65% bots), and <b>three things are on fire</b>: toxic backlinks (19.3%), the engagement-rate gap vs adidas, and AI answers leaning on Reddit/YouTube almost as much as nike.com.<span class="cite">Source: Executive Overview, 20–21 Jul 2026</span><span class="svc">→ Every red flag is findable in ≤2 clicks from the Executive tab.</span>` },
     { re:/(demo|expert|talk|sales|help|stagwell|schedule|book)/i, a:'@expert' }
   ],
   chips: [ 'Why is our engagement so low?', 'What’s on fire right now?', 'How do we show up in AI search?', 'Who is beating us and where?', 'Talk to a Stagwell expert' ]
@@ -1157,7 +1218,7 @@ let chatStarted=false;
 function startChat(){
   if(chatStarted) return; chatStarted=true;
   const name = state.name ? ` ${esc(state.name.split(/\s+/)[0])}` : '';
-  botSay(CHAT.greet.replace('Hi','Hi'+name));
+  botSay(CHAT.greet.replace('Hi —','Hi'+name+' —'));
   $('#chat-chips').innerHTML = CHAT.chips.map(c=>`<button>${esc(c)}</button>`).join('');
   document.querySelectorAll('#chat-chips button').forEach(b=>b.addEventListener('click',()=>askChat(b.textContent)));
 }
