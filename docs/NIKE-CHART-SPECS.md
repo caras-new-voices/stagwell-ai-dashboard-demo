@@ -200,3 +200,31 @@ Render `_meta`, `locked[]` (as a table: item / unlock / cost), the truncation no
 8. Dark mode is the stepped dark palette above, not a CSS invert; re-check the three relief slots still hold (they pass ≥3:1 in dark — labels remain anyway).
 9. Every card has a source tag; every chart has its so-what line.
 10. Final pass: screenshot at 1440px and 390px, check label collisions, legend order = `social.brandOrder`, and tab-switch preserves scroll position.
+
+---
+
+## 6. ROUND 2 DATA — ADDITIONAL CHART SPECS
+
+Round 2 added datasets to the JSON. New/updated visuals (same tokens, palette, and guardrails):
+
+**S8 · Followers vs Likers (per brand)** — Tab 2, new row after S4. Paired 100% stacked gender bars per brand: "Followers" bar vs "Likers" bar (`audience.gender` vs `audienceLikers.gender`), same F/M encoding as S4. Direct-label deltas. So-what: "The people who engage are not the people who follow — Nike's likers are 72% male and India-led."
+
+**S9 · Likers geography callout** — Tab 2, inside S8's card: mini-table of `audienceLikers.countries` for Nike (India 30.9% / US 11.6% / UK 6.7%) vs Followers countries. Warning-bordered callout.
+
+**K9 · Intent mix** — Tab 3, new row: horizontal 100% stacked bar of `search.usIntentSplit.rows` by keyword share (ordinal blue ramp: Informational→Navigational→Commercial→Transactional), plus a second bar of the same segments by traffic. Two bars, one scale (%), direct-labeled. So-what: "38% transactional keywords deliver 58% of engaged traffic."
+
+**K10 · Branded vs non-branded** — Tab 3, two stat tiles from `usIntentSplit.brandedTraffic/nonBrandedTraffic` (26.2M +1.33% / 9.6M -2.39%). So-what: "The decline is entirely non-branded — brand demand is holding."
+
+**K11 · Gap severity across rivals** — Tab 3, extends K3: grouped bars of Missing counts per opponent (footlocker 268.5K, adidas 233K, stockx 259.9K, dicks 1.5M — annotate Dick's outlier). Data: the four `keywordGapVs*` keys. Single-hue blue; Dick's bar labeled with warning chip.
+
+**K12 · Top pages movers** — Tab 3: diverging bars of `topPagesUS.rows` trafficDiff (gain right in `--delta-up`-tinted blue, loss left in critical-tint), labeled with path. So-what: "/mind (+80.8K) is the growth engine; Air Max and clearance pages are bleeding."
+
+**A5 · Per-engine mentions vs citations** — Tab 4, new row: for ChatGPT and Gemini (`ai.byEngineDetail`), paired delta chips: mentions Δ and citations Δ. Render as 2 mini-cards. So-what: "Gemini mentions Nike most but cites it least — and citations are falling 17%."
+
+**B9 · Audit insight strip** — Tab 5: 4 alert tiles from `backlinks.audit.round2Insights` (13 new toxic domains · 545 error pages / 4.8K links lost · 5.5K link-network links · 576 de-indexed). Status colors + icons.
+
+**B10 · Anchor types** — Tab 5: 100% stacked bar of `audit.anchorTypes` (ordinal blue ramp; Branded 46.2% direct-labeled). Note "view deal" anomaly (4M links / 118 domains) as caption.
+
+**K8 update** — add AI Search Health 79% (beta) meter beside Site Health, with blocked-crawler note from `siteAudit.fullReport.aiSearchHealth`.
+
+**Footer updates:** K1 now "showing pages 1–3 samples (~73 rows) of 4,180,334"; position tracking uses `fullReport` (92 keywords, cannibalization stat as a warning chip).

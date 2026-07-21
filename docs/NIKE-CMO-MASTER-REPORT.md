@@ -238,3 +238,23 @@ Sample perfect-visibility topics (100): Nike Benassi Slides, Nike Manufacturing 
 4. **Two backlink universes:** Audit toxicity % computed on ~73.5K sampled links; Analytics covers full 35.1M index.
 5. Social IMAI data and SEMrush data come from different providers — do not cross-compute (e.g., don't divide SEMrush traffic by IMAI reach).
 6. GA/GSC not connected; all figures are third-party modeled estimates, not Nike internal analytics.
+
+---
+
+# PART 7 — ROUND 2 ADDITIONS (gap-fill scrape, 21 Jul 2026)
+
+A second pass captured the data flagged as missing. Full values live in `nike-dashboard-data.json`; headlines:
+
+**Social (IMAI).** 8 of 10 posts per brand now captured (the widget renders 2 per tab across Popular/Recent Posts/Recent Reels/Top Reels). **Likers audiences captured for all 6 brands — and they differ sharply from Followers:** Nike's likers are 71.6% male (vs 62% of followers) and **India-led (30.9% vs US 19.7% for followers)** with London/Mumbai top cities; Lululemon's likers are 71% female vs 88% of followers; New Balance's likers are London-first (7.2%). Engagement is coming from a different population than the follower base — a core targeting insight.
+
+**Search (SEMrush).** US **intent split**: Transactional 38.3% of keywords drives 20.7M traffic, Informational 38.5% → 19.1M, Commercial 14.5% → 7M, Navigational 8.7% → 8.5M. **Branded vs non-branded US traffic: 26.2M (+1.33%) vs 9.6M (-2.39%)** — the non-branded base is the part shrinking. UK database: 749.6K kw (-8.67%), 10.1M traffic, 81% branded. Position changes (Jul 19–20): 78.9K total, 7K improved / 6.9K declined. Top pages with traffic diffs (nike.com/mind +80.8K is the biggest gainer; air-max and clearance-store pages bleeding). Subdomain split (www = 98.24%; about/careers/niketeam next). Keyword pages 2–3 sampled (~30 more rows).
+
+**New keyword gaps.** vs **Dick's**: Nike is outgunned — Dick's ranks on 1.8M keywords vs Nike's 713.9K; Nike missing 1.5M (top misses: "dicks sporting goods" 4.09M, "kayak" 2.24M, "new balance" 1.83M, "crocs" 1.5M). vs **adidas**: Nike missing "adidas" 3.35M, "gucci" 673K, "adidas samba" 450K; loses "soccer ball" (8 vs 1) and "how to measure shoe size" (8 vs 1). vs **StockX**: missing "louis vuitton" 2.24M, "popmart" 1M, "asics" 823K.
+
+**Backlinks.** Anchor detail with counts (Empty 6.4M links; "view deal" 4.0M from just 118 domains — pattern smell; branded anchors 46.2%). Audit insights: 13 new toxic domains, 545 error pages killing 4.8K backlinks, link networks (5.5K by URL path / 4.5K by IP), 576 de-indexed-domain links, 302 forum links. Top-AS live links (nike.in 88, londonspirit.com 87).
+
+**AI per-engine.** ChatGPT: 386.7K mentions (-2.1%) but citations +13.4%. **Gemini: #1 mention engine (413.6K) with citations collapsing -17.3%** — mentioned more, sourced less.
+
+**Project tools full reports.** Position Tracking: 92 tracked kw, visibility 81.60%, est. traffic 55,648, avg position 6.70, **cannibalization: 68/87 keywords affected, 264/277 cannibal pages**. Site Audit: benchmark shows top-10% sites at 92% vs Nike 85%; **AI Search Health 79% (beta) — pages blocked from ChatGPT-User/OAI-SearchBot crawlers**; top issue: low text-to-HTML ratio on 84 pages.
+
+**Newly confirmed gates:** Compare Domains values (Guru plan), full toxic-link list (Pro plan). Advertising Toolkit and Traffic Pro remain locked as before.

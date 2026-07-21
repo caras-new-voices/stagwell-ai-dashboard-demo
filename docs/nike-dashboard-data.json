@@ -2,6 +2,7 @@
   "_meta": {
     "title": "Nike CMO Intelligence — complete dashboard dataset",
     "snapshotDate": "2026-07-21",
+    "rounds": { "round1": "2026-07-21 (initial scrape)", "round2": "2026-07-21 (gap-fill: IMAI post tabs + Likers audiences; SEMrush keyword pages 2-3, intent/branded splits, position changes, top pages, subdomains, UK db, gap vs adidas/dicks/stockx, backlink rows/anchors/audit detail, AI per-engine, project full reports)", "rule": "Both rounds same-day; if future rounds differ in date, never blend metrics across rounds" },
     "sources": {
       "social": "InfluencerMarketing.AI (imai.co) brand reports, updated 21 Jul 2026",
       "search": "SEMrush project fid=12722449 (nike.com): Domain Overview, Organic Research, Backlink Analytics, AI Visibility, Keyword Gap, dashboard widgets"
@@ -70,7 +71,24 @@
           "topFollowers": [["@cristiano", "Cristiano Ronaldo"], ["@lilbieber", "Justin Bieber"], ["@zendaya", "Zendaya"]] },
         "topPosts": [["2026-06-02", "Define Greatness. Then Redefine It. @cristiano @kingjames", 13688154, 64113],
                      ["2026-06-04", "It was all going to plan until instincts took over… Rip The Script", 2757785, 59467]],
-        "postsNote": "First 2 of 10 posts captured",
+        "postsNote": "Round 2: 8 of 10 posts captured across widget tabs (2 per tab)",
+        "allPosts": {
+          "recentPosts": [["2026-07-14", null, 194562, 739], ["2026-07-12", "Always was, always will be. World No. 1 @janniksin takes a second consecutive title in London.", 243036, 850]],
+          "recentReels": [["2026-06-23", "Oh Captain, My Captain @ericcantona @brunofernandes8", 109634, 1774], ["2026-06-22", "Time for liftoff @erling and @channingtatum", 130266, 369]],
+          "topReels": [["2025-09-20", "If they underestimate, overdeliver. #JustDoIt", 390548, 1207], ["2026-06-03", "Nobody ever dreams of doing what they're told. Rip The Script.", null, null]]
+        },
+        "audienceLikers": {
+          "note": "Likers skew sharply vs Followers: more male, India-led",
+          "gender": { "malePct": 71.56, "femalePct": 28.44 },
+          "ageGender": [["13-17", 2.5, 4.0], ["18-24", 11.5, 29.1], ["25-34", 11.5, 30.0], ["35-44", 2.4, 7.2], ["45-64", 0.6, 1.2]],
+          "cities": [["Greater London", 1.82], ["Mumbai", 1.21], ["New York City", 1.04], ["Bangalore", 1.00], ["Delhi", 0.91]],
+          "countries": [["India", 30.91], ["United States", 11.62], ["United Kingdom", 6.68]],
+          "ethnicity": [["White / Caucasian", 71.65], ["Asian", 14.93], ["Hispanic", 7.46]],
+          "language": [["English", 61.71], ["Spanish", 8.04], ["German", 4.60]],
+          "influencersPct": 14.96,
+          "reachability": [["<500", 67.17], ["500-1k", 17.03], ["1-1.5k", 6.43], [">1.5k", 9.37]],
+          "brandAffinityTop": [["Nike", 22.28], ["Apple", 13.75], ["Walt Disney", null]]
+        },
         "positioning": "Motivational storytelling tied to major sporting moments and elite athletes; steady visibility with slightly softening engagement."
       },
 
@@ -115,7 +133,20 @@
           "topFollowers": [["@leomessi", "Leo Messi"], ["@davidbeckham", "David Beckham"], ["@433", "433"]] },
         "topPosts": [["2026-06-15", "El Último Tango — Messi x @adidasfootball (World Cup boots)", 6911101, 94494],
                      ["2026-05-08", "So... who's up next? #YouGotThis", 4617679, 17438]],
-        "postsNote": "First 2 of 10 posts captured",
+        "postsNote": "Round 2: 8 of 10 posts captured across widget tabs",
+        "allPosts": {
+          "recentPosts": [["2026-07-17", "IT DOESN'T GET BETTER THAN THIS 🤩", 1205154, 5283], ["2026-07-17", "the headband. the boots. the #19. ready.", 290791, 859]],
+          "recentReels": [["2026-07-17", "not your average camera roll. 🏆🌍🤩", 59939, 211], ["2026-07-16", "it takes a team to tango. 🐐🇦🇷 #YouGotThis", 699835, 3692]],
+          "topReels": [["2026-06-15", "El Último Tango (Messi)", 6911103, 94494], ["2026-05-08", "So... who's up next? #YouGotThis", 4638987, 17630]]
+        },
+        "audienceLikers": {
+          "gender": { "malePct": 65.55, "femalePct": 34.45 },
+          "ageGender": [["13-17", 3.0, 3.5], ["18-24", 12.1, 20.9], ["25-34", 11.6, 25.4], ["35-44", 4.5, 10.1], ["45-64", 3.1, 5.5]],
+          "cities": [["Greater London", 3.71], ["Stockholm", 2.29], ["Moscow", 1.04], ["Mexico City", 0.72], ["Paris", 0.72]],
+          "countries": [["United Kingdom", 14.97], ["United States", 11.27], ["Sweden", 9.61]],
+          "ethnicity": [["White / Caucasian", 74.32], ["Asian", 10.02], ["Hispanic", 8.14]],
+          "language": [["English", 47.00], ["Swedish", null]]
+        },
         "positioning": "Football-first performance storytelling under #YouGotThis; strong growth, engagement fluctuates."
       },
 
@@ -162,7 +193,17 @@
           "topFollowers": [["@selenagomez", "Selena Gomez"], ["@zendaya", "Zendaya"], ["@badgalriri", "Rihanna"]] },
         "topPosts": [["2026-06-04", "Biggest show / biggest showman ✨ @neymarjr #PUMAShowtime", 3525610, 15576],
                      ["2025-01-31", "Welcome home, @neymarjr (Santos)", 2567258, 11909]],
-        "postsNote": "First 2 of 10 posts captured",
+        "postsNote": "Round 2: 8 of 10 posts captured across widget tabs",
+        "allPosts": {
+          "recentPosts": [["2026-07-13", null, 11719, 127], ["2026-07-10", "Timeless style isn't tied to a moment. #PUMAsuede", 6876, 60]],
+          "recentReels": [["2026-07-09", "NEVER NOT SUEDE. #PUMAsuede", 1567, 20], ["2026-06-29", "You family now.", 24684, 482]],
+          "topReels": [["2025-03-20", null, 509757, 2903], ["2024-08-12", "Winning is only for a second. The chase is forever. #ForeverFaster #Paris2024", 439489, 528]]
+        },
+        "audienceLikers": {
+          "gender": { "malePct": 67.73, "femalePct": 32.27 },
+          "ageGender": [["13-17", 2.3, 3.3], ["18-24", 11.1, 21.1], ["25-34", 14.5, 31.9], ["35-44", 3.1, 9.2], ["45-64", 1.1, 2.1]],
+          "cities": [["New York City", 1.62], ["Accra", 1.22], ["Paris", 0.99], ["Greater London", 0.91], ["Kolkata", 0.83]]
+        },
         "positioning": "#GoWild campaign engine; TikTok delivers ~8× IG engagement; premium-lifestyle collabs (Balenciaga, Omega)."
       },
 
@@ -209,7 +250,17 @@
           "topFollowers": [["@stephencurry30", "Stephen Curry"], ["@turki", "Turki Alalshikh"], ["@djkhaled", "DJ Khaled"]] },
         "topPosts": [["2026-03-05", "FULL ACCESS Ep.1 — The Jet ✈️ (Rakai)", 341168, 4941],
                      ["2026-05-28", "FULL ACCESS Ep.2 — Rolling Loud 🎶", 216566, 1344]],
-        "postsNote": "First 2 of 10 posts captured",
+        "postsNote": "Round 2: 8 of 10 posts captured across widget tabs",
+        "allPosts": {
+          "recentPosts": [["2026-07-13", "Day 2 was bananas 🤯 wait til you hear about tomorrow…", 1214, 16], ["2026-07-12", "🤫", 31068, 63]],
+          "recentReels": [["2026-07-13", "Day 2 was bananas 🤯", 1215, 16], ["2026-07-12", null, 1234, 20]],
+          "topReels": [["2025-08-29", null, 246711, 3547], ["2025-09-01", "Halo State — @ross500 #UAHalo", 3543, 78]]
+        },
+        "audienceLikers": {
+          "gender": { "malePct": 68.13, "femalePct": 31.87 },
+          "ageGender": [["13-17", 2.7, 3.0], ["18-24", 11.8, 21.0], ["25-34", 13.2, 29.2], ["35-44", 3.2, 11.9], ["45-64", 1.0, 2.9]],
+          "cities": [["Denver", 1.80], ["Baltimore", 1.74], ["Mexico City", 1.54], ["New York City", 1.00], ["Milan", null]]
+        },
         "positioning": "#ProtectThisHouse performance voice; creator-series content; most male-skewed audience in set."
       },
 
@@ -256,7 +307,17 @@
           "topFollowers": [["@justintimberlake", "Justin Timberlake"], ["@jamesrodriguez10", "James Rodríguez"], ["@turki", "Turki Alalshikh"]] },
         "topPosts": [["2026-03-04", "The 204L. Worn by @rosalia.vt.", 438301, 2755],
                      ["2025-07-10", "Rosalía: The Ambassador — A New Balance Presentation", 331644, 7794]],
-        "postsNote": "First 2 of 10 posts captured",
+        "postsNote": "Round 2: 8 of 10 posts captured across widget tabs",
+        "allPosts": {
+          "recentPosts": [["2026-07-17", "@shoheiohtani never stops refining his process.", 4293, 26], ["2026-07-12", "One step closer for @bukayosaka87.", 8009, 64]],
+          "recentReels": [["2026-07-04", "The All-Star stage was made for unicorns 🦄", 144526, 984], ["2026-07-01", "The 950. Worn by @cooper_flagg. Available now.", 17067, 117]],
+          "topReels": [["2025-02-28", "We Got Now. 2025.", 186134, 1863], ["2026-01-07", "We Got Now.", 219441, 1790]]
+        },
+        "audienceLikers": {
+          "gender": { "malePct": 71.74, "femalePct": 28.26 },
+          "ageGender": [["13-17", 2.0, 3.3], ["18-24", 7.8, 21.2], ["25-34", 13.6, 32.9], ["35-44", 3.6, 11.9], ["45-64", 1.3, 2.3]],
+          "cities": [["Greater London", 7.17], ["São Paulo", null]]
+        },
         "positioning": "Fashion-forward (#wegotnow; Miu Miu / Stone Island collabs); fastest-growing; Brazil-first audience."
       },
 
@@ -303,7 +364,20 @@
           "topFollowers": [["@sonamkapoor", "Sonam Kapoor"], ["@agnezmo", "Agnez Mo"], ["@kajalaggarwalofficial", "Kajal Aggarwal"]] },
         "topPosts": [["2025-11-24", "Newest Educator: Ambassador @lewishamilton clocking in", 1488625, 6078],
                      ["2025-08-21", "No days off.", 1087648, 7386]],
-        "postsNote": "First 2 of 10 posts captured",
+        "postsNote": "Round 2: 8 of 10 post slots captured across widget tabs (recent posts/reels overlap)",
+        "allPosts": {
+          "recentPosts": [["2026-07-11", null, 79423, 335], ["2026-07-09", null, 12940, 153]],
+          "recentReels": [["2026-07-11", null, 79424, 335], ["2026-07-09", null, 12940, 153]],
+          "topReels": [["2025-11-24", "Lewis Hamilton Educator campaign", 1488625, 6078], ["2025-09-09", null, 2044, 60]]
+        },
+        "audienceLikers": {
+          "note": "Likers less female-dominant than followers (71% vs 88%)",
+          "gender": { "malePct": 29.20, "femalePct": 70.80 },
+          "ageGender": [["13-17", 4.0, 1.2], ["18-24", 21.3, 7.5], ["25-34", 33.2, 14.0], ["35-44", 9.9, 5.2], ["45-64", 2.4, 1.4]],
+          "cities": [["Los Angeles", 3.79], ["Vancouver", 3.65], ["Toronto", 2.95], ["New York City", 2.15], ["Chicago", 1.58]],
+          "countries": [["United States", 40.27], ["Canada", 17.32], ["Brazil", 4.38]],
+          "ethnicity": [["White / Caucasian", 56.17], ["Asian", 24.15], ["Hispanic", 12.86]]
+        },
         "positioning": "Wellness/community hub (#seawheeze); 88% female, 64% US audience; best credibility in set; Hamilton as marquee ambassador."
       }
     }
@@ -322,7 +396,9 @@
       "keyTopics": [["EU-to-UK shoe size", 200000], ["Women's Dresses", 125000], ["Women's Bottoms", 75000]]
     },
     "topKeywordsUS": {
-      "note": "Page 1 of 41,804 (4,180,334 total). Schema: keywordRow.",
+      "note": "Pages 1–3 of 41,804 (4,180,334 total). Schema: keywordRow. page2Sample/page3Sample: [keyword, pos, traffic, volume, kdPct].",
+      "page2Sample": [["air max 95 nike store", 1, "21.7K", "27.1K", 49], ["nike socks nike", 1, "21.7K", "27.1K", 45], ["nike slides men", 1, "21.7K", "27.1K", 49], ["nike initiator", 1, "21.7K", "27.1K", 31], ["nike womens shoes", 1, "21.7K", "27.1K", 68], ["black nike tech", 1, "21.7K", "27.1K", 45], ["nike p-6000", 1, "21.7K", "27.1K", 50], ["nike alphafly 3", 1, "21.7K", "27.1K", 48], ["nike air max plus", 1, "21.7K", "27.1K", 51], ["nike mind slides", 1, "21.7K", "27.1K", 36], ["nike 270", 1, "21.7K", "27.1K", 50], ["nike mens shoes", 1, "21.7K", "27.1K", 60], ["women's nike shoes", 1, "21.7K", "27.1K", 74], ["nike golf", 1, "21.7K", "27.1K", 43], ["nike kids shoes", 1, "21.7K", "27.1K", 54], ["jordan 11", 2, "20.2K", "246K", 43], ["air max", 1, "18.4K", "74K", 54], ["dunks", 1, "18.4K", "74K", 41]],
+      "page3Sample": [["kobe shoes", 1, "12.3K", "49.5K", 44], ["wie verbessert man die haltung (DE query in US db)", 7, "12.2K", "201K", 27], ["jordan 6", 1, "11.9K", "90.5K", 42], ["tennis shoes", 1, "11.9K", "90.5K", 47], ["nike shirts", 1, "11.8K", "14.8K", 58], ["nike metcon women", 1, "11.8K", "14.8K", 35], ["nike dri fit socks", 1, "11.8K", "14.8K", 34], ["nike running shorts", 1, "11.8K", "14.8K", 41], ["nike puffer jacket", 1, "11.8K", "14.8K", 37], ["nike tech kids", 1, "11.8K", "14.8K", 35], ["nike alphafly", 1, "11.8K", "14.8K", 49], ["nike kids", 1, "11.8K", "14.8K", 58], ["nike rejuven8", 1, "11.8K", "14.8K", 35]],
       "rows": [
         ["nike", 1, 2200000, 6.13, 2700000, 94], ["nike shoes", 1, 440000, 1.23, 550000, 67],
         ["nike tech", 1, 294400, 0.82, 368000, 54], ["nike vomero 5", 1, 196800, 0.55, 246000, 46],
@@ -426,6 +502,35 @@
         ]
       }
     },
+    "usIntentSplit": { "note": "Round 2 — [intent, keywordSharePct, keywords, traffic]",
+      "rows": [["Informational", 38.5, "2.4M", "19.1M"], ["Navigational", 8.7, "541.7K", "8.5M"], ["Commercial", 14.5, "906.6K", "7M"], ["Transactional", 38.3, "2.4M", "20.7M"]],
+      "brandedTraffic": { "d": "26.2M", "chgPct": 1.33 }, "nonBrandedTraffic": { "d": "9.6M", "chgPct": -2.39 } },
+    "ukOverview": { "note": "Round 2 — UK database",
+      "keywords": { "d": "749.6K", "chgPct": -8.67 }, "traffic": { "d": "10.1M", "chgPct": -0.67 }, "trafficCost": { "d": "$3.2M", "chgPct": -0.48 },
+      "brandedTraffic": { "d": "8.2M", "chgPct": -0.26 }, "nonBrandedTraffic": { "d": "1.9M", "chgPct": -2.45 },
+      "topKeywords": [["nike", 1, "823K", 6.53], ["nike p6000", 1, "135K", 1.07], ["nike trainers", 1, "110K", 0.87], ["nike air force 1", 1, "74K", 0.58], ["nike shoes", 1, "74K", 0.58]],
+      "intentTop": [["Informational", 48.5, "606.3K", "7.6M"]] },
+    "positionChanges": { "note": "Round 2 — window Jul 19–20, 2026",
+      "allChanges": "78.9K", "improved": "7K", "declined": "6.9K", "serpChanges": "20.9K",
+      "topPageChanges": [["nike.com/mind (approx path)", "+80.8K"], ["/m… page", "+152.4K"], ["/s… page", "-164.8K"], ["/D… page", "-73.3K"], ["/N… page", "-67.2K"]],
+      "pathNote": "Widget truncated URLs to first letters; /mind confirmed via Top Pages diff" },
+    "topPagesUS": { "note": "Round 2 — [path, traffic, trafficDiff, trafficPct, topKeyword]",
+      "rows": [["/", "2.5M", "-4.3K", 7.06, "nike"], ["/w/mens-shoes-nik1zy7ok", "658.3K", "-7K", 1.84, "nike shoes"], ["/w/nike-tech-clothing", "438K", "+2K", 1.22, "nike tech"], ["/w/air-force-1-shoes", "386.9K", "-19.4K", 1.08, "nike air force 1"], ["/jordan/air-jordan-4", "360.7K", "+17.8K", 1.00, "jordan 4"], ["/w/dunk-shoes", "358.9K", "-8K", 1.00, "nike dunks"], ["/jordan", "308.9K", "+12.7K", 0.86, "jordan"], ["/w/air-max-shoes", "287.7K", "-21.1K", 0.80, "nike air max"], ["/retail/s/nike-clearance-store-flushing-queens", "278.7K", "-22.8K", 0.77, "nike outlet"], ["/mind", "266.6K", "+80.8K", 0.74, "nike mind"]] },
+    "subdomains": { "note": "Round 2 — [subdomain, traffic, trafficPct, keywords]",
+      "rows": [["www.nike.com", 35117960, 98.24, "4.1M"], ["about.nike.com", 355568, 0.99, "59.4K"], ["careers.nike.com", 118682, 0.33, "3.5K"], ["niketeam.nike.com", 89758, 0.25, "21.5K"], ["investors.nike.com", 22888, 0.06, "4.1K"], ["www.afterdarktour.nike.com", 17039, 0.05, "965"], ["voiceoftheathlete.nike.com", 8717, 0.02, "76"], ["innovation.nike.com", 1317, 0.004, "679"]] },
+    "keywordGapVsAdidas": { "note": "Round 2",
+      "overlap": { "nike": "713.9K", "adidas": "373.4K" },
+      "nikeSegments": [["Shared", "140.4K"], ["Missing", "233K"], ["Weak", "67.3K"], ["Strong", "73.1K"], ["Untapped", "233K"], ["Unique", "573.5K"]], "allTotal": "946.9K",
+      "topOpportunities": [["adidas", 3350000], ["gucci", 673000], ["how to do a pushup", 550000], ["adidas samba", 450000], ["club america", 368000]],
+      "headToHeadSample": [["basketball shoes", 1, 3], ["soccer ball", 8, 1], ["best walking shoes for women", 21, 12], ["soccer cleats", 3, 1], ["football cleats", 3, 1], ["how to measure shoe size", 8, 1]] },
+    "keywordGapVsDicks": { "note": "Round 2 — Dick's keyword base is 2.5x Nike's",
+      "overlap": { "nike": "713.9K", "dickssportinggoods": "1.8M" },
+      "nikeSegments": [["Shared", "392.1K"], ["Missing", "1.5M"], ["Weak", "132.4K"], ["Strong", "259.7K"], ["Untapped", "1.5M"], ["Unique", "321.8K"]], "allTotal": "2.2M",
+      "topOpportunities": [["dicks sporting goods", 4090000], ["kayak", 2240000], ["dicks", 1830000], ["new balance", 1830000], ["crocs", 1500000]] },
+    "keywordGapVsStockx": { "note": "Round 2",
+      "overlap": { "nike": "713.9K", "stockx": "408.4K" },
+      "nikeSegments": [["Shared", "148.5K"], ["Missing", "259.9K"], ["Weak", "36.9K"], ["Strong", "111.6K"], ["Untapped", "259.9K"], ["Unique", "565.4K"]], "allTotal": "973.8K",
+      "topOpportunities": [["louis vuitton", 2240000], ["new balance", 1830000], ["popmart", 1000000], ["stockx", 1000000], ["asics", 823000]] },
     "trafficAnalytics": {
       "period": "Jun 2026", "scope": "Root Domain, Worldwide, Semrush Data",
       "visits": { "v": 91500000, "d": "91.5M", "chgPct": -1.82 },
@@ -439,10 +544,18 @@
     },
     "positionTracking": { "range": "Jul 15–21, 2026", "market": "United States (Google) · English", "visibilityPct": 82.31,
       "buckets": [["Top 3", 83], ["Top 10", 87], ["Top 20", 87], ["Top 100", 87]],
-      "sampleTracked": ["12 s jordans", "a'ja wilson shoes", "acg boots", "air force 1", "air forces", "air jordans"] },
+      "sampleTracked": ["12 s jordans", "a'ja wilson shoes", "acg boots", "air force 1", "air forces", "air jordans"],
+      "fullReport": { "note": "Round 2 — Landscape view, Jul 21–22, 2026", "trackedKeywords": 92,
+        "visibilityPct": { "v": 81.60, "chgPct": -0.71 }, "estimatedTraffic": { "v": 55648, "chg": -144.2 }, "avgPosition": { "v": 6.70, "chg": -0.02 },
+        "landingPages": 300,
+        "cannibalization": { "affectedKeywords": "68 / 87", "cannibalPages": "264 / 277", "rate": "22% (+1%, low rate)" },
+        "tabsAvailable": ["Landscape", "Overview", "Rankings Distribution", "Tags", "Pages", "Cannibalization", "Competitors Discovery", "Devices & Locations", "Featured Snippets", "Share of Voice"] } },
     "siteAudit": { "updated": "2026-07-21", "healthPct": 85, "errors": 12, "warnings": 96, "crawledPages": 100,
       "pageBreakdown": [["Healthy", 11], ["Broken", 1], ["Have issues", 84], ["Redirect", 4], ["Blocked", 0]],
-      "note": "100-page sample crawl" }
+      "note": "100-page sample crawl",
+      "fullReport": { "note": "Round 2", "benchmark": "Top-10% websites: 92% (nike.com: 85%)",
+        "aiSearchHealth": { "pct": 79, "label": "beta", "note": "Reach 80% for better AI-search optimization; 344 issues; pages blocked from AI crawlers incl. ChatGPT-User, OAI-SearchBot, Googlebot, Google-Extended" },
+        "jsRendering": "Disabled", "topIssues": [["Low text to HTML ratio", 84, "warning"], ["Duplicate meta descriptions", 11, "warning"], ["Missing title", null, "error"]] } }
   },
 
   "ai": {
@@ -458,7 +571,13 @@
     "topicsAndSources": { "performingTopics": 317100, "topicOpportunities": 5900, "citedSources": 865300, "sourceOpportunities": 12500, "promptsTracked": 1400000 },
     "sampleTopics": { "note": "Page 1 of 31,707. [topic, visibility, mentions, aiVolume]",
       "rows": [["Nike Benassi Slides and Sandals", 100, 17, 3800], ["Nike Manufacturing and Supply Chain", 100, 33, 3300], ["Nike Outlet/Clearance Sacramento & Folsom", 100, 17, 2000], ["Nike Essentials", 100, 15, 482], ["Nike Dynamic Fit GK Gloves", 100, 15, 469], ["Bolsas y mochilas Nike", 100, 15, 427], ["Nike Invincible Running Shoes", 100, 15, 416], ["Nike Mercurial Boots History", 100, 16, 333], ["Espinilleras Nike Mercurial", 100, 15, 256], ["Nike Mercurial Sprinters", 100, 15, 121]] },
-    "competitorSet": ["adidas.ie", "jdsports.ie", "sportsdirect.com", "underarmour.ie"]
+    "competitorSet": ["adidas.ie", "jdsports.ie", "sportsdirect.com", "underarmour.ie"],
+    "byEngineDetail": { "note": "Round 2 — per-engine drilldowns (Worldwide)",
+      "chatgpt": { "mentions": { "d": "386.7K", "chgPct": -2.1 }, "citations": { "d": "181.8K", "chgPct": 13.4 }, "citedPages": { "d": "385.2K", "chgPct": 12.5 },
+        "countries": [["US", 33.1, "128K"], ["DE", 5.2, "20K"], ["FR", 5.1, "19.7K"], ["Other", 56.6, "219K"]] },
+      "gemini": { "mentions": { "d": "413.6K", "chgPct": 0.2 }, "citations": { "d": "22.9K", "chgPct": -17.3 }, "citedPages": { "d": "27.9K", "chgPct": -15.9 },
+        "countries": [["US", 36.1, "149.3K"], ["DE", 5.0, "20.8K"]],
+        "insight": "Gemini is Nike's #1 mention engine but citations are falling sharply (-17.3%)" } }
   },
 
   "backlinks": {
@@ -475,7 +594,18 @@
     "topAnchors": ["Empty Anchor", "view deal", "india english", "http://www.nike.com", "https://www.celinebagser.com/", "nike men's full…10 | fb1362-101", "nike, opens in new window", "nike men's air …13 | fv8105-161", "nike.com", "investors"],
     "topLinkedPages": [["https://www.nike.com/", 43831], ["https://nike.com/", 15461], ["http://www.nike.com/", 12055], ["http://nike.com/", 8424], ["https://www.nike.com/launch", 4881]],
     "similarProfiles": [["adidas.com", 22], ["nba.com", 17], ["starbucks.com", 16], ["walmart.com", 16], ["nfl.com", 15]],
+    "topBacklinksSample": { "note": "Round 2 — highest-AS live backlinks (page 1 sample)",
+      "rows": [["nike.in (Nike IN, sitewide)", 88, "text"], ["londonspirit.com", 87, "image"], ["viva941.com (blog)", 85, "text"], ["nikegiftcardsforbusiness.com", 85, "text"], ["nikestares.com", 85, "302 redirect"]] },
+    "anchorsDetail": { "note": "Round 2 — [anchor, backlinks, refDomains, firstSeen]",
+      "rows": [["Empty Anchor", 6376096, 23988, "2016-12-30"], ["view deal", 3962577, 118, "2024-10-20"], ["india english", 530054, 15, "2025-05-13"], ["www.nike.com", 426458, 958, "2022-03-01"], ["www.celinebagser.com/ (spam)", 374638, 28, "2025-07-01"], ["nike men's full force low… fb1362-101", 268104, 1, "2025-11-11"], ["nike, opens in new window", 224956, 8, "2025-05-20"], ["nike men's air force 1 '07… fv8105-161", 206250, 1, "2025-10-12"], ["nike.com", 205670, 11417, "2019-08-28"], ["investors", 201113, 87, "2024-10-15"], ["news", 186176, 97, "2024-05-24"], ["about nike", 181825, 74, "2024-10-15"], ["sustainability", 177203, 91, "2024-12-15"], ["免費退貨", 170288, 900, "2025-01-16"], ["nike run club", 161134, 1636, "2021-08-29"], ["تطبيق nike run club", 156995, 5, "2025-01-09"]] },
     "audit": { "overallToxicity": "High", "sampleNote": "Audit analyzes a ~73.5K-link / 18.6K-domain sample; Analytics covers the full 35.1M index",
+      "round2Insights": { "newToxicDomains": 13, "newPotentiallyToxicDomains": 38, "errorPagesOnDomain": 545, "backlinksAffectedByErrorPages": "4.8K",
+        "linkNetworkByUrlPath": "5.5K", "linkNetworkByIP": "4.5K", "deindexedDomainLinks": 576, "forumLinks": 302 },
+      "anchorTypes": [["Branded", 46.2, 33984], ["Compound", 10.0, 7321], ["Other", 10.2, null], ["Money", 5.4, 3956], ["Organic", 3.5, 2554]],
+      "auditRefDomainsByAS": [["81-100", 1.2, 214], ["61-80", 1.6, 305], ["41-60", 5.5, 1017], ["21-40", 15.7, 2924], ["0-20", 76.0, 14108]],
+      "topRefCategories": [["Arts & Entertainment", 19.7, 3660], ["Shopping", 10.1, 1876], ["Business & Industrial", 8.7, 1608], ["News", 6.5, 1212], ["Internet & Telecom", 6.4, 1185]],
+      "topReferralDomains": [["mailora.ai", 51, 82], ["www.auracharisse.com", 51, 54], ["fashionunited.nl", 51, 47], ["www.brandswitch.co", 51, 42], ["www.barcodable.com", 51, 41]],
+      "proGate": "Full toxic-backlink list beyond top rows requires Pro plan ('View all backlinks' upsell)",
       "toxicitySplit": [["Toxic", 19.3, 3600], ["Potentially toxic", 15.4, 2900], ["Non-toxic", 65.2, 12100]],
       "refDomains": { "total": 18569, "new": 343, "broken": 5096, "lost": 371 },
       "analyzedBacklinks": { "total": 73538, "new": 3915, "broken": 11059, "lost": 2461 },
@@ -492,9 +622,12 @@
   ],
 
   "locked": [
-    { "item": "Advertising Research detail (ad copies, full PPC keywords, PPC competitors)", "requires": "SEMrush Advertising Toolkit $99–220/mo" },
-    { "item": "Traffic Analytics channel %, geo, demographics, top pages", "requires": "Traffic & Market Toolkit Pro $289/mo" },
-    { "item": "IMAI TikTok/YouTube deep tabs, brand-safety scores, posts 3–10 per brand", "requires": "IMAI unlock / not captured" },
-    { "item": "SEMrush row-level completeness beyond page 1 of big tables", "requires": "Export/API (may consume credits)" }
+    { "item": "Advertising Research detail (ad copies, full PPC keywords, PPC competitors)", "requires": "SEMrush Advertising Toolkit $99–220/mo", "status": "confirmed locked round 2" },
+    { "item": "Traffic Analytics channel %, geo, demographics, top pages", "requires": "Traffic & Market Toolkit Pro $289/mo", "status": "confirmed locked round 2" },
+    { "item": "Compare Domains metric values", "requires": "SEMrush Guru plan (table structure renders, values gated)", "status": "found locked round 2" },
+    { "item": "Backlink Audit full toxic-link list beyond top rows", "requires": "SEMrush Pro plan ('View all backlinks')", "status": "found locked round 2" },
+    { "item": "IMAI TikTok/YouTube deep tabs, brand-safety scores", "requires": "IMAI unlock", "status": "confirmed locked round 2" },
+    { "item": "IMAI posts: 2 remaining of 10 per brand", "requires": "Widget renders 2 posts per tab (8 of 10 captured round 2)", "status": "partially resolved" },
+    { "item": "SEMrush row-level completeness beyond captured pages", "requires": "Export/API (may consume credits)", "status": "keywords now pages 1–3 sampled; competitors/gap/AI topics still page 1" }
   ]
 }
