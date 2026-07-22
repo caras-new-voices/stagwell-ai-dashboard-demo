@@ -495,8 +495,43 @@ button.solve::before{content:"";width:9px;height:9px;background:currentColor;-we
 .sol-more{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-2);white-space:nowrap}
 .sol-card:hover .sol-more{text-decoration:underline}
 
+/* ==================================================================
+   DISCLAIMERS & INTERNAL-USE NOTICES
+   ================================================================== */
+.badge-internal{border:1px solid rgba(255,255,255,.35);color:#cfe0e6;font-size:9.5px;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.08em;white-space:nowrap}
+@media(max-width:640px){.badge-internal{display:none}}
+.arrival-foot{margin-top:9vh;text-align:center;font-size:11.5px;color:var(--ink-muted)}
+.arrival-foot b{color:var(--ink-2);font-weight:700}
+.dash-disclaimer{max-width:1280px;margin:0 auto;padding:18px 22px 34px;font-size:11.5px;color:var(--ink-muted);line-height:1.6;border-top:1px solid var(--grid)}
+.with-chat .dash-disclaimer{max-width:none;margin:0;padding-right:392px}
+@media(max-width:1200px){.with-chat .dash-disclaimer{padding-right:22px}}
+.dash-disclaimer b{color:var(--ink-2)}
+button.disc-link{background:none;border:0;padding:0;font:inherit;font-weight:700;color:var(--link);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+
+/* risk register response page */
+.riskpage{position:fixed;inset:0;z-index:95;display:none;align-items:flex-start;justify-content:center;padding:4vh 16px 16px;background:rgba(3,20,28,.55);backdrop-filter:blur(3px);overflow-y:auto}
+.riskpage.open{display:flex}
+.rp-body{width:min(880px,100%);background:var(--surface-1);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-lg);padding:26px 30px;animation:smIn .32s var(--ease)}
+.rp-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.rp-head h2{font-size:21px;letter-spacing:-.01em}
+.rp-head .sm-close{margin-left:auto}
+.rp-intro{font-size:12.5px;color:var(--ink-2);line-height:1.6;margin-bottom:14px}
+.rp-legend{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.rp-cat{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+.rp-item{border:1px solid var(--grid);border-radius:12px;padding:13px 15px;margin-bottom:10px}
+.rp-item h4{font-size:13.5px;margin-bottom:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rp-item .reg{font-size:11.5px;color:var(--ink-muted);font-style:italic;margin-bottom:7px;line-height:1.5}
+.rp-item .resp{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.rp-item .resp b{color:var(--ink-1)}
+.rchip{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.rchip.ok{background:var(--tint-good);color:#0a7a34}
+.rchip.na{background:var(--indigo-soft);color:var(--link)}
+.rchip.prod{background:var(--accent-soft);color:#8a6202}
+.rchip.decide{background:var(--tint-warn);color:#8a6202}
+.rp-foot{font-size:11px;color:var(--ink-muted);margin-top:14px;border-top:1px dashed var(--baseline);padding-top:10px;line-height:1.6}
+
 @media(prefers-reduced-motion:reduce){
-  .sm-body{animation:none!important}
+  .sm-body,.rp-body{animation:none!important}
   .reveal,.animate-bars .bar-fill,.animate-bars .meter i,.animate-bars .vfill{animation:none!important;opacity:1!important;transform:none!important}
   .gen-logo,.gen-ring,.gen-step.active .gs-ico::before,.typing i{animation:none!important}
   .blob,.hero-mark,.chat-fab.intro,.tab.newtab,.map-halo{animation:none!important}
@@ -622,6 +657,7 @@ svg.worldmap .map-lab.sm{font-size:9.5px;font-weight:700;fill:var(--ink-2);strok
 <header class="topnav">
   <span class="logo"><span class="sparkmark"></span>STAGWELL AI</span>
   <span class="badge-demo">DEMO</span>
+  <span class="badge-internal" title="This demo is for internal Stagwell use only and should not be shared outside the company and its partners.">INTERNAL USE ONLY</span>
   <span class="spacer"></span>
   <span class="userchip" id="userchip">G</span>
 </header>
@@ -658,6 +694,11 @@ svg.worldmap .map-lab.sm{font-size:9.5px;font-weight:700;fill:var(--ink-2);strok
           <span><svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16M2 9h5M2 15h5M17 9h5M17 15h5"/></svg> <b>This demo is populated with Nike data only.</b> Other brands aren’t wired up yet — explore the full experience with Nike.</span>
           <button id="usenike">Explore Nike instead →</button>
         </div>
+        <div class="arrival-foot">
+          <b>Internal Stagwell use only</b> — please don’t share outside the company and its partners.
+          · Demo data may include inaccuracies; subjective scores are illustrative.
+          <button class="disc-link" data-open-risk>Risk register response</button>
+        </div>
       </div>
     </div>
   </section>
@@ -676,6 +717,12 @@ svg.worldmap .map-lab.sm{font-size:9.5px;font-weight:700;fill:var(--ink-2);strok
       <div class="tabs-sticky"><nav class="tabs" id="tabs"></nav></div>
     </div>
     <div class="dash-body" id="dash-body"></div>
+    <footer class="dash-disclaimer">
+      <b>Internal Stagwell use only</b> — this demo should not be shared outside the company and its partners.<br>
+      Data presented was collected from various sources and may include inaccuracies or be out of date. Any subjective scoring is for illustrative purposes only.
+      <button class="disc-link" data-goto-notes>See our data sources page for details →</button>
+      · <button class="disc-link" data-open-risk>Risk register response</button>
+    </footer>
   </section>
 
 </main>
@@ -683,6 +730,10 @@ svg.worldmap .map-lab.sm{font-size:9.5px;font-weight:700;fill:var(--ink-2);strok
 <button class="chat-fab" id="chat-fab"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></svg> Consult Stagwell AI</button>
 <div class="solmodal" id="solmodal" aria-hidden="true" role="dialog" aria-label="Stagwell product profile">
   <div class="sm-body"></div>
+</div>
+
+<div class="riskpage" id="riskpage" aria-hidden="true" role="dialog" aria-label="Risk register response">
+  <div class="rp-body"></div>
 </div>
 
 <div class="expmodal" id="expmodal" aria-hidden="true" role="dialog" aria-label="Build out your dashboard">
@@ -1030,7 +1081,84 @@ function closeSolModal(){
   wrap.classList.remove('open'); wrap.setAttribute('aria-hidden','true');
   document.body.style.overflow='';
 }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('#solmodal').classList.contains('open')) closeSolModal(); });
+document.addEventListener('keydown', e=>{ if(e.key!=='Escape') return; if($('#riskpage').classList.contains('open')) closeRisk(); else if($('#solmodal').classList.contains('open')) closeSolModal(); });
+/* ===================== RISK REGISTER RESPONSE (footer page) =====================
+   Point-by-point response to the internal risk register, reviewed against the demo
+   as built. Chips: ok = addressed in the demo · na = does not apply to a static demo
+   (clarifies a misunderstanding) · prod = productization requirement, flagged ·
+   decide = owner/governance decision, documented here. */
+const RISK = [
+ { cat:'Legal / data', items:[
+  { t:'Data license scope', chip:['decide','Decide consciously — documented'],
+    reg:'Purchasing data ≠ the right to publicly display it; public reports and leaderboards are often a separate license tier.',
+    resp:'<b>Correct, and designed for.</b> The demo displays IMAI and SEMrush metrics transcribed from licensed product UIs as a one-time snapshot (20–21 Jul 2026), attributed on every card. It is an <b>internal demo, not a public launch</b>: an internal-use notice now appears in the nav, on the arrival page, and in this footer, and the demo is served from an unlisted URL. There is no public leaderboard anywhere in the product — it is a single-brand self-view. <b>Before anything public ships</b>: review each vendor agreement for public-display / derived-works / attribution clauses (the register’s own recommendation), and prefer composite scores over raw licensed metrics. For wider internal circulation, Vercel password protection can be enabled on this deployment.' },
+  { t:'Scores about real companies', chip:['ok','Addressed in demo design'],
+    reg:'Exposure rises if scores are presented as fact, methodology undisclosed, or errors harm a company.',
+    resp:'Every score shown is a <b>named vendor’s methodology output</b>, never presented as fact: cards carry source tags (IMAI / SEMrush + date), the Data Notes page states that IMAI scores and reach are <b>model estimates</b> and that all figures are third-party modeled estimates (GA/GSC not connected), and the site-wide disclaimer now states that subjective scoring is illustrative. Scores are timestamped everywhere. A correction channel is a productization item (flagged), not a demo item.' },
+  { t:'Privacy in creator data', chip:['ok','Addressed · legal review pre-launch'],
+    reg:'Named creators are personal data under GDPR if EU-reachable; needs privacy review for a public product.',
+    resp:'The demo follows the register’s own mitigation: it shows <b>business-account data and public metrics only</b> — brand handles (@nike, @adidas…) and public-figure names in vendor-reported campaign context (e.g. top posts). No private individuals, no contact data, no follower-level records. The demo is static: it collects and processes nothing. A formal GDPR/privacy review remains a pre-launch requirement for the public product — flagged.' },
+  { t:'Email program compliance', chip:['na','N/A — static demo'],
+    reg:'Event-triggered emails need clean consent basis per region.',
+    resp:'<b>Misunderstanding of the demo:</b> no email is ever sent, and no address is stored. The email field in the dashboard build-out is a staging prop — the UI states “Demo — nothing is sent or stored,” and the page makes no network requests at all. The register’s point stands for the real product: the “we email you when your category moves” mechanic must be built consent-first — flagged in productization requirements.' },
+  { t:'Corporate / public-company layer', chip:['decide','Routing step — documented'],
+    reg:'Anything carrying the Stagwell name implies corporate endorsement; corporate comms should sign off before external circulation.',
+    resp:'Agreed as a routing step, not a product change. The demo is now explicitly labeled <b>internal use only</b> on every screen, which holds the line until comms sign-off exists. “Stagwell AI” is used as a working title (see Naming below).' }]},
+ { cat:'Political / organizational', items:[
+  { t:'Client-conflict on named brands', chip:['decide','Owner action before wider circulation'],
+    reg:'Verify the five named brands against network agency client/prospect relationships before the draft circulates beyond the immediate group.',
+    resp:'The demo names Nike plus five competitors because the source dataset does. This check <b>cannot be done from inside the demo</b> — it is the fifteen-minute owner action the register describes: verify the six brands against network client/prospect lists, or record that the category was deliberately chosen. Until then, the internal-use notice constrains circulation. If a conflict is found, the dataset pipeline can be re-run against a clean category.' },
+  { t:'Deficit-frame leaderboards vs. network clients', chip:['na','N/A — no leaderboard exists'],
+    reg:'A network client publicly shown declining or ranked low creates account-team friction.',
+    resp:'<b>Partly a misunderstanding:</b> the product has no public leaderboard and no public named list — it is <b>self-view only</b> (the searcher sees their own brand’s dashboard), which is exactly the register’s recommended launch posture. Competitor metrics do appear inside the private self-view (vendor-reported comparison data). Governance sentence, as requested: <i>launch posture is self-view only; any public or ranked surface requires an explicit go-decision.</i>' },
+  { t:'Naming', chip:['ok','Working title noted'],
+    reg:'Treat “Stagwell.ai” as a working title until the group-level naming decision lands.',
+    resp:'Acknowledged: “Stagwell AI” appears throughout this demo as a <b>working title</b>. Nothing in the build depends on the name — it is a set of tokens and strings, changeable in minutes when the naming decision lands.' },
+  { t:'Data provenance perception', chip:['ok','Stated explicitly'],
+    reg:'Keep the clean story clean: licensed public data, not client-derived or research-panel data.',
+    resp:'Stated explicitly on the Data Notes page: the demo runs on <b>licensed third-party public data</b> (IMAI social reports; SEMrush project data), GA/GSC are not connected, and no client-derived or panel data exists anywhere in the build. The two providers are never cross-computed — a rule enforced in the dashboard itself.' }]},
+ { cat:'Security / abuse', items:[
+  { t:'Intent data is the crown jewel', chip:['na','N/A — demo collects nothing'],
+    reg:'Searches, qualifier conversations, and self-declared gaps are commercially sensitive first-party data.',
+    resp:'<b>Misunderstanding of the demo:</b> this is a static file with <b>no backend, no accounts, no analytics, and no storage</b> — searches, priority selections, the email field, and chat interactions never leave the visitor’s browser and vanish on refresh. For the real product the register is right that intent data is the most sensitive asset: access controls on lead context, a retention policy, and SOC 2 posture are flagged as productization requirements.' },
+  { t:'Free-tier abuse', chip:['na','N/A — nothing to scrape'],
+    reg:'A generous free product invites scraping; rate limiting and bot detection are launch-day requirements.',
+    resp:'<b>N/A for the demo:</b> there is no free tier, no API, and no per-query data — only one fixed, already-public-by-design snapshot embedded in the page. Scraping it yields nothing that viewing it doesn’t. For the product: rate limiting, per-account caps, and bot detection are logged as launch-day requirements, per the register.' },
+  { t:'Qualifier-agent safety', chip:['ok','Addressed by construction'],
+    reg:'The AI panel must be scoped, never produce advice/strategy, and be hardened against prompt injection.',
+    resp:'<b>Addressed by construction in the demo:</b> “Ask Stagwell AI” is not a model — it is a <b>fully scripted keyword-matched response set</b>, labeled “scripted demo” in the panel. “Ignore your instructions…” returns the scripted fallback because there are no instructions to ignore. It can only say what was authored from the report, and every answer cites its source. When a live model replaces the script, the register’s guardrail spec (scoped diagnostic flows, no open generation, injection hardening) becomes a product requirement — flagged.' },
+  { t:'Search-target sensitivities', chip:['ok','Addressed · policy for product'],
+    reg:'Users can run reports on any company — including Stagwell, its clients, or private companies. Decide exclusions early.',
+    resp:'<b>Addressed in the demo:</b> only Nike is wired; every other target is politely declined by design, so no sensitive report can be generated. The register’s real ask — an exclusion/special-handling policy for the open product — is recorded as a pre-launch decision: define the blocklist posture (e.g. Stagwell entities, network clients, private companies) before open search ships.' }]}
+];
+function openRisk(){
+  const wrap=$('#riskpage');
+  wrap.querySelector('.rp-body').innerHTML = `
+    <div class="rp-head"><span class="sol-mark" style="width:40px;height:40px;border-radius:10px">RR</span>
+      <div><h2>Risk register — point-by-point response</h2>
+      <span style="font-size:11px;color:var(--ink-muted)">Reviewed against the demo as built · 22 Jul 2026 · lives with the build, updated as the build changes</span></div>
+      <button class="sm-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button></div>
+    <p class="rp-intro">Some register items apply to this build and are addressed in it; several assume a live product with accounts, emails, open search, and a generative agent — <b>this is a static, self-contained internal demo</b> with no backend, no data collection, and a scripted assistant, so those items are clarified below and carried forward as productization requirements instead. Like the register itself, this page is issue-spotting for counsel and governance — not legal advice.</p>
+    <div class="rp-legend">
+      <span class="rchip ok">Addressed in demo</span><span class="rchip na">N/A — static demo</span>
+      <span class="rchip prod">Productization req.</span><span class="rchip decide">Decision / routing</span>
+    </div>
+    ${RISK.map(c=>`<div class="rp-cat">${esc(c.cat)}</div>` + c.items.map(it=>`
+      <div class="rp-item">
+        <h4>${esc(it.t)} <span class="rchip ${it.chip[0]}">${esc(it.chip[1])}</span></h4>
+        <div class="reg">Register: “${esc(it.reg)}”</div>
+        <div class="resp">${it.resp}</div>
+      </div>`).join('')).join('')}
+    <div class="rp-foot"><b>Demo facts relied on above</b> (verifiable in the build): single static HTML file · no network requests of any kind · no backend, accounts, storage, or analytics · scripted non-generative chat · Nike-only search gate · vendor source tags + timestamps on every card · Data Notes page with sources, locked items, truncation notes, and the provider-boundary rule · internal-use notice on every screen. Productization requirements referenced here are collected for the product-requirements doc.</div>`;
+  wrap.classList.add('open'); wrap.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  wrap.querySelector('.sm-close').addEventListener('click', closeRisk);
+}
+function closeRisk(){
+  const wrap=$('#riskpage');
+  wrap.classList.remove('open'); wrap.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
 function solvePill(ids, label){
   return `<div class="solve-row">${label?`<span style="font-size:10px;color:var(--ink-muted);align-self:center;text-transform:uppercase;letter-spacing:.05em;font-weight:700">${esc(label)}</span>`:''}` +
     ids.map(id=>`<button class="solve" data-sol="${id}" title="How ${esc(SOL_BY_ID[id].name)} helps: ${esc(SOL_BY_ID[id].nike||SOL_BY_ID[id].what)}">${esc(SOL_BY_ID[id].name)}</button>`).join('') + `</div>`;
@@ -1049,7 +1177,10 @@ function goSolution(id){
 document.addEventListener('click', e=>{
   const b=e.target.closest('button.solve');
   if(b){ openSolModal(b.dataset.sol); return; }
+  if(e.target.closest('[data-open-risk]')){ openRisk(); return; }
+  if(e.target.closest('[data-goto-notes]')){ selectTab('notes'); if(state.expanded) window.scrollTo({top:0,behavior:REDUCED?'auto':'smooth'}); return; }
   if(e.target.closest('#solmodal') && !e.target.closest('.sm-body')){ closeSolModal(); return; }
+  if(e.target.closest('#riskpage') && !e.target.closest('.rp-body')){ closeRisk(); return; }
   const card=e.target.closest('.sol-card');
   if(card && !e.target.closest('button')) openSolModal(card.id.replace('sol-',''));
 });
@@ -2140,6 +2271,7 @@ function tabNotes(){
       <li><b>Search / AI / Backlinks:</b> ${esc(DATA._meta.sources.search)}</li>
       <li><b>Provider boundary:</b> ${esc(DATA._meta.conventions.providerRule)}</li>
       <li><b>Currencies:</b> ${esc(DATA._meta.conventions.currency)}</li>
+      <li><b>Accuracy disclaimer:</b> data presented across this demo was collected from various sources and may include inaccuracies or be out of date. Any subjective scoring (e.g. IMAI Audience Quality, “Great/Poor” labels) is methodology output shown for illustrative purposes, not a statement of fact.</li>
       <li><b>Not internal analytics:</b> GA/GSC not connected; all figures are third-party modeled estimates, not Nike internal analytics. Snapshot ${esc(DATA._meta.snapshotDate)}; deltas are month-over-month or as labeled.</li>
       <li><b>Two scrape rounds (same day):</b> ${esc(DATA._meta.rounds.round2)}. Rule: ${esc(DATA._meta.rounds.rule)}.</li>
       <li><b>Stagwell Solutions tab:</b> product descriptions and contacts come from the Stagwell “Product One-Pagers” deck (Jul 2026, themarketingcloud.com); the “for Nike” framing connects each product to metrics on this dashboard. QuestRQ and Unlock have no one-pager in the deck and are listed with contacts only.</li>

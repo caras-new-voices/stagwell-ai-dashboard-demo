@@ -173,3 +173,24 @@ Solutions modal system were left untouched.
   context: full flow search→gen→starter→expand (4 beats)→every tab→company modal (via
   solve pill and Solutions card)→chat. All assertions pass; zero console errors and zero
   page errors in every context.
+
+---
+
+## Disclaimers, internal-use notices & risk-register response
+
+- **Site-wide data disclaimer** (footer on every dashboard tab): data collected from
+  various sources, may include inaccuracies / may not be current; subjective scoring is
+  illustrative — with a link to the Data Notes (data sources) page. A matching "Accuracy
+  disclaimer" entry was added to Data Notes itself.
+- **Internal-use notice everywhere**: "INTERNAL USE ONLY" chip in the top nav (every
+  screen), full sentence on the arrival page and in the dashboard footer: internal
+  Stagwell use only, not to be shared outside the company and its partners.
+- **Risk Register response page** (linked from the arrival and dashboard footers): a
+  point-by-point response to the internal risk register — 13 items across Legal/Data,
+  Political/Organizational, and Security/Abuse, each with a status chip (addressed in
+  demo · N/A static demo · productization requirement · decision/routing), the register's
+  claim quoted, and a detailed response. Items that assume a live product (email consent,
+  intent-data storage, free-tier scraping, generative-agent injection) are clarified as
+  not applicable to a static, no-backend, scripted demo and carried forward as
+  productization requirements; genuine owner actions (client-conflict brand check,
+  vendor license review, comms sign-off, naming) are documented as such.
