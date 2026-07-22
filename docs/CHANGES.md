@@ -108,3 +108,68 @@ Compared against Stagwell's actual site and official tri-bar logo asset:
 - Search hero kept light (per the design pass — and truer to the white-first site), with
   navy headline + teal accent phrase and a yellow→teal hairline underline on dark bands.
 - Data-series palette and status colors untouched.
+
+---
+
+## Feedback round 1 (22 Jul 2026)
+
+Owner-approved redesign from Jonathan Caras' review. Light theme only, dot map built,
+all sprints executed. Data (`const DATA`), the CVD-validated series palette, status
+colors, chart guardrails, the Nike-only gate, the scripted-chat contract, and the
+Solutions modal system were left untouched.
+
+### Sprint A — Arrival page
+- New headline **"Enter a new world of brand intelligence."** (navy ink, teal accent on
+  the phrase) with a quiet sub-line. Placeholder → "Type in any brand…".
+- Deleted the four suggestion cards and the coach-mark bubble (markup + CSS + JS wiring).
+- Added a pure-CSS ambient atmosphere: two large blurred teal/gold gradient blobs
+  drifting slowly, plus an oversized, very faint tri-bar logo motif offset at the edge.
+  All motion disabled under `prefers-reduced-motion`.
+- Stripped the "Public Intelligence · New" and "Examples" nav links; kept logo + wordmark
+  + DEMO badge (+ user chip once an email is entered).
+
+### Sprint B — Single theme + generation overlay
+- Removed the theme toggle button, `state.theme`, the toggle JS, and every
+  `html[data-theme="dark"]` CSS block (17 rules + the dark token set).
+- Generation overlay keeps the step checklist; removed the bottom progress bar
+  (`.gen-bar` markup + its JS width updates). Added a CSS-only rotating conic gradient
+  ring (teal→gold) behind the pulsing logo tile as the "alive" signal.
+- Final step copy → **"Assembling your dashboard"**.
+
+### Sprint C — Land straight on a starter dashboard
+- New flow: search → generation overlay → dashboard. The snapshot / priorities / signup
+  `<section>`s and their renderers were deleted from the flow.
+- Dashboard opens in a **starter state**: Overview tab only + a CTA pseudo-tab
+  **"⊕ Build out the rest of your dashboard"**; no chat panel, no FAB.
+- Overview recomposed top-down: KPI hero row → **"Where Nike is winning" / "What needs
+  attention"** twin panels (green/red headers, icon + stat + one-line why; every value
+  verbatim from `DATA`) → **the dot map** → existing share-of-6-brand strip, ER chart,
+  follower-growth chart, red-flags panel, momentum sparklines (all intact).
+- **Self-contained SVG dot-grid world map** (`720×300` viewBox, ~1134 dots generated at
+  build time from hand-defined coarse continent polygons rasterized at ~3.5°, inlined as
+  a flat integer array; Antarctica omitted; no external data). Four provider-pure layers
+  switched by chips — **Audience/IMAI**, **Likers/IMAI**, **AI mentions/SEMrush**,
+  **Backlink origins/SEMrush** — each with teal centroid highlights + haloes, direct
+  labels with exact values, a "so what" line and a source tag. Providers never mixed.
+
+### Sprint D — Staged in-place expansion
+- The build-out CTA opens an in-place modal: **Beat 1** priorities picker (the existing 7
+  priority cards, same `state.priorities` logic) → **Beat 2** single optional email field
+  (initials → user chip) → **Beat 3** short "Generating your full dashboard" overlay, then
+  the six remaining tabs animate into the tab bar one-by-one (~120ms stagger) and the
+  priorities chips appear in the header → **Beat 4** the **"Consult Stagwell AI"** FAB
+  appears bottom-right with an attention pulse; chat opens only on click.
+- Expansion is one-way per session. Pre-expansion, any deep-link to a not-yet-built tab
+  (`.goto`, twin-panel rows, red-flag links, solve-modal navigation) triggers the
+  expansion flow instead of dead-ending. Under reduced-motion the whole flow is instant
+  (tabs appear at once, no pulses).
+
+### Sprint E — Cleanup, QA, ship
+- Deleted dead code: snapshot/priorities/signup sections + `renderSnapshot`, the signup
+  handler, theme JS/CSS, `.gen-bar`, suggestion-card + coach markup/CSS, removed nav
+  links, and `GEN.provision` (replaced by `GEN.buildout`). All timings stay in the `GEN`
+  config and CSS custom properties.
+- Playwright QA (headless Chromium) at 1440×900, 390×844, and a `reducedMotion:'reduce'`
+  context: full flow search→gen→starter→expand (4 beats)→every tab→company modal (via
+  solve pill and Solutions card)→chat. All assertions pass; zero console errors and zero
+  page errors in every context.
