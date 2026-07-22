@@ -85,3 +85,26 @@ Stagwell Solutions tab opens the same modal with the full one-pager detail:
 Backdrop / ✕ / Esc close; body scroll locks while open; reduced-motion skips the entrance
 animation. Mini products without one-pagers (QuestRQ, Unlock, ID Graph) state that
 honestly in the modal.
+
+---
+
+## Brand-accuracy pass (against the real stagwellglobal.com)
+
+Compared against Stagwell's actual site and official tri-bar logo asset:
+
+- **Real Stagwell logo added** — a faithful inline-SVG recreation of the tri-bar "S" mark
+  (yellow `#FBB61A` / teal `#0098B9` / ink `#231F20`, correct bar geometry and corner
+  radii), rendered on a white app tile in the top nav, the generation overlay, the chat
+  header, and the favicon.
+- **Teal is now the primary interactive color** (`#0098B9`, link `#0E7C99`, dark
+  `#2FA9C8`) — buttons, links, active tab underline, selection states, progress bars,
+  section ticks, chat send/FAB — matching the site's teal-accent hierarchy.
+- **Navy corrected** to the wordmark ink `#12333F`/`#1A4A5F` (was a too-green `#04222E`);
+  neutrals shifted from warm to cool gray; dark theme re-stepped to navy-cool.
+- **Yellow recalibrated to the logo's `#FBB61A`** and reserved for brand/solution
+  moments: DEMO + data badges, the NIKE title accent, and all Stagwell-solution surfaces
+  (✦ pills, evidence rows, FOR-NIKE blocks, expert CTAs) — mirroring how yellow behaves
+  in the logo: present, not dominant.
+- Search hero kept light (per the design pass — and truer to the white-first site), with
+  navy headline + teal accent phrase and a yellow→teal hairline underline on dark bands.
+- Data-series palette and status colors untouched.
