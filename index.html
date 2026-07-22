@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stagwell AI — Nike Brand &amp; Competitive Intelligence (Demo)</title>
+<meta name="description" content="Stagwell AI demo — Nike brand &amp; competitive intelligence. Social, search, AI visibility, backlink risk, and the Stagwell Marketing Cloud products that move each metric.">
+<meta name="theme-color" content="#04222E">
+<meta property="og:title" content="Stagwell AI — Nike Brand &amp; Competitive Intelligence">
+<meta property="og:description" content="A Stagwell AI demo: 7-tab Nike intelligence dashboard with a scripted AI assistant.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235B4FE6'/%3E%3Cpath d='M32 12l5 15 15 5-15 5-5 15-5-15-15-5 15-5z' fill='white'/%3E%3C/svg%3E">
 <style>
 /* ============ DESIGN TOKENS (NIKE-CHART-SPECS §1) ============ */
 :root{
@@ -11,23 +17,25 @@
   --ink-1:#0b1a20; --ink-2:#4c5257; --ink-muted:#8a8f93;
   --grid:#e7e6df; --baseline:#c7c6bd; --border:rgba(11,26,32,.09);
   --delta-up:#006300; --delta-down:#d03b3b;
-  /* Stagwell brand chrome */
+  /* Stagwell brand chrome — indigo primary, gold as secondary CTA accent */
   --gold:#FFB81C; --gold-2:#E5A200; --gold-ink:#0b1a20; --accent-soft:#fff4d6;
   --brand-deep:#04222E; --brand-deep-2:#0a3341; --brand-hair:rgba(255,184,28,.55);
   --link:#0A5E86;
-  --header-band:#04222E; --volt:#FFB81C; /* volt token repurposed → Stagwell gold (UI accent only) */
+  --header-band:#04222E; --volt:#FFB81C; /* volt token repurposed → muted gold (CTA outline accent) */
   --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
   --c-nike:#2a78d6; --c-adidas:#eb6834; --c-puma:#1baf7a;
   --c-underarmour:#eda100; --c-newbalance:#e87ba4; --c-lululemon:#008300;
   --blue-300:#6da7ec; --deemph:#c3c2b7;
-  --indigo:#0A5E86; --indigo-soft:#e8f2f7; /* legacy hooks → teal interactive */
+  --indigo:#0A5E86; --indigo-soft:#e8f2f7; /* PRIMARY interactive */
   --tint-good:rgba(12,163,12,.10); --tint-crit:rgba(208,59,59,.08); --tint-warn:rgba(250,178,25,.14);
   --shadow-sm:0 1px 2px rgba(4,34,46,.05);
   --shadow:0 2px 4px rgba(4,34,46,.045),0 10px 28px rgba(4,34,46,.07);
   --shadow-lg:0 18px 50px rgba(4,34,46,.16);
   --skel:linear-gradient(100deg,#ecebe4 30%,#f6f5f0 50%,#ecebe4 70%);
   --ease:cubic-bezier(.22,.61,.36,1);
-  --radius:16px;
+  --radius:16px; --radius-sm:12px;
+  --spark:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/%3E%3C/svg%3E');
+  --lockicon:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4"%3E%3Crect x="3" y="11" width="18" height="10" rx="2"/%3E%3Cpath d="M7 11V7a5 5 0 0 1 10 0v4"/%3E%3C/svg%3E');
 }
 html[data-theme="dark"]{
   --surface-1:#14201f; --surface-2:#0f1918; --page:#0a0f10;
@@ -53,29 +61,29 @@ input,select{font:inherit}
 a{color:var(--indigo)}
 
 /* ============ TOP NAV (Stagwell chrome — both themes) ============ */
-.topnav{position:sticky;top:0;z-index:60;background:#0a0a0a;color:#fff;display:flex;align-items:center;gap:16px;padding:0 22px;height:56px}
+.topnav{position:sticky;top:0;z-index:60;background:#0a0b18;color:#fff;display:flex;align-items:center;gap:16px;padding:0 22px;height:56px}
 .topnav .logo{font-weight:800;letter-spacing:.28em;font-size:17px;white-space:nowrap}
 .topnav .spacer{flex:1}
 .topnav .navlink{color:#d7d7d7;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap}
-.badge-new{background:var(--indigo);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px}
+.badge-new{background:var(--gold);color:var(--gold-ink);font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px}
 .badge-demo{background:var(--volt);color:#111;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px;letter-spacing:.08em}
-.theme-btn{background:#1d1d1f;border:1px solid #3a3a3a;color:#ddd;border-radius:999px;padding:6px 12px;font-size:12px}
-.userchip{width:32px;height:32px;border-radius:50%;background:var(--indigo);color:#fff;display:none;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.theme-btn{background:#191b2e;border:1px solid #33374d;color:#ddd;border-radius:999px;padding:6px 12px;font-size:12px}
+.userchip{width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--gold-ink);display:none;align-items:center;justify-content:center;font-size:12px;font-weight:700}
 @media(max-width:640px){.topnav .navlink.hide-sm{display:none}}
 
 /* ============ ONBOARDING ============ */
 .screen{max-width:1180px;margin:0 auto;padding:34px 20px 80px}
-.hero-dark{background:radial-gradient(1200px 400px at 80% -10%, #26262b 0%, #0a0a0a 60%);color:#fff}
+.hero-dark{background:radial-gradient(1200px 400px at 80% -10%, #1c1d38 0%, #0a0b18 60%);color:#fff}
 .hero-inner{max-width:1180px;margin:0 auto;padding:64px 20px 54px}
 .hero-q{font-size:26px;font-weight:600;margin-bottom:18px}
-.searchbar{display:flex;align-items:center;background:#fff;border-radius:14px;padding:6px 6px 6px 20px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.searchbar{display:flex;align-items:center;background:#fff;border-radius:14px;padding:6px 6px 6px 20px;box-shadow:var(--shadow)}
 .searchbar input{flex:1;border:0;outline:0;font-size:20px;padding:14px 12px;background:transparent;min-width:0;color:#111}
 .searchbar .go{background:var(--indigo);border:0;color:#fff;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex:none}
 .suggest-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
-.suggest{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#eee;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:14px;text-align:left}
-.suggest:hover{background:rgba(255,255,255,.12)}
-.suggest .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,255,255,.1)}
-.coach{margin-top:22px;display:inline-flex;gap:10px;align-items:flex-start;background:rgba(79,70,229,.14);border:1px solid rgba(129,120,255,.45);border-radius:12px;padding:12px 16px;font-size:13.5px;color:#e6e4ff;max-width:520px}
+.suggest{background:var(--surface-1);border:1px solid var(--border);color:var(--ink-1);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:14px;text-align:left;box-shadow:var(--shadow-sm)}
+.suggest:hover{background:var(--indigo-soft)}
+.suggest .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,184,28,.14);color:var(--gold)}
+.coach{margin-top:22px;display:inline-flex;gap:10px;align-items:flex-start;background:rgba(255,184,28,.12);border:1px solid var(--brand-hair);border-radius:12px;padding:12px 16px;font-size:13.5px;color:#fbeecb;max-width:520px}
 .notice{margin-top:16px;background:#fff;border-left:4px solid var(--warn);border-radius:10px;padding:14px 16px;color:#111;display:none;align-items:center;gap:14px;flex-wrap:wrap}
 .notice button{background:#111;color:var(--volt);border:0;border-radius:9px;padding:9px 14px;font-weight:700}
 
@@ -90,11 +98,12 @@ html[data-theme="dark"] .step-pill{color:#b9b3ff}
 .icard h3{font-size:15.5px;display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .icard .ico{width:32px;height:32px;border-radius:8px;background:var(--indigo-soft);display:flex;align-items:center;justify-content:center;font-size:15px}
 .sowhat{font-size:13px;color:var(--ink-2);margin-top:12px;padding-top:10px;border-top:1px dashed var(--baseline)}
-.sowhat::before{content:"✦ ";color:var(--indigo)}
+.sowhat{display:flex;gap:7px}
+.sowhat::before{content:"";flex:none;width:11px;height:11px;margin-top:3px;background:var(--indigo);-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
 .srcnote{font-size:10px;color:var(--ink-muted);margin-top:8px;text-align:right}
 .bignum{font-size:42px;font-weight:800;letter-spacing:-.02em;line-height:1.05}
 .cta-row{display:flex;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
-.btn-primary{background:var(--indigo);color:#fff;border:0;border-radius:11px;padding:14px 26px;font-weight:700;font-size:15px}
+.btn-primary{background:var(--gold);color:var(--gold-ink);border:0;border-radius:11px;padding:14px 26px;font-weight:700;font-size:15px}
 .btn-ghost{background:transparent;color:var(--ink-muted);border:0;font-weight:600;padding:14px 10px}
 .btn-dark{background:#111;color:var(--volt);border:0;border-radius:11px;padding:14px 26px;font-weight:700;font-size:15px}
 .preview-note{text-align:center;color:var(--ink-muted);font-size:13px;margin-top:20px}
@@ -102,8 +111,8 @@ html[data-theme="dark"] .step-pill{color:#b9b3ff}
 .prio{background:var(--surface-1);border:2px solid var(--border);border-radius:14px;padding:16px;text-align:left;position:relative;transition:border-color .15s}
 .prio .tick{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;border:2px solid var(--baseline);background:var(--surface-1)}
 .prio.sel{border-color:var(--indigo)}
-.prio.sel .tick{background:var(--indigo);border-color:var(--indigo)}
-.prio.sel .tick::after{content:"✓";color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;height:100%}
+.prio.sel .tick{background:var(--gold);border-color:var(--gold)}
+.prio.sel .tick::after{content:"✓";color:var(--gold-ink);font-size:13px;display:flex;align-items:center;justify-content:center;height:100%}
 .prio .ico{width:38px;height:38px;border-radius:10px;background:var(--indigo-soft);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}
 .prio h4{font-size:14.5px;margin-bottom:5px}
 .prio p{font-size:12.5px;color:var(--ink-muted)}
@@ -113,7 +122,7 @@ html[data-theme="dark"] .step-pill{color:#b9b3ff}
 .signup-wrap input[type=text],.signup-wrap input[type=email]{width:100%;border:1px solid var(--baseline);border-radius:9px;padding:11px 12px;font-size:14.5px;background:var(--surface-1);color:var(--ink-1)}
 .deliv{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 .deliv label{display:flex;align-items:center;gap:7px;border:1px solid var(--baseline);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;margin:0;cursor:pointer}
-.deliv input{accent-color:var(--indigo)}
+.deliv input{accent-color:var(--gold-2)}
 .demonote{font-size:12px;color:var(--ink-muted);margin-top:14px;text-align:center}
 
 /* ============ DASHBOARD SHELL ============ */
@@ -151,9 +160,9 @@ html[data-theme="dark"] .step-pill{color:#b9b3ff}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
 .kpi{background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
 .kpi .lbl{font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
-.kpi .val{font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.02}
-.kpi .val.smaller{font-size:28px}
-.kpi .sub{font-size:12px;color:var(--ink-muted);margin-top:5px}
+.kpi .val{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1.02;font-variant-numeric:tabular-nums}
+.kpi .val.smaller{font-size:26px}
+.kpi .sub{font-size:12px;color:var(--ink-muted);margin-top:5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .kpi.alert{border-left:3px solid var(--crit)}
 .kpi.alert .val{color:var(--crit)}
 .chipd{display:inline-block;font-weight:700;font-size:12px;border-radius:999px;padding:1px 8px;white-space:nowrap}
@@ -182,7 +191,8 @@ html[data-theme="dark"] .statchip.warn{color:var(--warn)}
 .bar-fill{height:100%;border-radius:0 4px 4px 0;min-width:2px;position:absolute;top:0}
 .bar-val{font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .chart-note{font-size:13px;color:var(--ink-2);margin-top:10px;padding-top:8px;border-top:1px dashed var(--baseline)}
-.chart-note::before{content:"✦ ";color:var(--ink-muted)}
+.chart-note{display:flex;gap:7px}
+.chart-note::before{content:"";flex:none;width:10px;height:10px;margin-top:4px;background:var(--ink-muted);-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
 .scale-note{font-size:11px;color:var(--ink-muted);margin-top:6px}
 .brandchip{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .brandchip i{width:12px;height:12px;border-radius:50%;flex:none}
@@ -227,7 +237,7 @@ table.tbl{width:100%;border-collapse:collapse;font-size:13px}
 .kd{display:inline-block;width:40px;height:6px;background:var(--grid);border-radius:4px;vertical-align:1px;margin-right:6px;position:relative;overflow:hidden}
 .kd i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
 .lockcell{color:var(--ink-muted)}
-.lockcell::before{content:"🔒 ";font-size:11px}
+.lockcell::before{content:"";display:inline-block;width:11px;height:11px;margin-right:4px;vertical-align:-1px;background:currentColor;-webkit-mask:var(--lockicon) center/contain no-repeat;mask:var(--lockicon) center/contain no-repeat}
 .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
 
 /* brand cards */
@@ -322,14 +332,15 @@ details[open].bdetails summary::after{content:" ▾";}
 /* ==================================================================
    FACELIFT · Stagwell brand chrome  (Sprint 0 + 2)
    ================================================================== */
-body{font-family:"Helvetica Neue",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.003em}
+body{font-family:"Helvetica Neue","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Arial,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.003em;text-rendering:optimizeLegibility}
+.bar-val,.mval,.bignum,td.num,.ministats div b,.spark-tile .stx b,.vbars .vb .vval{font-variant-numeric:tabular-nums}
 a{color:var(--link);text-underline-offset:2px}
 h1,h2,h3,.dash-title{letter-spacing:-.02em}
-::selection{background:var(--gold);color:var(--gold-ink)}
+::selection{background:var(--indigo);color:#fff}
 
 /* nav */
 .topnav{background:linear-gradient(90deg,var(--brand-deep) 0%,#062a38 55%,var(--brand-deep-2) 100%);box-shadow:inset 0 -1px 0 var(--brand-hair),0 1px 12px rgba(0,0,0,.18);gap:18px}
-.topnav .logo{background:linear-gradient(90deg,#fff 60%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+.topnav .logo{background:linear-gradient(90deg,#fff 62%,#ffe6a6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
 .badge-demo{background:var(--gold);color:var(--gold-ink);box-shadow:0 0 0 3px rgba(255,184,28,.16)}
 .badge-new{background:var(--gold);color:var(--gold-ink)}
 .navlink{color:#cdd6d8}
@@ -339,21 +350,22 @@ h1,h2,h3,.dash-title{letter-spacing:-.02em}
 
 /* onboarding chrome */
 #screen-search{min-height:calc(100vh - 56px);background:#041a24}
-.hero-dark{background:radial-gradient(1100px 480px at 82% -18%, #0c3a4b 0%, var(--brand-deep) 48%, #041a24 100%);position:relative;overflow:hidden;min-height:calc(100vh - 56px)}
+.hero-dark{background:radial-gradient(1100px 480px at 82% -18%, #eef0f8 0%, var(--page) 55%, var(--surface-2) 100%);color:var(--ink-1);position:relative;overflow:hidden;min-height:calc(100vh - 56px)}
 .hero-inner{padding-top:12vh}
-.hero-dark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.7}
-.hero-q{background:linear-gradient(92deg,#fff 55%,#ffe6a6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.searchbar{box-shadow:0 18px 60px rgba(0,0,0,.42),0 0 0 1px rgba(255,184,28,.12)}
-.searchbar:focus-within{box-shadow:0 18px 60px rgba(0,0,0,.42),0 0 0 2px var(--gold)}
-.searchbar .go{background:var(--gold);color:var(--gold-ink);transition:transform .15s,filter .15s}
-.searchbar .go svg{stroke:var(--gold-ink)}
+.hero-dark::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,transparent,var(--indigo),transparent);opacity:.5}
+.hero-q{color:var(--ink-1);-webkit-text-fill-color:currentColor}
+.hero-q .accent,.hero-q em{color:var(--indigo);font-style:normal;-webkit-text-fill-color:var(--indigo)}
+.searchbar{box-shadow:var(--shadow),0 0 0 1px rgba(255,184,28,.14)}
+.searchbar:focus-within{box-shadow:0 18px 60px rgba(0,0,0,.42),0 0 0 2px var(--indigo)}
+.searchbar .go{background:var(--indigo);color:#fff;transition:transform .15s,filter .15s}
+.searchbar .go svg{stroke:#fff}
 .searchbar .go:hover{filter:brightness(1.05);transform:translateX(2px)}
 .suggest{transition:transform .15s,background .15s,border-color .15s}
-.suggest:hover{transform:translateY(-2px);border-color:var(--brand-hair)}
+.suggest:hover{transform:translateY(-2px);border-color:var(--indigo)}
 .suggest .ico{background:rgba(255,184,28,.14)}
 .coach{background:rgba(255,184,28,.12);border-color:var(--brand-hair);color:#fbeecb}
-.notice{border-left-color:var(--gold)}
-.notice button{background:var(--brand-deep);color:var(--gold)}
+.notice{border-left-color:var(--indigo)}
+.notice button{background:var(--indigo);color:#fff}
 
 .step-pill{background:var(--accent-soft);color:var(--gold-2);border:1px solid rgba(229,162,0,.35)}
 html[data-theme="dark"] .step-pill{color:var(--gold)}
@@ -362,9 +374,9 @@ html[data-theme="dark"] .freebanner{color:var(--gold);background:linear-gradient
 .icard{box-shadow:var(--shadow);transition:transform .2s var(--ease),box-shadow .2s}
 .icard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 .icard .ico{background:var(--accent-soft)}
-.sowhat::before{color:var(--gold-2)}
+.sowhat::before{background:var(--indigo)}
 .btn-primary{background:var(--gold);color:var(--gold-ink);box-shadow:0 6px 20px rgba(255,184,28,.32);transition:transform .15s,filter .15s,box-shadow .2s}
-.btn-primary:hover{filter:brightness(1.04);transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,184,28,.42)}
+.btn-primary:hover{filter:brightness(1.06);transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,184,28,.42)}
 .btn-dark{background:var(--brand-deep);color:var(--gold)}
 .btn-dark:hover{filter:brightness(1.15)}
 .prio{box-shadow:var(--shadow-sm);transition:transform .15s,border-color .15s,box-shadow .2s}
@@ -380,7 +392,7 @@ html[data-theme="dark"] .freebanner{color:var(--gold);background:linear-gradient
 /* dashboard header */
 .dash-head{background:linear-gradient(120deg,var(--brand-deep) 0%,#062a38 60%,var(--brand-deep-2) 100%);box-shadow:inset 0 -1px 0 var(--brand-hair)}
 .dash-title .volt{color:var(--gold)}
-.mbadge.voltb{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.mbadge.voltb{background:var(--indigo);color:#fff;border-color:var(--indigo)}
 .tabs-sticky{background:linear-gradient(120deg,var(--brand-deep),var(--brand-deep-2));box-shadow:0 2px 10px rgba(0,0,0,.16)}
 .tab{transition:color .15s}
 .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
@@ -389,9 +401,9 @@ html[data-theme="dark"] .freebanner{color:var(--gold);background:linear-gradient
 /* cards / tiles */
 .card{box-shadow:var(--shadow);transition:box-shadow .2s}
 .sec-h h3{position:relative;padding-left:12px}
-.sec-h h3::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:14px;border-radius:2px;background:var(--gold)}
+.sec-h h3::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:14px;border-radius:2px;background:var(--indigo)}
 .kpi{box-shadow:var(--shadow-sm);transition:transform .18s var(--ease),box-shadow .2s;border-top:2px solid transparent}
-.kpi:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-top-color:var(--gold)}
+.kpi:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-top-color:var(--indigo)}
 .kpi.alert{border-left:3px solid var(--crit);border-top:2px solid transparent}
 .kpi .val{font-weight:800}
 .dash-footer{background:linear-gradient(120deg,var(--brand-deep),var(--brand-deep-2));box-shadow:var(--shadow)}
@@ -472,7 +484,7 @@ html[data-theme="dark"] .msg .svc{color:var(--gold)}
 button.solve{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);border:1px solid rgba(229,162,0,.4);color:var(--gold-2);border-radius:999px;padding:4px 12px;font-size:11.5px;font-weight:700;transition:transform .15s,background .15s}
 html[data-theme="dark"] button.solve{color:var(--gold)}
 button.solve:hover{transform:translateY(-1px);background:var(--gold);color:var(--gold-ink)}
-button.solve::before{content:"✦ "}
+button.solve::before{content:"";width:9px;height:9px;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
 .sol-hero{background:linear-gradient(120deg,var(--brand-deep) 0%,#062a38 60%,var(--brand-deep-2) 100%);border-radius:var(--radius);color:#fff;padding:26px 24px;margin-bottom:20px;box-shadow:var(--shadow)}
 .sol-hero h2{font-size:24px;margin-bottom:8px}
 .sol-hero h2 b{color:var(--gold)}
@@ -508,28 +520,122 @@ html[data-theme="dark"] .sol-nike::before{color:var(--gold)}
 .sol-mini{opacity:.85}
 .sol-mini .sol-what{color:var(--ink-muted)}
 
+/* ==================================================================
+   COMPANY SHOWCASE MODAL (Stagwell product profile, in-page)
+   ================================================================== */
+@keyframes smIn{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+.solmodal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;padding:6vh 16px 16px;background:rgba(3,20,28,.55);backdrop-filter:blur(3px);overflow-y:auto}
+.solmodal.open{display:flex}
+.sm-body{width:min(680px,100%);background:var(--surface-1);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-lg);padding:22px 24px;display:flex;flex-direction:column;gap:12px;animation:smIn .32s var(--ease);position:relative}
+.sm-head{display:flex;align-items:center;gap:12px}
+.sm-mark{width:46px;height:46px;border-radius:12px;font-size:15px}
+.sm-head b{font-size:19px;display:block;letter-spacing:-.01em}
+.sm-head .cat{font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.05em;display:inline-flex;align-items:center;gap:5px}
+.sm-close{margin-left:auto;align-self:flex-start;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--ink-muted);transition:color .15s,border-color .15s}
+.sm-close:hover{color:var(--crit);border-color:var(--crit)}
+.sm-prob{font-size:13px}
+.sm-what{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.sm-sec-t{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);display:flex;align-items:center;gap:6px;margin-top:4px}
+.sm-feats{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:560px){.sm-feats{grid-template-columns:1fr}}
+.sm-feats div{background:var(--surface-2);border:1px solid var(--grid);border-radius:11px;padding:10px 12px}
+.sm-feats b{display:block;font-size:12.5px;margin-bottom:3px}
+.sm-feats span{font-size:11.5px;color:var(--ink-2);line-height:1.45}
+.sm-evidence{display:flex;flex-direction:column;gap:7px}
+.sm-ev{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;background:var(--accent-soft);border:1px solid rgba(229,162,0,.3);border-radius:10px;padding:9px 12px;font-size:12.5px;color:var(--ink-1);transition:transform .15s,border-color .15s}
+.sm-ev:hover{transform:translateX(3px);border-color:var(--gold)}
+.sm-ev em{font-style:normal;font-size:11px;font-weight:800;color:var(--gold-2);white-space:nowrap}
+html[data-theme="dark"] .sm-ev em{color:var(--gold)}
+.sm-note{font-size:12.5px;color:var(--ink-muted)}
+.sm-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--baseline);padding-top:12px;margin-top:2px}
+.sm-actions{display:flex;gap:8px;flex-wrap:wrap}
+.sm-cat-btn{background:var(--surface-2);border:1px solid var(--baseline);border-radius:8px;padding:7px 13px;font-weight:700;font-size:11.5px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.sm-cat-btn:hover{border-color:var(--gold);color:var(--gold-2)}
+.sol-card{cursor:pointer}
+.sol-more{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-2);white-space:nowrap}
+html[data-theme="dark"] .sol-more{color:var(--gold)}
+.sol-card:hover .sol-more{text-decoration:underline}
+
 @media(prefers-reduced-motion:reduce){
+  .sm-body{animation:none!important}
   .reveal,.animate-bars .bar-fill,.animate-bars .meter i,.animate-bars .vfill{animation:none!important;opacity:1!important;transform:none!important}
-  .gen-logo,.gen-step.active .gs-ico::before,.gen-bar.indet i{animation:none!important}
+  .gen-logo,.gen-step.active .gs-ico::before,.gen-bar.indet i,.typing i{animation:none!important}
   *{transition-duration:.01ms!important}
 }
+
+/* ==================================================================
+   POLISH · type system, SVG iconography, component refinements
+   ================================================================== */
+.icn{flex:none;vertical-align:-2.5px}
+.sparkmark{width:26px;height:26px;border-radius:7px;background:var(--gold);display:inline-flex;align-items:center;justify-content:center;flex:none;box-shadow:0 2px 8px rgba(255,184,28,.4)}
+.sparkmark::after{content:"";width:14px;height:14px;background:var(--gold-ink);-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat}
+.topnav .logo{display:flex;align-items:center;gap:10px}
+.navlink{display:inline-flex;align-items:center}
+.theme-btn{display:inline-flex;align-items:center;gap:6px}
+.bignum{font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.screen h2.big{letter-spacing:-.025em}
+.sec-h h3{font-size:13.5px;letter-spacing:.055em;font-weight:700;color:var(--ink-2)}
+.sec-h h3::before{height:13px}
+.card .srcnote,.icard .srcnote{letter-spacing:.04em;text-transform:uppercase;font-size:9px}
+main#app{background:linear-gradient(180deg,rgba(4,34,46,.05),transparent 340px)}
+html[data-theme="dark"] main#app{background:linear-gradient(180deg,rgba(139,130,245,.05),transparent 340px)}
+.step-pill{display:inline-flex;gap:7px}
+.step-pill::before{content:"";width:10px;height:10px;background:currentColor;-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat;align-self:center}
+html[data-theme="dark"] .notice{background:var(--surface-1);color:var(--ink-1)}
+html[data-theme="dark"] .notice b{color:var(--ink-1)}
+/* scoreboard */
+.tbl tr.grp td{background:var(--surface-2);color:var(--ink-muted);font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:5px 8px;border-bottom:1px solid var(--baseline)}
+.tbl .best{background:var(--tint-good);font-weight:600}
+.tbl .worst{background:var(--tint-crit);font-weight:600}
+.tbl .nikecol{border-left:2px solid var(--c-nike);background:rgba(42,120,214,.05)}
+html[data-theme="dark"] .tbl .nikecol{background:rgba(57,135,229,.1)}
+@media(max-width:980px){.tbl.sticky1 th:first-child,.tbl.sticky1 td:first-child{position:sticky;left:0;background:var(--surface-1);z-index:2;box-shadow:2px 0 0 var(--grid)}}
+/* footer cta */
+.dash-footer.slim{padding:13px 18px;font-size:13px;border-radius:12px}
+.dash-footer.slim button{padding:9px 16px;font-size:13px}
+/* chat */
+.badge-scripted{display:inline-block;background:var(--tint-warn);color:#8a6202;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:1.5px 7px;vertical-align:1px}
+html[data-theme="dark"] .badge-scripted{color:var(--warn)}
+.chat-msgs::after{content:"";align-self:center;margin:auto 0;width:72px;height:72px;background:var(--grid);-webkit-mask:var(--spark) center/contain no-repeat;mask:var(--spark) center/contain no-repeat;opacity:.55}
+.typing{display:flex;gap:4px;padding:8px 12px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-muted);animation:typedot 1s infinite}
+.typing i:nth-child(2){animation-delay:.16s}.typing i:nth-child(3){animation-delay:.32s}
+@keyframes typedot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.msg.bot{box-shadow:var(--shadow-sm)}
+.chat-in button{display:flex;align-items:center;justify-content:center}
+/* solutions */
+.sol-contact{overflow-wrap:anywhere;min-width:0}
+.sol-grid.minis{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:10px}
+.sol-grid.minis .sol-card{padding:14px}
+/* notes */
+.notes ol li::marker{color:var(--gold-2);font-weight:800}
+/* mobile hints */
+@media(max-width:900px){
+  .tabs{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  .tblwrap{-webkit-mask-image:linear-gradient(90deg,#000 94%,transparent);mask-image:linear-gradient(90deg,#000 94%,transparent)}
+}
+@media(max-width:640px){
+  .chat-fab{padding:11px 15px;right:14px;bottom:14px;font-size:13px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media print{.dash-footer,.solve-row,.chat-disc{display:none!important}}
 </style>
 </head>
 <body>
 
 <header class="topnav">
-  <span class="logo">STAGWELL AI</span>
+  <span class="logo"><span class="sparkmark"></span>STAGWELL AI</span>
   <span class="badge-demo">DEMO</span>
   <span class="spacer"></span>
-  <span class="navlink hide-sm">🌐 Public Intelligence <span class="badge-new">New</span></span>
-  <span class="navlink hide-sm">💡 Examples</span>
-  <button class="theme-btn" id="theme-btn" title="Toggle light/dark">🌙 Dark</button>
+  <span class="navlink hide-sm"><svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>&nbsp;Public Intelligence <span class="badge-new">New</span></span>
+  <span class="navlink hide-sm"><svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 1 3.7 10.7c-.6.5-.7 1.3-.7 2.3h-6c0-1-.1-1.8-.7-2.3A6 6 0 0 1 12 3z"/></svg>&nbsp;Examples</span>
+  <button class="theme-btn" id="theme-btn" title="Toggle light/dark"><svg class="icn" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>Dark</button>
   <span class="userchip" id="userchip">G</span>
 </header>
 
 <div class="gen" id="gen" aria-hidden="true">
   <div class="gen-inner">
-    <div class="gen-logo">✦</div>
+    <div class="gen-logo"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></svg></div>
     <h3 id="gen-title">Building your intelligence</h3>
     <p id="gen-sub">Stagwell AI is analyzing Nike across public sources</p>
     <div class="gen-steps" id="gen-steps"></div>
@@ -542,7 +648,7 @@ html[data-theme="dark"] .sol-nike::before{color:var(--gold)}
   <section id="screen-search">
     <div class="hero-dark">
       <div class="hero-inner">
-        <div class="hero-q">What brand, product, audience, or market do you want to understand?</div>
+        <div class="hero-q">What brand, product, audience, or market do you <span class="accent">want to understand?</span></div>
         <form class="searchbar" id="searchform">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input id="searchinput" type="text" placeholder="Try &quot;Nike&quot;…" autocomplete="off">
@@ -551,14 +657,14 @@ html[data-theme="dark"] .sol-nike::before{color:var(--gold)}
           </button>
         </form>
         <div class="suggest-row">
-          <button class="suggest" data-fill="Nike"><span class="ico">🏢</span>A brand you own</button>
-          <button class="suggest" data-fill="Nike"><span class="ico">👥</span>A competitor</button>
-          <button class="suggest" data-fill="Nike"><span class="ico">👟</span>A product category</button>
-          <button class="suggest" data-fill="Nike"><span class="ico">🎯</span>A new market opportunity</button>
+          <button class="suggest" data-fill="Nike"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M9 7.5h1.5M13.5 7.5H15M9 11.5h1.5M13.5 11.5H15M9 21v-4.5h6V21"/></svg></span>A brand you own</button>
+          <button class="suggest" data-fill="Nike"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="3.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M15.5 3.6a3.5 3.5 0 0 1 0 6.8"/></svg></span>A competitor</button>
+          <button class="suggest" data-fill="Nike"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/></svg></span>A product category</button>
+          <button class="suggest" data-fill="Nike"><span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>A new market opportunity</button>
         </div>
-        <div class="coach">✦ <span>Start with anything you care about — even if it is not your company.</span></div>
+        <div class="coach"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex:none;margin-top:2px"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></svg> <span>Start with anything you care about — even if it is not your company.</span></div>
         <div class="notice" id="search-notice">
-          <span>🎬 <b>This demo is populated with Nike data only.</b> Other brands aren’t wired up yet — explore the full experience with Nike.</span>
+          <span><svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16M2 9h5M2 15h5M17 9h5M17 15h5"/></svg> <b>This demo is populated with Nike data only.</b> Other brands aren’t wired up yet — explore the full experience with Nike.</span>
           <button id="usenike">Explore Nike instead →</button>
         </div>
       </div>
@@ -566,18 +672,18 @@ html[data-theme="dark"] .sol-nike::before{color:var(--gold)}
   </section>
 
   <section id="screen-snapshot" class="screen" hidden>
-    <div class="center"><span class="step-pill">✦ Step 1 of 3 · Free preview</span></div>
-    <div class="freebanner">✨ Free Snapshot — based on public market data.</div>
+    <div class="center"><span class="step-pill">Step 1 of 3 · Free preview</span></div>
+    <div class="freebanner"><svg width="16" height="16" viewBox="0 0 24 24" fill="var(--gold-2)" style="vertical-align:-2px"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></svg> Free Snapshot — based on public market data.</div>
     <div class="cards3" id="snapshot-cards"></div>
     <div class="cta-row">
-      <button class="btn-primary" id="to-priorities">✦ Tell us what you want to monitor →</button>
+      <button class="btn-primary" id="to-priorities">Tell us what you want to monitor →</button>
     </div>
-    <p class="preview-note">🔓 This is a preview of public insights. Continue to shape a dashboard around what matters to you.</p>
+    <p class="preview-note"><svg class="icn" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg> This is a preview of public insights. Continue to shape a dashboard around what matters to you.</p>
   </section>
 
   <section id="screen-priorities" class="screen" hidden>
     <div class="center">
-      <span class="step-pill">✦ Step 2 of 3 · Personalize</span>
+      <span class="step-pill">Step 2 of 3 · Personalize</span>
       <h2 class="big">What would make this useful to you?</h2>
       <p class="sub">Choose the signals and insights that matter most so we can shape your dashboard.</p>
     </div>
@@ -591,7 +697,7 @@ html[data-theme="dark"] .sol-nike::before{color:var(--gold)}
 
   <section id="screen-signup" class="screen" hidden>
     <div class="center">
-      <span class="step-pill">✦ Step 3 of 3 · Keep monitoring</span>
+      <span class="step-pill">Step 3 of 3 · Keep monitoring</span>
       <h2 class="big">Keep monitoring Nike</h2>
       <p class="sub">Signing up enables periodic and event-driven intelligence — delivered where you already work.</p>
     </div>
@@ -631,18 +737,22 @@ html[data-theme="dark"] .sol-nike::before{color:var(--gold)}
 
 </main>
 
-<button class="chat-fab" id="chat-fab">✦ Ask Stagwell AI</button>
+<button class="chat-fab" id="chat-fab"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></svg> Ask Stagwell AI</button>
+<div class="solmodal" id="solmodal" aria-hidden="true" role="dialog" aria-label="Stagwell product profile">
+  <div class="sm-body"></div>
+</div>
+
 <aside class="chat-panel" id="chat-panel" aria-label="Ask Stagwell AI">
   <div class="chat-h">
-    <span class="ai-ico">✦</span>
-    <div><b>Ask Stagwell AI</b><span>Your AI marketing intelligence assistant · <b style="color:var(--serious)">scripted demo</b></span></div>
-    <button class="close" id="chat-close" aria-label="Close chat">✕</button>
+    <span class="ai-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 7.4L22 12l-7.4 2.6L12 22l-2.6-7.4L2 12l7.4-2.6z"/></svg></span>
+    <div><b>Ask Stagwell AI</b><span>Your AI marketing intelligence assistant <span class="badge-scripted">Scripted demo</span></span></div>
+    <button class="close" id="chat-close" aria-label="Close chat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="chat-msgs" id="chat-msgs"></div>
   <div class="chips" id="chat-chips"></div>
   <div class="chat-in">
     <input id="chat-input" type="text" placeholder="Ask a question or request a customization…">
-    <button id="chat-send" aria-label="Send">➤</button>
+    <button id="chat-send" aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></button>
   </div>
   <div class="chat-disc">Demo assistant — responses are scripted from the 21 Jul 2026 report, not a live model.</div>
 </aside>
@@ -667,6 +777,40 @@ const state = { screen:'search', priorities:new Set(), name:'', tab:'exec', rend
 const $ = s => document.querySelector(s);
 const REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wait = ms => new Promise(r=>setTimeout(r, ms));
+
+/* ---- inline SVG icon set (replaces all emoji iconography) ---- */
+const IC = {
+  alert:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+  critical:'<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>',
+  warning:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+  serious:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  ban:'<circle cx="12" cy="12" r="9"/><path d="M5.6 5.6 18.4 18.4"/>',
+  flag:'<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/>',
+  smartphone:'<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3.5"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M15.5 3.6a3.5 3.5 0 0 1 0 6.8"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/>',
+  megaphone:'<path d="M3 11v2a1 1 0 0 0 1 1h2l4 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M14 7a5 5 0 0 1 0 10M17.5 4a9 9 0 0 1 0 16"/>',
+  trend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/>',
+  news:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h6M7 13h10M7 16h7"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+  shield:'<path d="M12 3l7 3v5c0 4.4-3 8.3-7 10-4-1.7-7-5.6-7-10V6z"/>',
+  target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+  cloud:'<path d="M17.5 19a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11.6-1A4 4 0 0 0 6 19z"/>',
+  bot:'<rect x="4" y="8" width="16" height="12" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/>',
+  chart:'<path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/>',
+  doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  radar:'<circle cx="12" cy="12" r="9"/><path d="M12 12l5-3"/><circle cx="12" cy="12" r="4"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  pin:'<path d="M12 21s-7-6.3-7-11a7 7 0 0 1 14 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  flask:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/>',
+  unlock:'<rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/>',
+  network:'<circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="18" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="M12 7.5v4M10 13l-3.5 3M14 13l3.5 3"/>'
+};
+function ic(name, size=14, extra=''){
+  return `<svg class="icn" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"${extra?` style="${extra}"`:''}>${IC[name]||''}</svg>`;
+}
 
 /* ---- generation choreography (Sprint 1): makes results feel computed ---- */
 const GEN = {
@@ -731,83 +875,201 @@ function animateIn(root){
 }
 /* ---- Stagwell Marketing Cloud catalog (from Product One-Pagers deck, Jul 2026) ---- */
 const SOLUTIONS = [
-  { id:'platform', name:'The Marketing Cloud Platform', cat:'Platform', ico:'☁️', mark:'MC',
+  { id:'platform', name:'The Marketing Cloud Platform', cat:'Platform', ico:'cloud', mark:'MC',
     prob:'Disparate marketing tools lead to disconnected processes and cost inefficiencies.',
     what:'Makes it easy for marketers to discover AI-powered products, collaborate more effectively, and achieve greater outcomes with integrated workflows.',
     feats:['Enhanced discoverability','Shared workspaces','Multi-product bundles','Single sign-on & billing'],
     nike:'One roof for every product below — bundle IMAI, QuestBrand, GEOPulse and SATS into a single Nike intelligence stack instead of four vendor contracts.',
     metrics:['whole dashboard'], contact:null },
-  { id:'agentcloud', name:'Agent Cloud', cat:'Platform', ico:'🤖', mark:'AC',
+  { id:'agentcloud', name:'Agent Cloud', cat:'Platform', ico:'bot', mark:'AC',
     prob:'Too many scattered AI tools create inefficiency and security risks for modern marketers.',
     what:'Centralizes access to the best AI models in one secure hub — usage-based pricing, enterprise-grade security, and custom assistants built for marketers.',
     feats:['Data never trains models','Latest LLMs in one place','Pay per use','Custom AI assistants'],
     nike:'The engine an assistant like “Ask Stagwell AI” runs on — Nike teams get secure LLM access and can ship custom assistants without data leaving the fence.',
     metrics:['AI assistant'], contact:['Abhi Ademmagari','venkata.ademmagari@themarketingcloud.com'] },
-  { id:'questbrand', name:'QuestBrand', cat:'Market Research', ico:'📊', mark:'QB',
+  { id:'questbrand', name:'QuestBrand', cat:'Market Research', ico:'chart', mark:'QB',
     prob:'Understanding how a brand resonates with customers is difficult and expensive.',
     what:'The Harris Poll’s global, real-time brand tracker — 1,700+ brands, 30 years of history, AI-embedded reporting and dynamic visualizations.',
     feats:['Brand Equity Score','Conversion funnel','150+ audience segments','Pre/post campaign views'],
     nike:'Track Nike’s equity against adidas and New Balance in real time, and quantify whether campaigns like “Define Greatness” move perception — not just likes (+22.21% MoM).',
     metrics:['scoreboard','share of voice','campaign lift'], contact:['Zeke Hughes','zeke.hughes@harrispoll.com'] },
-  { id:'questdiy', name:'QuestDIY', cat:'Market Research', ico:'📝', mark:'QD',
+  { id:'questdiy', name:'QuestDIY', cat:'Market Research', ico:'doc', mark:'QD',
     prob:'Consumer research is expensive, time-consuming, and resource-heavy.',
     what:'Harris’ AI-assisted survey platform — build, field, and analyze surveys quickly, with instant deployment to respondents in 100+ countries.',
     feats:['Flexible question types','100+ country reach','AI survey generator','Real-time results'],
     nike:'Answer the “why” behind the 0.06% engagement rate: field a survey to 18–34 sneaker buyers in the US, Brazil, and India this week, not next quarter.',
     metrics:['engagement rate','audience insight'], contact:['Zeke Hughes','zeke.hughes@harrispoll.com'] },
-  { id:'bera', name:'BERA.ai', cat:'Market Research', ico:'📈', mark:'BE',
+  { id:'bera', name:'BERA.ai', cat:'Market Research', ico:'trend', mark:'BE',
     prob:'Tracking brand performance and staying ahead of competitors shouldn’t be costly or slow.',
     what:'Brand Explorer links brand strategy to business outcomes — the financial impact of brand investments, predictive analytics, and global benchmarking across 130+ metrics.',
     feats:['Connect Brand-to-Business™','Explain metric shifts','130+ metrics, no blind spots','AI-generated briefs'],
     nike:'Explain the shifts this dashboard only shows: why the keyword base fell -5.6% and what the EMV lead is actually worth in revenue terms.',
     metrics:['deltas','EMV','brand equity'], contact:['Michael Vasquez','michael.vasquez@bera.ai'] },
-  { id:'pulse', name:'Pulse', cat:'Communications', ico:'🛰️', mark:'PU',
+  { id:'pulse', name:'Pulse', cat:'Communications', ico:'radar', mark:'PU',
     prob:'Comms teams see the noise too late to shape the outcome.',
     what:'Turns emotional signals into strategic intelligence — a Chief Comms Command Center that spotlights emerging risks, decodes hot-button triggers, and tracks message resonance.',
     feats:['Comms command center','Know the trigger','Message-gap analysis','Trend monitoring'],
     nike:'Put the spam-blog attack on Jordan terms and the “hides likes” narrative on a risk radar before they shape coverage — and measure whether Nike’s response lands.',
     metrics:['toxicity','reputation risk'], contact:['Tony Sardella','tony.sardella@themarketingcloud.com'] },
-  { id:'imai', name:'IMAI', cat:'Communications', ico:'🤳', mark:'IM',
+  { id:'imai', name:'IMAI', cat:'Communications', ico:'smartphone', mark:'IM',
     prob:'Identifying and engaging influencers is expensive and inefficient.',
     what:'InfluencerMarketing.ai — the platform behind this dashboard’s social data. 500M+ creators across 6 platforms, with bot detection, audience forecasting, and end-to-end campaign management.',
     feats:['500M+ creators','In-platform deal flow','Bot detection & forecasting','7-year brand-safety scan'],
     nike:'Attack the audience-quality problem head-on: 21.65% of Nike’s followers are bots (AQS 14). Find creators whose audiences are real, forecast reach honestly, and rebuild ER from 0.06%.',
     metrics:['fake followers','AQS','engagement rate','EMV'], contact:['Luis Carranza','luis@influencermarketing.ai'] },
-  { id:'unicepta', name:'UNICEPTA', cat:'Communications', ico:'📡', mark:'UN',
+  { id:'unicepta', name:'UNICEPTA', cat:'Communications', ico:'globe', mark:'UN',
     prob:'Global media signals are slow, scattered, and hard to act on.',
     what:'GenAI-powered media intelligence from 460M+ sources across 200 countries and 187 languages — monitoring, reputation analysis, trend sensors, and a dedicated client team.',
     feats:['Cross-media monitoring','Reputation analytics','Journalist database','Crisis support'],
     nike:'Watch all 460M sources for the toxic spam-blog network and rival campaign launches — and benchmark Nike’s share of narrative against adidas’ #YouGotThis.',
     metrics:['media coverage','toxicity','competitor tracking'], contact:['JP Lovejoy','JP.Lovejoy@unicepta.com'] },
-  { id:'geopulse', name:'GEOPulse', cat:'Communications', ico:'🧭', mark:'GP',
+  { id:'geopulse', name:'GEOPulse', cat:'Communications', ico:'compass', mark:'GP',
     prob:'Brands are losing the ability to shape their own narratives as consumers rely on LLMs.',
     what:'A Generative AI Optimization and reputation-visibility platform — large-scale LLM monitoring, predictive content optimization, and compliance-ready outputs.',
     feats:['Share of AI Voice','Citation-gap analysis','AI visibility audit','Compliance outputs'],
     nike:'Built for exactly this tab’s red flag: reddit.com cites within 400 mentions of nike.com, Gemini citations are down -17.3%, and AI Search Health sits at 79% with blocked AI crawlers. GEOPulse wins those citations back.',
     metrics:['AI visibility','citations','AI search health'], contact:['Raja Gopal','v-raja.gopal@themarketingcloud.com'] },
-  { id:'sats', name:'SATS', cat:'Media', ico:'🎯', mark:'SA',
+  { id:'sats', name:'SATS', cat:'Media', ico:'target', mark:'SA',
     prob:'Knowing your audience and what motivates them is hard with fragmented data and disconnected tools.',
     what:'Stagwell Agentic Targeting System — a privacy-first audience platform on the Stagwell ID Graph, fusing first-party data with media data and proprietary consumer intelligence.',
     feats:['Proprietary data sets','Agentic AI segmentation','Pipe-to-activation','Differential privacy (OpenDP)'],
     nike:'Close the followers-vs-likers gap: Nike’s engaged audience is 71.6% male and India-led while followers are US-led. Build those segments and activate against the 268.5K missing keywords rivals capture.',
     metrics:['audience','likers','keyword gap'], contact:['Peter Cromwell','Peter.Cromwell@themarketingcloud.com'] },
-  { id:'peopleplatform', name:'The People Platform', cat:'Media', ico:'📍', mark:'PP',
+  { id:'peopleplatform', name:'The People Platform', cat:'Media', ico:'pin', mark:'PP',
     prob:'Profiling consumers solely on digital behavior paints an inaccurate picture.',
     what:'First- and third-party data with location intelligence — audience measurement across DOOH and cinema, Nielsen/MediaOcean-integrated, with post-visitation surveys.',
     feats:['Audience measurement','Currency-grade data','Location intelligence','Post-visit surveys'],
     nike:'Connect the dashboard to the physical world: “nike outlet” pulls 201K searches/mo and clearance pages are bleeding traffic — measure who actually walks into Nike retail and why.',
     metrics:['site visits','retail demand'], contact:['Georgy Brady','Gbrady@thepeopleplatform.com'] },
-  { id:'questrq', name:'QuestRQ', cat:'Market Research', ico:'🔬', mark:'RQ', mini:true,
+  { id:'questrq', name:'QuestRQ', cat:'Market Research', ico:'flask', mark:'RQ', mini:true,
     what:'Part of the Harris Quest research suite. One-pager not included in this deck — contact for details.',
     nike:null, metrics:[], contact:['Zeke Hughes','zeke.hughes@harrispoll.com'] },
-  { id:'unlock', name:'Unlock', cat:'Media', ico:'🔓', mark:'UL', mini:true,
+  { id:'unlock', name:'Unlock', cat:'Media', ico:'unlock', mark:'UL', mini:true,
     what:'One-pager not included in this deck — contact for details.',
     nike:null, metrics:[], contact:['Adam Dietrich','adam.dietrich@unlockcommunity.com'] },
-  { id:'idgraph', name:'Stagwell ID Graph', cat:'Media', ico:'🕸️', mark:'ID', mini:true,
+  { id:'idgraph', name:'Stagwell ID Graph', cat:'Media', ico:'network', mark:'ID', mini:true,
     what:'The identity spine SATS is built on — fuses first-party data with third-party media data and proprietary consumer intelligence (described in the SATS one-pager).',
     nike:null, metrics:[], contact:null },
 ];
 const SOL_BY_ID = Object.fromEntries(SOLUTIONS.map(s=>[s.id,s]));
+/* Full one-pager detail (verbatim feature copy from the Product One-Pagers deck)
+   + evidence: where each product's problem shows up on this dashboard. */
+const SOL_DETAIL = {
+  platform: { featsFull:[
+      ['Enhanced Discoverability','Easily identify and learn about relevant products without having to conduct external research.'],
+      ['Improved Collaboration','Increase teamwork and communication with shared workspaces and cross-application interconnectivity.'],
+      ['Multi-product Cost Efficiencies','Bundle multiple integrated products based on business need to increase cost savings.'],
+      ['Centralized Management','Streamlined on-boarding, billing, single sign-on, and user access controls help save you time.']],
+    evidence:[] },
+  agentcloud: { featsFull:[
+      ['Data Security','Keep your sensitive data safe when using AI tools — it’s never used to train AI models.'],
+      ['The Best AI Tools','Access the latest LLMs and creative AI tools in one place.'],
+      ['Flexible Usage','Pay only for what you use, not bloated subscriptions.'],
+      ['Customization','Build and share your own AI assistants tailored to your workflows.']],
+    evidence:[] },
+  questbrand: { featsFull:[
+      ['Brand Equity Score','Gauge your brand’s momentum, consideration, quality, and familiarity.'],
+      ['Conversion Funnel','Pinpoint where you’re losing customers and identify areas of engagement and attrition.'],
+      ['Robust Audience Segmentation','Explore 150+ demographic, psychographic, and behavioral segments.'],
+      ['Evaluate Ad Campaigns','Use the pre/post view to quantify how a campaign has affected your brand’s perception.']],
+    evidence:[['social','Head-to-head scoreboard — 6 brands'],['exec','Share of six-brand IG audience: Nike 81.6%'],['exec','Follower growth: Nike -0.07%/mo, only shrinking account']] },
+  questdiy: { featsFull:[
+      ['Flexible Surveys','Varying question types (multiple choice, lists, open ends, etc.), and the ability to upload image or video.'],
+      ['Global Distribution','Instant deployment to respondents in more than 100 countries.'],
+      ['Survey Generator','AI assistant tool enables fast drafting using market-research best practices.'],
+      ['Immediate Insights','Real-time access to results while in-field, and the option to download raw data.']],
+    evidence:[['social','IG engagement rate 0.06% — the “why” is unanswered'],['social','Core audience: 25–34, US/Brazil/India']] },
+  bera: { featsFull:[
+      ['Connect Brand-to-Business™','Stop simply tracking brand metrics. Instead, quantify the real impact they have on business outcomes, e.g. sales and KPIs.'],
+      ['Explain Brand Changes','Gain a better understanding of why brand metrics have shifted from one period to the next.'],
+      ['Eliminate Brand Blind Spots','Understand your brand’s full story with 130+ metrics offering demographic, geographic, and behavioral insights.'],
+      ['Better Ideas, Faster, with AI','Transform brand and audience data into actionable briefs and ideas, empowering smarter activation strategies.']],
+    evidence:[['exec','Organic keywords -5.6% MoM — unexplained shift'],['social','EMV $4.8M — what is it worth in revenue?']] },
+  pulse: { featsFull:[
+      ['Chief Comms Command Center','Spotlight emerging risks and opportunities, and gauge current brand perception.'],
+      ['Know the Trigger','Understand what makes hot-button topics so charged, so your team can craft messaging that hits the right note.'],
+      ['Assess the Gaps','Determine how far a brand’s messages are from resonating with target audiences.'],
+      ['Monitor Trends','Clearly show the effectiveness of communications over time.']],
+    evidence:[['links','Backlink toxicity HIGH — 19.3% of sampled links'],['links','13 new toxic domains this period']] },
+  imai: { featsFull:[
+      ['Extensive Influencer Reach','Discover 500MM+ creators worldwide across YouTube, Instagram, TikTok, and more.'],
+      ['Streamlined Management','Efficiently negotiate deals directly within the platform and manage content editing seamlessly.'],
+      ['Audience Forecasting','Determine accurate audience size with bot detection and advanced audience analytics.'],
+      ['Brand Safety Controls','Analyze the past 7 years of creators’ content to ensure brand alignment.']],
+    evidence:[['social','Fake/bot followers 21.65% — worst in set'],['social','Audience Quality Score 14 (Poor)'],['social','IG engagement rate 0.06% vs adidas 0.28%']] },
+  unicepta: { featsFull:[
+      ['Media Monitoring','Enjoy curated media reviews, cross-media news alerts, event and industry monitoring, competitor tracking, and social listening.'],
+      ['Comprehensive Analytics','Stay ahead of the curve with reputation analysis, trend sensors, deep dives into specific topics, and analytics tied to your own KPIs.'],
+      ['Cutting-edge Tech','Access data through a one-stop solution dashboard, search a database of journalists and influencers, and let AI automate key parts of the process.'],
+      ['Human Touch','The right tech with the right support, including a dedicated client team, and assistance for crisis management and license management.']],
+    evidence:[['links','Spam-blog network targeting Jordan / Nike TN terms'],['social','Rival campaign tracking — adidas #YouGotThis']] },
+  geopulse: { featsFull:[
+      ['AI Visibility Dashboards','Real-time metrics on Share of AI Voice, citation rank, and bot activity.'],
+      ['Gap Analysis','Identify narrative gaps where competitors dominate AI answers.'],
+      ['AI Visibility Audit','Benchmark owned media against AI citation best practices.'],
+      ['Compliance Enforcement','Produces audit-ready outputs aligned with legal and regulatory workflows.']],
+    evidence:[['ai','reddit.com (83.1K) cited nearly as often as nike.com (83.5K)'],['ai','Gemini citations collapsing -17.3%'],['searchkw','AI Search Health 79% — AI crawlers blocked']] },
+  sats: { featsFull:[
+      ['Proprietary Data Sets','Unlock deep behavioral and attitudinal mindsets from Stagwell’s vast proprietary data.'],
+      ['Agentic Exploration','Segment audiences dynamically with an AI interface built for marketers.'],
+      ['Seamless Activation','Accelerate multi-channel launches by piping rich audience insights straight into activation platforms.'],
+      ['Differential Privacy','Activate sensitive datasets securely, powered by Harvard’s OpenDP project.']],
+    evidence:[['social','Likers are India-led & 71.6% male — followers are US-led'],['searchkw','Missing 1.5M keywords vs Dick’s'],['searchkw','Non-branded traffic -2.39%']] },
+  peopleplatform: { featsFull:[
+      ['Audience Measurement','Understand who is actually exposed to your campaigns across DOOH, cinema, and more.'],
+      ['Trustworthy Data','Data sanitization and validation offer currency-level insights, integrated with Nielsen and MediaOcean.'],
+      ['Location Intelligence','Understand offline behaviors and movement patterns via millions of anonymized devices.'],
+      ['Post-Visitation Surveys','Gather consumer feedback about on-site experiences with your brand and products.']],
+    evidence:[['searchkw','“nike outlet” 201K searches/mo · clearance page -22.8K'],['searchkw','Site visits 91.5M (-1.82%)']] },
+  questrq: { featsFull:null, evidence:[] },
+  unlock: { featsFull:null, evidence:[] },
+  idgraph: { featsFull:null, evidence:[['searchkw','Powers SATS activation against the keyword gap']] }
+};
+const TAB_NAME = Object.fromEntries([['exec','Executive Overview'],['social','Social Competitive'],['searchkw','Search & Keywords'],['ai','AI Visibility'],['links','Backlinks & Risk'],['solutions','Stagwell Solutions'],['notes','Data Notes']]);
+/* ---- company showcase modal (in-page, no tab switch) ---- */
+function openSolModal(id){
+  const s=SOL_BY_ID[id]; if(!s) return;
+  const d=SOL_DETAIL[id]||{};
+  const wrap=$('#solmodal');
+  const feats = d.featsFull
+    ? `<div class="sm-sec-t">${ic('doc',13)} Capabilities — from the one-pager</div>
+       <div class="sm-feats">${d.featsFull.map(f=>`<div><b>${esc(f[0])}</b><span>${esc(f[1])}</span></div>`).join('')}</div>`
+    : `<div class="sm-note"><span class="lockcell"></span> No one-pager for this product in the July 2026 deck — capabilities available on request.</div>`;
+  const ev = (d.evidence&&d.evidence.length)
+    ? `<div class="sm-sec-t">${ic('chart',13)} Where this shows up on your dashboard</div>
+       <div class="sm-evidence">${d.evidence.map(e=>`<button class="sm-ev" data-tab="${e[0]}"><span>${esc(e[1])}</span><em>${esc(TAB_NAME[e[0]])} →</em></button>`).join('')}</div>`
+    : '';
+  wrap.querySelector('.sm-body').innerHTML = `
+    <div class="sm-head">
+      <span class="sol-mark sm-mark">${esc(s.mark)}</span>
+      <div><b>${esc(s.name)}</b><span class="cat">${ic(s.ico,12)} ${esc(s.cat)} · Stagwell Marketing Cloud</span></div>
+      <button class="sm-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+    </div>
+    ${s.prob?`<div class="sol-prob sm-prob">“${esc(s.prob)}”</div>`:''}
+    <div class="sm-what">${esc(s.what)}</div>
+    ${s.nike?`<div class="sol-nike">${esc(s.nike)}</div>`:''}
+    ${feats}
+    ${ev}
+    <div class="sm-foot">
+      <span class="sol-contact">${s.contact?`<b>${esc(s.contact[0])}</b> · ${esc(s.contact[1])}`:'Via The Marketing Cloud'}</span>
+      <span class="sm-actions">
+        <button class="sm-cat-btn">${ic('globe',13)} See in catalog</button>
+        <button class="sol-cta" data-openchat>Request a demo</button>
+      </span>
+    </div>`;
+  wrap.classList.add('open'); wrap.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  wrap.querySelector('.sm-close').addEventListener('click', closeSolModal);
+  wrap.querySelector('.sm-cat-btn').addEventListener('click', ()=>{ closeSolModal(); goSolution(id); });
+  wrap.querySelector('[data-openchat]').addEventListener('click', ()=>{ closeSolModal(); openChat(); botSay(CHAT.expert); });
+  wrap.querySelectorAll('.sm-ev').forEach(b=>b.addEventListener('click', ()=>{ closeSolModal(); selectTab(b.dataset.tab); window.scrollTo({top:0, behavior:REDUCED?'auto':'smooth'}); }));
+}
+function closeSolModal(){
+  const wrap=$('#solmodal');
+  wrap.classList.remove('open'); wrap.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('#solmodal').classList.contains('open')) closeSolModal(); });
 function solvePill(ids, label){
   return `<div class="solve-row">${label?`<span style="font-size:10px;color:var(--ink-muted);align-self:center;text-transform:uppercase;letter-spacing:.05em;font-weight:700">${esc(label)}</span>`:''}` +
     ids.map(id=>`<button class="solve" data-sol="${id}" title="How ${esc(SOL_BY_ID[id].name)} helps: ${esc(SOL_BY_ID[id].nike||SOL_BY_ID[id].what)}">${esc(SOL_BY_ID[id].name)}</button>`).join('') + `</div>`;
@@ -825,13 +1087,17 @@ function goSolution(id){
 }
 document.addEventListener('click', e=>{
   const b=e.target.closest('button.solve');
-  if(b) goSolution(b.dataset.sol);
+  if(b){ openSolModal(b.dataset.sol); return; }
+  if(e.target.closest('#solmodal') && !e.target.closest('.sm-body')){ closeSolModal(); return; }
+  const card=e.target.closest('.sol-card');
+  if(card && !e.target.closest('button')) openSolModal(card.id.replace('sol-',''));
 });
 function skeleton(kind){
-  const tile=`<div class="kpi"><span class="skel line" style="width:55%"></span><span class="skel" style="height:40px;margin-top:10px"></span></div>`;
-  const chart=`<div class="card"><span class="skel line wide" style="width:38%"></span><span class="skel chart" style="margin-top:14px"></span></div>`;
+  const tile=`<div class="kpi"><span class="skel line" style="width:52%"></span><span class="skel" style="height:34px;width:70%;margin-top:12px"></span><span class="skel line" style="width:40%;margin-top:10px"></span></div>`;
+  const bars=`<div class="card"><span class="skel line wide" style="width:38%"></span>${'<div style="display:grid;grid-template-columns:120px 1fr 70px;gap:10px;align-items:center;margin-top:12px"><span class="skel line" style="margin:0"></span><span class="skel" style="height:14px"></span><span class="skel line" style="margin:0"></span></div>'.repeat(5)}</div>`;
+  const chart=`<div class="card"><span class="skel line wide" style="width:32%"></span><span class="skel chart" style="margin-top:14px"></span></div>`;
   return `<div class="sec"><div class="kpis">${tile.repeat(kind==='wide'?6:5)}</div></div>
-    <div class="sec grid2">${chart}${chart}</div>`;
+    <div class="sec grid2">${bars}${chart}</div>`;
 }
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function fmt(n){
@@ -852,7 +1118,7 @@ function brandchip(id, label){
 }
 function kpiTiles(list){
   return `<div class="kpis">` + list.map(k =>
-    `<div class="kpi ${k.alert?'alert':''}"><div class="lbl">${k.alert?'⚠ ':''}${esc(k.lbl)}</div>
+    `<div class="kpi ${k.alert?'alert':''}"><div class="lbl">${k.alert?ic('alert',11)+' ':''}${esc(k.lbl)}</div>
      <div class="val ${String(k.val).length>6?'smaller':''}">${esc(k.val)}</div>
      <div class="sub">${k.sub?esc(k.sub)+' ':''}${chip(k.delta,k.deltaTxt,k.invert)}</div></div>`).join('') + `</div>`;
 }
@@ -896,7 +1162,9 @@ function sparkDelta(up){
 $('#theme-btn').addEventListener('click',()=>{
   state.theme = state.theme==='light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', state.theme);
-  $('#theme-btn').textContent = state.theme==='light' ? '🌙 Dark' : '☀️ Light';
+  const moon='<svg class="icn" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+  const sun='<svg class="icn" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  $('#theme-btn').innerHTML = state.theme==='light' ? moon+'Dark' : sun+'Light';
 });
 
 /* ===================== ROUTER + ONBOARDING ===================== */
@@ -930,7 +1198,7 @@ function renderSnapshot(){
   const dov=DATA.search.domainOverview.worldwide;
   $('#snapshot-cards').innerHTML = `
   <div class="icard">
-    <h3><span class="ico">📱</span>1. Social Reach</h3>
+    <h3><span class="ico">${ic('smartphone',15)}</span>1. Social Reach</h3>
     <div class="bignum">${esc(N.totalFollowers.d)}</div>
     <div style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">total followers (IG + TikTok + YouTube)</div>
     ${barList([
@@ -942,7 +1210,7 @@ function renderSnapshot(){
     <div class="srcnote">IMAI · 21 Jul 2026</div>
   </div>
   <div class="icard">
-    <h3><span class="ico">🔎</span>2. Search Presence</h3>
+    <h3><span class="ico">${ic('search',15)}</span>2. Search Presence</h3>
     <div class="bignum">99<span style="font-size:16px;font-weight:600;color:var(--ink-muted)"> /100</span></div>
     <div style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">SEMrush Authority Score — “Industry leader”</div>
     <div style="display:flex;gap:22px;flex-wrap:wrap;margin:6px 0 2px">
@@ -953,7 +1221,7 @@ function renderSnapshot(){
     <div class="srcnote">SEMrush · 21 Jul 2026</div>
   </div>
   <div class="icard">
-    <h3><span class="ico">⚠️</span>3. Early Warning</h3>
+    <h3><span class="ico">${ic('alert',15)}</span>3. Early Warning</h3>
     <div class="bignum" style="color:var(--crit)">0.06%</div>
     <div style="font-size:12px;color:var(--ink-muted);margin-bottom:12px">Nike IG engagement rate</div>
     ${barList([
@@ -968,19 +1236,19 @@ function renderSnapshot(){
 $('#to-priorities').addEventListener('click',()=>{ show('priorities'); renderPriorities(); });
 
 const PRIORITIES = [
-  { ico:'📣', t:'Competitor Campaigns', d:'Track competitor campaigns, messaging, and share of voice across markets.', sel:true },
-  { ico:'🧑‍🤝‍🧑', t:'Influencer Performance', d:'Monitor influencer activity, engagement, and impact across channels.', sel:true },
-  { ico:'📈', t:'Sales Trends', d:'Analyze sales performance and category trends over time.', sel:false },
-  { ico:'👤', t:'Audience Growth', d:'Understand audience expansion, demographics, and engagement shifts.', sel:true },
-  { ico:'📰', t:'Media Coverage', d:'Stay updated on brand mentions and media narrative trends.', sel:false },
-  { ico:'🌍', t:'European Expansion', d:'Identify opportunities, market signals, and risks across European markets.', sel:false },
-  { ico:'🛡️', t:'Reputation Risk', d:'Detect emerging issues and reputation threats early.', sel:false }
+  { ico:'megaphone', t:'Competitor Campaigns', d:'Track competitor campaigns, messaging, and share of voice across markets.', sel:true },
+  { ico:'users', t:'Influencer Performance', d:'Monitor influencer activity, engagement, and impact across channels.', sel:true },
+  { ico:'trend', t:'Sales Trends', d:'Analyze sales performance and category trends over time.', sel:false },
+  { ico:'user', t:'Audience Growth', d:'Understand audience expansion, demographics, and engagement shifts.', sel:true },
+  { ico:'news', t:'Media Coverage', d:'Stay updated on brand mentions and media narrative trends.', sel:false },
+  { ico:'globe', t:'European Expansion', d:'Identify opportunities, market signals, and risks across European markets.', sel:false },
+  { ico:'shield', t:'Reputation Risk', d:'Detect emerging issues and reputation threats early.', sel:false }
 ];
 PRIORITIES.filter(p=>p.sel).forEach(p=>state.priorities.add(p.t));
 function renderPriorities(){
   $('#prio-grid').innerHTML = PRIORITIES.map(p=>`
     <button class="prio ${state.priorities.has(p.t)?'sel':''}" data-t="${esc(p.t)}">
-      <span class="tick"></span><span class="ico">${p.ico}</span>
+      <span class="tick"></span><span class="ico">${ic(p.ico,17)}</span>
       <h4>${esc(p.t)}</h4><p>${esc(p.d)}</p>
     </button>`).join('');
   updPrioCount();
@@ -991,7 +1259,7 @@ function renderPriorities(){
     updPrioCount();
   }));
 }
-function updPrioCount(){ $('#prio-count').textContent = `✓ ${state.priorities.size} of ${PRIORITIES.length} priorities selected`; }
+function updPrioCount(){ $('#prio-count').textContent = `${state.priorities.size} of ${PRIORITIES.length} priorities selected`; }
 $('#to-signup').addEventListener('click',()=>show('signup'));
 $('#skip-prio').addEventListener('click',()=>show('signup'));
 $('#signupform').addEventListener('submit',async e=>{
@@ -1038,7 +1306,7 @@ function renderTab(id){
     if(id==='links') pane.innerHTML=tabLinks();
     if(id==='solutions') pane.innerHTML=tabSolutions();
     if(id==='notes') pane.innerHTML=tabNotes();
-    pane.insertAdjacentHTML('beforeend', footerCta());
+    pane.insertAdjacentHTML('beforeend', footerCta(id));
     pane.querySelectorAll('[data-openchat]').forEach(b=>b.addEventListener('click',()=>{ openChat(); botSay(CHAT.expert); }));
     pane.querySelectorAll('.goto').forEach(b=>b.addEventListener('click',()=>selectTab(b.dataset.goto)));
     animateIn(pane);
@@ -1047,8 +1315,18 @@ function renderTab(id){
   pane.innerHTML = `<div class="reveal">${skeleton(id==='searchkw'||id==='exec'?'wide':'std')}</div>`;
   setTimeout(build, 430);
 }
-function footerCta(){
-  return `<div class="dash-footer"><span>Looking to execute on these opportunities? Stagwell offers integrated solutions across strategy, media, creators, and creative.</span><button data-openchat>Talk to a Stagwell Expert</button></div>`;
+function footerCta(id){
+  const copy={
+    exec:['See a full competitive teardown', 'Book an executive briefing'],
+    social:['Turn 21.65% bot followers and a 0.06% ER into a creator plan', 'Talk to a creator strategist'],
+    searchkw:['Recover the 268.5K-keyword retail gap', 'Talk to a search strategist'],
+    ai:['Win back the AI citations leaking to Reddit &amp; YouTube', 'Talk to an AI-visibility expert'],
+    links:['Get a disavow plan for the toxic spam-blog network', 'Talk to a risk analyst'],
+    solutions:['Assemble the right mix of Stagwell products for Nike', 'Request a tailored proposal'],
+    notes:['Questions on methodology or sourcing?', 'Talk to the data team']
+  };
+  const [msg,btn]=copy[id]||copy.exec;
+  return `<div class="dash-footer slim"><span>${msg}.</span><button data-openchat>${btn}</button></div>`;
 }
 
 /* ---------- TAB 1 · EXECUTIVE (E1–E6) ---------- */
@@ -1064,12 +1342,12 @@ function tabExec(){
     { lbl:'Backlink toxicity', val:'HIGH', sub:'19.3% toxic', alert:true }
   ]);
   // E2 — red flags from DATA.redFlags
-  const sevIcon = {critical:'⛔', serious:'⚠', warning:'▲'};
+  const sevIcon = {critical:ic('critical',15,'color:var(--crit)'), serious:ic('serious',15,'color:var(--serious)'), warning:ic('warning',14,'color:var(--warn)')};
   const tabLabel = {backlinks:'Backlinks & Risk', social:'Social Competitive', search:'Search & Keywords', ai:'AI Visibility'};
   const tabId = {backlinks:'links', social:'social', search:'searchkw', ai:'ai'};
   const flagFix = [['pulse','unicepta'],['imai'],['bera','sats'],['imai','questdiy'],['sats'],['geopulse']];
   const e2 = `<ol class="flags">` + DATA.redFlags.map((f,i)=>
-    `<li><span class="dot ${f.severity}"></span><span><b>${i+1}. ${sevIcon[f.severity]} ${esc(f.title)}</b>${esc(f.detail)}
+    `<li><span class="dot ${f.severity}"></span><span><b>${i+1}. <span style="vertical-align:-2px">${sevIcon[f.severity]}</span> ${esc(f.title)}</b>${esc(f.detail)}
      <button class="goto" data-goto="${tabId[f.tab]}">→ ${tabLabel[f.tab]}</button>
      ${solvePill(flagFix[i]||[], 'Fix with')}</span></li>`).join('') + `</ol>`;
   // E3 — IG share strip (NOT a linear follower bar chart, per spec)
@@ -1086,7 +1364,7 @@ function tabExec(){
   <div class="sec"><div class="sec-h"><h3>30-second read</h3><span class="src">IMAI + SEMrush · 20–21 Jul 2026</span></div>${e1}</div>
   <div class="sec grid2">
     <div class="card">
-      <div class="sec-h"><h3>🚩 CMO red flags</h3><span class="src">severity: ⛔ critical · ⚠ serious · ▲ warning</span></div>
+      <div class="sec-h"><h3>${ic('flag',14)} CMO red flags</h3><span class="src">severity: <span class="dot critical" style="display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:0"></span> critical · <span class="dot serious" style="display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:0"></span> serious · <span class="dot warning" style="display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:0"></span> warning</span></div>
       ${e2}
     </div>
     <div style="display:flex;flex-direction:column;gap:16px">
@@ -1146,7 +1424,10 @@ function tabSocial(){
   const B=DATA.social.brands;
   // S0 scoreboard
   const head = `<tr><th>Metric</th>${ORDER.map(id=>`<th ${id==='nike'?'class="nikecol"':''}>${brandchip(id)}</th>`).join('')}</tr>`;
-  const rows = SCORE_ROWS.map(r=>{
+  const GRP={0:'Reach',4:'Engagement',9:'Audience quality',12:'Economics &amp; audience'};
+  const span=ORDER.length+1;
+  const rows = SCORE_ROWS.map((r,ri)=>{
+    const grpRow = GRP[ri]?`<tr class="grp"><td colspan="${span}">${GRP[ri]}</td></tr>`:'';
     let best=-1, worst=-1;
     if(r.dir){
       let bv=null, wv=null;
@@ -1155,13 +1436,16 @@ function tabSocial(){
         if(wv===null||((r.dir==='high')?v<wv:v>wv)){wv=v;worst=i;} });
       if(best===worst){best=-1;worst=-1;}
     }
+    return grpRow + rowHtml(r,best,worst);
+  }).join('');
+  function rowHtml(r,best,worst){
     return `<tr><td style="font-weight:600;white-space:nowrap">${esc(r.label)}</td>` + ORDER.map((id,i)=>{
       const d=r.get(B[id]);
       const cls=[id==='nike'?'nikecol':'', i===best?'best':'', i===worst?'worst':''].filter(Boolean).join(' ');
       const glyph = i===best?' ▲':(i===worst?' ▼':'');
       return `<td class="${cls} num">${d?esc(d):'—'}${glyph}</td>`;
     }).join('') + `</tr>`;
-  }).join('');
+  }
   // S1 engagement per post by platform (shade = platform)
   const s1 = ORDER.map(id=>{
     const e=B[id].engagementPerPost, col=bc(id);
@@ -1180,7 +1464,7 @@ function tabSocial(){
   const botsOf = id => { const f=B[id].influencerInsight.followersBreakdown.find(x=>x[0]==='Fake/bots'); return f?f[1]:0; };
   const byBots = [...ORDER].sort((a,b)=>botsOf(b)-botsOf(a));
   const s2cred = barList(byBots.map(id=>({l:BRAND_NAME[id], html:brandchip(id), v:B[id].influencerInsight.credibilityPct, d:B[id].influencerInsight.credibilityPct.toFixed(2)+'%', c:bc(id)})), {max:100, scaleNote:'Axis 0–100%.'});
-  const s2bots = barList(byBots.map(id=>({l:BRAND_NAME[id], html:brandchip(id), v:botsOf(id), d:'⚠ '+botsOf(id).toFixed(2)+'%', c:'rgba(208,59,59,.7)'})), {max:25, scaleNote:'Axis 0–25% (status color: risk).'});
+  const s2bots = barList(byBots.map(id=>({l:BRAND_NAME[id], html:brandchip(id), v:botsOf(id), d:botsOf(id).toFixed(2)+'%', c:'rgba(208,59,59,.7)'})), {max:25, scaleNote:'Axis 0–25% (status color: risk).'});
   // S3 quality map scatter — emphasis: Nike blue, rest gray, direct labels
   const sx=v=>50+(v-68)/(80-68)*510, sy=v=>250-(v/50)*220;
   const labOff={nike:-56,adidas:-16,newbalance:18,puma:-20,underarmour:28,lululemon:-14};
@@ -1275,7 +1559,7 @@ function tabSocial(){
   return `
   <div class="sec card">
     <div class="sec-h"><h3>Head-to-head scoreboard — 6 brands</h3><span class="src">▲ best in row · ▼ worst in row</span></div>
-    <div class="tblwrap"><table class="tbl">${head}${rows}</table></div>
+    <div class="tblwrap"><table class="tbl sticky1">${head}${rows}</table></div>
     <div class="trunc-note">Currencies as reported: adidas £, lululemon CAD$, others $; EMV always USD. IMAI scores/reach are model estimates.</div>
     <div class="srcnote">IMAI · 21 Jul 2026</div>
   </div>
@@ -1286,7 +1570,7 @@ function tabSocial(){
       <div class="srcnote">IMAI · 21 Jul 2026</div></div>
     <div class="card"><div class="sec-h"><h3>Credibility &amp; fake followers</h3></div>
       <div style="font-weight:700;font-size:11px;margin:4px 0" class="upper">Followers credibility</div>${s2cred}
-      <div style="font-weight:700;font-size:11px;margin:12px 0 4px" class="upper">Fake/bot followers ⚠</div>${s2bots}
+      <div style="font-weight:700;font-size:11px;margin:12px 0 4px" class="upper">Fake/bot followers ${ic('alert',11,'color:var(--crit)')}</div>${s2bots}
       <div class="chart-note">1 in 5 Nike followers is fake — double the set average.</div>
       ${solvePill(['imai'],'Fix with')}
       <div class="srcnote">IMAI · 21 Jul 2026</div></div>
@@ -1307,7 +1591,7 @@ function tabSocial(){
       <div class="chart-note">The people who engage are not the people who follow — every brand’s likers skew more male than its followers.</div>
       ${solvePill(['sats'],'Fix with')}
       <div class="srcnote">IMAI · 21 Jul 2026</div></div>
-    <div class="callout warnb"><h4>⚠ Nike’s engaged audience is a different population</h4>
+    <div class="callout warnb"><h4>${ic('alert',13,'color:var(--warn)')} Nike’s engaged audience is a different population</h4>
       ${s9}
       <div class="chart-note">Nike’s likers are 71.6% male and India-led (30.9%) — the follower base you report on is not the audience actually engaging.</div>
       ${solvePill(['sats','questdiy'],'Act on it')}
@@ -1431,7 +1715,7 @@ function tabSearch(){
     ${pts.map((p,i)=>`<circle cx="${lx(i)}" cy="${ly(p[1])}" r="5" style="fill:var(--ink-1)"><title>${esc(p[0])}: ~${fmt(p[1])}</title></circle>
       <text x="${lx(i)}" y="${ly(p[1])-12}" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink-1)">~${fmt(p[1])}</text>
       <text x="${lx(i)}" y="200" font-size="10.5" fill="var(--ink-muted)" text-anchor="middle">${esc(p[0])}</text>`).join('')}
-  </svg><div class="scale-note">Approximate — chart-read anchors only; no monthly precision implied. Channel split ${esc('🔒')} Traffic &amp; Market Toolkit Pro ($289/mo).</div>`;
+  </svg><div class="scale-note">Approximate — chart-read anchors only; no monthly precision implied. Channel split <span class="lockcell">Traffic &amp; Market Toolkit Pro ($289/mo)</span>.</div>`;
   // K7 rank buckets + round-2 full report
   const pos=S.positionTracking, fr=pos.fullReport;
   const k7 = `<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">
@@ -1442,7 +1726,7 @@ function tabSearch(){
       <span><b>${fr.trackedKeywords}</b> tracked kw</span><span><b>${fr.estimatedTraffic.v.toLocaleString('en-US')}</b> est. traffic</span>
       <span><b>${fr.avgPosition.v}</b> avg position</span><span><b>${fr.landingPages}</b> landing pages</span>
     </div>
-    <div style="margin-top:8px"><span class="statchip warn" title="Cannibal pages: ${esc(fr.cannibalization.cannibalPages)}">⚠ Cannibalization: ${esc(fr.cannibalization.affectedKeywords)} keywords · rate ${esc(fr.cannibalization.rate)}</span></div>
+    <div style="margin-top:8px"><span class="statchip warn" title="Cannibal pages: ${esc(fr.cannibalization.cannibalPages)}">${ic('warning',11)} Cannibalization: ${esc(fr.cannibalization.affectedKeywords)} keywords · rate ${esc(fr.cannibalization.rate)}</span></div>
     <div class="scale-note">Round-2 full report, Jul 21–22 · Position changes (Jul 19–20): ${esc(S.positionChanges.allChanges)} total · ${esc(S.positionChanges.improved)} improved / ${esc(S.positionChanges.declined)} declined · ${esc(S.positionChanges.serpChanges)} SERP changes.</div>`;
   // K8 site health + AI Search Health (round 2)
   const sa=S.siteAudit, ash=sa.fullReport.aiSearchHealth;
@@ -1450,7 +1734,7 @@ function tabSearch(){
   const k8 = `
     ${meterRow('Site health', sa.healthPct/100, sa.healthPct+'%', 'var(--good)')}
     ${meterRow('AI Search Health', ash.pct/100, ash.pct+'% (beta)', 'var(--warn)')}
-    <div style="margin:10px 0"><span class="statchip crit">⛔ ${sa.errors} errors</span> <span class="statchip warn">⚠ ${sa.warnings} warnings</span></div>
+    <div style="margin:10px 0"><span class="statchip crit">${ic('critical',11)} ${sa.errors} errors</span> <span class="statchip warn">${ic('warning',11)} ${sa.warnings} warnings</span></div>
     ${stack100(sa.pageBreakdown.filter(p=>p[1]>0).map(p=>({l:`${p[0]} ${p[1]}`, s:String(p[1]), v:p[1], c:pbColor[p[0]]})))}
     <div class="scale-note">${esc(sa.note)} · updated ${esc(sa.updated)} · benchmark: ${esc(sa.fullReport.benchmark)}.</div>
     <div class="chart-note">AI Search Health 79%: pages are blocked from AI crawlers (ChatGPT-User, OAI-SearchBot, Google-Extended) — 344 issues stand between Nike and AI answers. Top issue: low text-to-HTML ratio (84 pages).</div>
@@ -1614,7 +1898,7 @@ function tabAI(){
   <div class="sec"><div class="sec-h"><h3>AI search visibility</h3><span class="src">SEMrush AI SEO · 21 Jul 2026 · ${fmt(ts.promptsTracked)} prompts tracked</span></div>${a0}</div>
   <div class="sec">
     <div class="callout warnb">
-      <h4>⚠ Who AI cites for “Nike” — the CMO takeaway</h4>
+      <h4>${ic('alert',13,'color:var(--warn)')} Who AI cites for “Nike” — the CMO takeaway</h4>
       <p class="huge">reddit.com (83.1K) and youtube.com (75.5K) are cited nearly as often as nike.com (83.5K) in AI answers.</p>
       <p style="margin-top:8px;color:var(--ink-2);font-size:13.5px">Nike does not control its own AI narrative — Reddit is 400 mentions behind.</p>
       <div style="margin-top:14px">${a3}</div>
@@ -1667,8 +1951,8 @@ function tabLinks(){
     { lbl:'Toxicity', val:'HIGH', sub:'19.3% toxic', alert:true }
   ]);
   const toxColor={'Toxic':'var(--crit)','Potentially toxic':'var(--warn)','Non-toxic':'var(--good)'};
-  const toxIcon={'Toxic':'⛔','Potentially toxic':'⚠','Non-toxic':'✓'};
-  const b2 = stack100(au.toxicitySplit.map(t=>({l:`${toxIcon[t[0]]} ${t[0]} ${t[1]}%`, s:`${toxIcon[t[0]]} ${t[1]}%`, v:t[1], c:toxColor[t[0]], d:fmt(t[2])+' links'})));
+  const toxIcon={'Toxic':'', 'Potentially toxic':'', 'Non-toxic':''};
+  const b2 = stack100(au.toxicitySplit.map(t=>({l:`${t[0]} ${t[1]}%`, s:`${t[1]}%`, v:t[1], c:toxColor[t[0]], d:fmt(t[2])+' links'})));
   const b3 = `<div class="mono" style="display:flex;flex-direction:column;gap:6px">${au.worstOffenders.map(d=>`<span><span style="color:var(--crit)">●</span> ${esc(d)} <span class="statchip crit" style="font-size:9.5px">Toxicity 100</span></span>`).join('')}</div>
     <table class="tbl" style="margin-top:12px"><tr><th></th><th class="num">Total</th><th class="num">New</th><th class="num">Broken</th><th class="num">Lost</th></tr>
     <tr><td>Ref domains (audit)</td><td class="num">${au.refDomains.total.toLocaleString('en-US')}</td><td class="num">+${au.refDomains.new}</td><td class="num">${au.refDomains.broken.toLocaleString('en-US')}</td><td class="num">${au.refDomains.lost}</td></tr>
@@ -1710,7 +1994,7 @@ function tabLinks(){
   <div class="sec"><div class="sec-h"><h3>Backlink profile</h3><span class="src">SEMrush Backlink Analytics · 21 Jul 2026 · ${esc(h.refIPs)} ref IPs · ${esc(h.refSubnets)} subnets · category: ${esc(h.category)} · “${esc(h.liveNote)}”</span></div>${b1}</div>
   <div class="sec grid2">
     <div class="callout warnb" style="border-color:var(--crit)">
-      <h4>⛔ Toxicity — HIGH</h4>
+      <h4>${ic('ban',13,'color:var(--crit)')} Toxicity — HIGH</h4>
       ${b2}
       <div class="chart-note">One in three sampled links is toxic or suspect.</div>
       <div class="scale-note">${esc(au.sampleNote)}.</div>
@@ -1767,11 +2051,11 @@ function tabLinks(){
 
 /* ---------- TAB 6 · STAGWELL SOLUTIONS (from Product One-Pagers deck, Jul 2026) ---------- */
 function tabSolutions(){
-  const CATS = [ ['Platform','☁️'], ['Market Research','🔬'], ['Communications','📣'], ['Media','🎯'] ];
+  const CATS = [ ['Platform','cloud'], ['Market Research','flask'], ['Communications','megaphone'], ['Media','target'] ];
   const card = s => `
     <div class="sol-card ${s.mini?'sol-mini':''}" id="sol-${s.id}">
       <div class="sol-head"><span class="sol-mark">${esc(s.mark)}</span>
-        <div><b>${esc(s.name)}</b><span class="cat">${s.ico} ${esc(s.cat)}</span></div></div>
+        <div><b>${esc(s.name)}</b><span class="cat">${ic(s.ico,12)} ${esc(s.cat)}</span></div></div>
       ${s.prob?`<div class="sol-prob">“${esc(s.prob)}”</div>`:''}
       <div class="sol-what">${esc(s.what)}</div>
       ${s.feats?`<div class="sol-feats">${s.feats.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`:''}
@@ -1779,18 +2063,20 @@ function tabSolutions(){
       ${s.metrics&&s.metrics.length?`<div class="sol-metrics">${s.metrics.map(m=>`<span>${esc(m)}</span>`).join('')}</div>`:''}
       <div class="sol-foot">
         <span class="sol-contact">${s.contact?`<b>${esc(s.contact[0])}</b> · ${esc(s.contact[1])}`:'Via The Marketing Cloud'}</span>
-        <button class="sol-cta" data-openchat>Request a demo</button>
+        <span style="display:inline-flex;align-items:center;gap:10px"><span class="sol-more">Full profile ›</span>
+        <button class="sol-cta" data-openchat>Request a demo</button></span>
       </div>
     </div>`;
   return `
   <div class="sol-hero">
     <h2>The <b>Stagwell Marketing Cloud</b> — every problem on this dashboard has an owner.</h2>
-    <p>Thirteen products, one integrated suite. Each card below explains what the product does and exactly which Nike metric it moves — the same products the ✦ pills across the dashboard point to. Source: Stagwell Product One-Pagers, July 2026 · themarketingcloud.com.</p>
+    <p>Thirteen products, one integrated suite. Each card below explains what the product does and exactly which Nike metric it moves — click any card (or any pill across the dashboard) for the full one-pager profile. Source: Stagwell Product One-Pagers, July 2026 · themarketingcloud.com.</p>
   </div>
   ${CATS.map(([cat,ico])=>{
     const items=SOLUTIONS.filter(s=>s.cat===cat);
-    return `<div class="sol-cat"><span class="cat-ico">${ico}</span><h3>${esc(cat)}</h3><span class="src">${items.length} product${items.length>1?'s':''}</span></div>
-    <div class="sol-grid">${items.map(card).join('')}</div>`;
+    const fulls=items.filter(s=>!s.mini), minis=items.filter(s=>s.mini);
+    return `<div class="sol-cat"><span class="cat-ico">${ic(ico,15)}</span><h3>${esc(cat)}</h3><span class="src">${items.length} product${items.length>1?'s':''}</span></div>
+    <div class="sol-grid">${fulls.map(card).join('')}</div>${minis.length?`<div class="sol-grid minis">${minis.map(card).join('')}</div>`:''}`;
   }).join('')}
   <div class="trunc-note" style="margin-top:16px">QuestRQ and Unlock appear in the suite overview without one-pagers in this deck; the Stagwell ID Graph is described within the SATS one-pager. Demo note: “Request a demo” opens the scripted assistant — no real scheduling.</div>`;
 }
@@ -1815,7 +2101,7 @@ function tabNotes(){
     </ol>
   </div>
   <div class="card notes">
-    <div class="sec-h"><h3>Locked datasets — never faked, always 🔒</h3></div>
+    <div class="sec-h"><h3>Locked datasets — never faked, always locked</h3></div>
     <table class="tbl"><tr><th>Item</th><th>Unlock</th></tr>${locked}</table>
     <div class="sec-h" style="margin-top:16px"><h3>Truncation notes</h3></div>
     <ol>
@@ -1884,7 +2170,7 @@ function botSay(html){ addMsg('bot',html); }
 function askChat(q){
   addMsg('user',esc(q));
   const m=$('#chat-msgs');
-  m.insertAdjacentHTML('beforeend','<div class="typing">Stagwell AI is thinking…</div>');
+  m.insertAdjacentHTML('beforeend','<div class="typing"><i></i><i></i><i></i></div>');
   m.scrollTop=m.scrollHeight;
   setTimeout(()=>{
     m.querySelector('.typing').remove();
